@@ -285,11 +285,111 @@ $scale: var(--scale);
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
   color: whitesmoke;
   display: flex;
-  align-items: center;
+  align-items: flex-end;
   justify-content: center;
   flex-direction: column;
   z-index: 950;
   opacity: 0; /* Hidden by default */
+}
+
+.img-option {
+  margin-right: -7.5rem;
+}
+
+.aspect-ratio-dropdown {
+  color: whitesmoke;
+  background-color: #353536;
+  border: 1px solid #ff5252;
+  margin-bottom: 0.5rem;
+  margin-right: 0.5rem;
+  border-radius: 5px;
+  padding: 0.5rem;
+}
+
+/* Style the slider track */
+input[type="range"] {
+  -webkit-appearance: none; /* Remove default styles */
+  appearance: none;
+
+  height: 8px;
+  background: #ccc; /* Light gray background for the empty track */
+  border-radius: 5px;
+  outline: none;
+}
+
+/* Chrome, Safari, and Edge: Filled Track */
+input[type="range"]::-webkit-slider-runnable-track {
+  background: #ccc; /* Light gray for the empty part of the track */
+  border-radius: 5px;
+  height: 8px;
+}
+
+/* Chrome, Safari, and Edge: Thumb */
+input[type="range"]::-webkit-slider-thumb {
+  -webkit-appearance: none; /* Remove default styling */
+  appearance: none;
+  background: #ff0000; /* Red color for the thumb */
+  width: 16px;
+  height: 16px;
+  border-radius: 50%;
+  cursor: pointer;
+  margin-top: -4px; /* Align thumb vertically in the center */
+}
+
+/* Chrome, Safari, and Edge: Filled portion */
+input[type="range"]::-webkit-slider-runnable-track {
+  background: linear-gradient(
+    to right,
+    #ff0000 var(--value, 0%),
+    #ccc var(--value, 0%)
+  );
+}
+
+/* Firefox Track */
+input[type="range"]::-moz-range-track {
+  background: #ccc; /* Light gray for the empty part of the track */
+  border-radius: 5px;
+  height: 8px;
+}
+
+/* Firefox Thumb */
+input[type="range"]::-moz-range-thumb {
+  background: #ff0000; /* Red color for the thumb */
+  width: 16px;
+  height: 16px;
+  border-radius: 50%;
+  cursor: pointer;
+}
+
+/* Firefox: Filled portion */
+input[type="range"]::-moz-range-progress {
+  background: #ff0000; /* Red for the filled portion */
+  height: 8px;
+}
+
+/* IE and Edge Legacy: Thumb */
+input[type="range"]::-ms-thumb {
+  background: #ff0000; /* Red thumb */
+  width: 16px;
+  height: 16px;
+  border-radius: 50%;
+  cursor: pointer;
+}
+
+/* IE and Edge Legacy: Track */
+input[type="range"]::-ms-track {
+  background: transparent;
+  border-color: transparent;
+  color: transparent;
+}
+
+/* IE and Edge Legacy: Filled portion */
+input[type="range"]::-ms-fill-lower {
+  background: #ff0000; /* Red filled part */
+}
+
+input[type="range"]::-ms-fill-upper {
+  background: #ccc; /* Light gray for unfilled part */
 }
 
 .animate-down {

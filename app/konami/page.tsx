@@ -21,15 +21,13 @@ export default function Konami({}: Props) {
   );
 
   const [cycle, setCycle] = useState(true);
-  const [cycleSpeed, setCycleSpeed] = useState(5000);
-  const [showSettings, setShowSettings] = useState(false);
-  const [baseScale, setBaseScale] = useState(0.8);
+  // Store cycleSpeed in seconds
+  const [cycleSpeed, setCycleSpeed] = useState(5);
+  const [showSettings, setShowSettings] = useState(true);
+  const [baseScale, setBaseScale] = useState(0.69);
   const [scale, setScale] = useState(baseScale);
   const [uploadedImage, setUploadedImage] = useState<string | null>(null);
-
-  useEffect(() => {
-    console.log("show Settings:", showSettings);
-  }, [showSettings]);
+  const [aspectRatio, setAspectRatio] = useState("banner");
 
   // Base and current colors
   const [baseBackgroundColor, setBaseBackgroundColor] = useState("#ffffff");
@@ -81,7 +79,6 @@ export default function Konami({}: Props) {
   useEffect(() => {
     const root = document.documentElement;
 
-    // If gradient is not selected, use solid colors; if selected, gradient logic runs above.
     const colorVariables = {
       "--accent-color": accentColor,
       "--background-color": isGradientSelected
@@ -94,6 +91,7 @@ export default function Konami({}: Props) {
       "--button-text-color": buttonTextColor,
       "--shadow-color": shadowColor,
       "--text-color": textColor,
+      "--scale": scale,
     };
 
     const allColorsAreSet = Object.values(colorVariables).every(
@@ -116,6 +114,7 @@ export default function Konami({}: Props) {
     textColor,
     buttonTextColor,
     isGradientSelected,
+    scale,
   ]);
 
   // Array of dialog names to cycle through
@@ -144,21 +143,26 @@ export default function Konami({}: Props) {
   // Rotate dialogs automatically
   useEffect(() => {
     if (!cycle) return; // Exit early if cycle is false
+
+    // Convert cycleSpeed (in seconds) to milliseconds
+    const intervalDuration = cycleSpeed * 1000;
+
     setDialogIndex((prevIndex) => {
       const nextIndex = (prevIndex + 1) % dialogNames.length;
       setActiveDialog(dialogNames[nextIndex]);
       return nextIndex;
     });
+
     const intervalId = setInterval(() => {
       setDialogIndex((prevIndex) => {
         const nextIndex = (prevIndex + 1) % dialogNames.length;
         setActiveDialog(dialogNames[nextIndex]);
         return nextIndex;
       });
-    }, 5000); // Rotate every 5 seconds when cycle is true
+    }, intervalDuration); // Use user-defined interval
 
     return () => clearInterval(intervalId);
-  }, [cycle]);
+  }, [cycle, cycleSpeed]);
 
   return (
     <div className="konami-container">
@@ -175,12 +179,10 @@ export default function Konami({}: Props) {
             showSettings ? "animate-down" : "animate-up"
           }`}
         >
-          <h2>Settings</h2>
-
           {/* Cycle Speed Slider */}
           <div className="setting-option">
             <label htmlFor="cycle-speed">
-              Cycle Speed ({cycleSpeed} seconds)
+              Cycle Speed ({cycleSpeed} second{cycleSpeed > 1 ? "s" : ""})
             </label>
             <input
               id="cycle-speed"
@@ -205,12 +207,13 @@ export default function Konami({}: Props) {
               onChange={(e) => setScale(Number(e.target.value))}
             />
           </div>
-
+          <br />
           {/* Image Upload */}
-          <div className="setting-option">
-            <label htmlFor="image-upload">Upload Image</label>
+          <div className="setting-option ">
+            <label htmlFor="image-upload">Logo: </label>
             <input
               id="image-upload"
+              className="img-option"
               type="file"
               accept="image/*"
               onChange={(e) => {
@@ -223,14 +226,32 @@ export default function Konami({}: Props) {
                 }
               }}
             />
-            {uploadedImage && (
-              <img
-                src={uploadedImage}
-                alt="Uploaded Preview"
-                className="uploaded-image"
-              />
-            )}
           </div>
+          <div className="setting-option">
+            <label htmlFor="aspect-ratio">Aspect Ratio: </label>
+            <select
+              id="aspect-ratio"
+              className="aspect-ratio-dropdown"
+              onChange={(e) => {
+                setAspectRatio(e.target.value);
+                console.log("Selected aspect ratio:", e.target.value);
+              }}
+            >
+              <option value="wide">Wide</option>
+              <option value="portrait">Portrait</option>
+              <option value="classic">Classic</option>
+              <option value="banner">Banner</option>
+              <option value="square">Square</option>
+            </select>
+          </div>
+
+          {uploadedImage && (
+            <img
+              src={uploadedImage}
+              alt="Uploaded Preview"
+              className="uploaded-image"
+            />
+          )}
         </div>
 
         {activeDialog === "LookupDialog" && <LookupDialog animate="true" />}
