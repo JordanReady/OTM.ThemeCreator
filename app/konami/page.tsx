@@ -10,6 +10,7 @@ import PinInputDialog from "./dialogs/PinInputDialog";
 import TimeoutDialog from "./dialogs/TimeoutDialog";
 
 import VariableBox from "./VariableBox";
+import Link from "next/link";
 
 type Props = {};
 
@@ -73,21 +74,10 @@ export default function Konami({}: Props) {
 
   // This function would apply gradient logic based on the current colors, lightnessPercent, and gradientDegree.
   // Replace with your actual gradient logic.
-  const convertToGradient = () => {
-    // Example: Create a simple linear gradient for the background
-    // using the accent color and a lightened version of the background color.
-    // You could use any color manipulation library or logic here.
-    const lightenedColor = lightenColor(backgroundColor, lightnessPercent);
-    const gradientValue = `linear-gradient(${gradientDegree}deg, ${backgroundColor}, ${lightenedColor})`;
-
-    const root = document.documentElement;
-    root.style.setProperty("--background-color", gradientValue);
-  };
 
   // Whenever percent or degree changes and gradient is selected, update the gradient
   useEffect(() => {
     if (isGradientSelected) {
-      convertToGradient();
     }
   }, [lightnessPercent, gradientDegree, isGradientSelected]);
 
@@ -184,44 +174,53 @@ export default function Konami({}: Props) {
       {activeDialog === "TimeoutDialog" && <TimeoutDialog animate="true" />}
 
       <div className="theme-picker-container">
-        <div className="dialog-picker">
+        <div className="dialog-picker animate">
           <div className="dialog-switch-buttons">
             <button
               className="dialog-switch-button"
               onClick={() => openDialog("LookupDialog")}
             >
-              Open LookupDialog
+              Lookup Dialog
             </button>
             <button
               className="dialog-switch-button"
               onClick={() => openDialog("LookupInputDialog")}
             >
-              Open LookupInputDialog
+              Lookup Input Dialog
             </button>
             <button
               className="dialog-switch-button"
               onClick={() => openDialog("LookupResultDialog")}
             >
-              Open LookupResultDialog
+              Lookup Result Dialog
             </button>
             <button
               className="dialog-switch-button"
               onClick={() => openDialog("ErrorDialog")}
             >
-              Open ErrorDialog
+              Error Dialog
             </button>
             <button
               className="dialog-switch-button"
               onClick={() => openDialog("PinInputDialog")}
             >
-              Open PinInputDialog
+              Pin Input Dialog
             </button>
             <button
               className="dialog-switch-button"
               onClick={() => openDialog("TimeoutDialog")}
             >
-              Open TimeoutDialog
+              Timeout Dialog
             </button>
+            <button
+              className="dialog-switch-button"
+              onClick={() => openDialog("TimeoutDialog")}
+            >
+              Cycle Dialogs
+            </button>
+            <Link href="/" className="dialog-switch-button">
+              Home
+            </Link>
           </div>
         </div>
 

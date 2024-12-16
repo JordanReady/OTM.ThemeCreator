@@ -387,10 +387,11 @@ $scale: var(--scale);
 }
 
 .dialog-switch-buttons {
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: center;
-  gap: 1rem;
+  display: grid;
+  grid-template-columns: repeat(4, 1fr); /* 3 equal columns for the first row */
+  grid-auto-rows: auto; /* Automatically adjust row height */
+  gap: 1rem; /* Space between the buttons */
+  justify-content: center; /* Center the grid horizontally */
 }
 
 .dialog-switch-button {

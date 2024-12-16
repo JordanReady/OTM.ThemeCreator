@@ -30,8 +30,8 @@ export default function HomePage() {
         alt={`OTMS Logo`}
         className="logo"
       />
-      <h1 className="page-title">Welcome to OTMS Theme Creator</h1>
-      <p className="page-subtitle">
+      <h1 className="page-title animate">Welcome to OTMS Theme Creator</h1>
+      <p className="page-subtitle animate">
         Select an Interface to begin customizing the theme!
       </p>
       <div className="interface-card-container">

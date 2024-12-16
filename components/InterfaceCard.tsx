@@ -17,8 +17,8 @@ export default function InterfaceCard({
   const link = title.toLowerCase();
 
   return (
-    <Link href={`/${link}`} className="interface-card">
-      <h2 className="interface-title">{title}</h2>
+    <Link href={`/${link}`} className="interface-card animate">
+      <h2 className="interface-title ">{title}</h2>
       <img
         src={imageSrc}
         alt={`${title} interface`}

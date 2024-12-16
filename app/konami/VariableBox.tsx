@@ -52,7 +52,7 @@ export default function VariableBox({
     : colorValue;
 
   return (
-    <span className="css-variable-box">
+    <span className="css-variable-box animate">
       <span className="variable-name">{label}</span>
       <div className={`color-preview ${variableName}`}>
         <input
