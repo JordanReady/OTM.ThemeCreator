@@ -19,7 +19,8 @@ export default function Konami({}: Props) {
   const [activeDialog, setActiveDialog] = useState<string | null>(
     "LookupDialog"
   );
-  const [timer, setTimer] = useState(6000);
+
+  const [cycle, setCycle] = useState(true);
 
   // Base and current colors
   const [baseBackgroundColor, setBaseBackgroundColor] = useState("#ffffff");
@@ -69,17 +70,6 @@ export default function Konami({}: Props) {
 
   // New gradient-related states
   const [isGradientSelected, setIsGradientSelected] = useState(false);
-  const [lightnessPercent, setLightnessPercent] = useState(50);
-  const [gradientDegree, setGradientDegree] = useState(45);
-
-  // This function would apply gradient logic based on the current colors, lightnessPercent, and gradientDegree.
-  // Replace with your actual gradient logic.
-
-  // Whenever percent or degree changes and gradient is selected, update the gradient
-  useEffect(() => {
-    if (isGradientSelected) {
-    }
-  }, [lightnessPercent, gradientDegree, isGradientSelected]);
 
   // Apply variables to root
   useEffect(() => {
@@ -138,10 +128,7 @@ export default function Konami({}: Props) {
   // Function to switch the active dialog
   const openDialog = (dialogName: string) => {
     setActiveDialog(dialogName);
-    setTimer(60000);
-    setTimeout(() => {
-      setTimer(3000);
-    }, 60000);
+    setCycle(false);
   };
 
   const closeDialog = () => {
@@ -150,15 +137,18 @@ export default function Konami({}: Props) {
 
   // Rotate dialogs automatically
   useEffect(() => {
+    if (!cycle) return; // Exit early if cycle is false
+
     const intervalId = setInterval(() => {
       setDialogIndex((prevIndex) => {
         const nextIndex = (prevIndex + 1) % dialogNames.length;
         setActiveDialog(dialogNames[nextIndex]);
         return nextIndex;
       });
-    }, timer);
+    }, 5000); // Rotate every 5 seconds when cycle is true
+
     return () => clearInterval(intervalId);
-  }, [timer]);
+  }, [cycle]);
 
   return (
     <div className="konami-container">
@@ -214,7 +204,7 @@ export default function Konami({}: Props) {
             </button>
             <button
               className="dialog-switch-button"
-              onClick={() => openDialog("TimeoutDialog")}
+              onClick={() => setCycle(true)}
             >
               Cycle Dialogs
             </button>
