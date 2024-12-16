@@ -10,33 +10,6 @@ type Props = {
 };
 
 export default function LookupDialog({ animate, imgSrc, aspectRatio }: Props) {
-  const [aspectRatioClass, setAspectRatioClass] =
-    useState("custom-logo-banner");
-  //add switch for different aspect ratios
-
-  useEffect(() => {
-    switch (aspectRatio) {
-      case "wide":
-        setAspectRatioClass("custom-logo-wide");
-        break;
-      case "portrait":
-        setAspectRatioClass("custom-logo-portrait");
-        break;
-      case "classic":
-        setAspectRatioClass("custom-logo-classic");
-        break;
-      case "banner":
-        setAspectRatioClass("custom-logo-banner");
-        break;
-      case "square":
-        setAspectRatioClass("custom-logo-square");
-        break;
-      default:
-        setAspectRatioClass("custom-logo-classic"); // Fallback class
-        break;
-    }
-  }, [aspectRatio]);
-
   return (
     <div className="custom-dialog-backdrop">
       <div className={`custom-dialog ${animate === "true" ? "animate" : ""}`}>
@@ -46,7 +19,7 @@ export default function LookupDialog({ animate, imgSrc, aspectRatio }: Props) {
             width={350}
             height={200}
             alt={`OTMS Logo`}
-            className={`logo ${aspectRatioClass}`}
+            className={`logo ${aspectRatio}`}
           />
           <h2>Player Account Lookup</h2>
         </div>

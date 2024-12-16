@@ -29,6 +29,33 @@ export default function Konami({}: Props) {
   const [uploadedImage, setUploadedImage] = useState<string>("/OTMSLogo.png");
   const [aspectRatio, setAspectRatio] = useState("banner");
 
+  const [aspectRatioClass, setAspectRatioClass] =
+    useState("custom-logo-banner");
+  //add switch for different aspect ratios
+
+  useEffect(() => {
+    switch (aspectRatio) {
+      case "wide":
+        setAspectRatioClass("custom-logo-wide");
+        break;
+      case "portrait":
+        setAspectRatioClass("custom-logo-portrait");
+        break;
+      case "classic":
+        setAspectRatioClass("custom-logo-classic");
+        break;
+      case "banner":
+        setAspectRatioClass("custom-logo-banner");
+        break;
+      case "square":
+        setAspectRatioClass("custom-logo-square");
+        break;
+      default:
+        setAspectRatioClass("custom-logo-classic"); // Fallback class
+        break;
+    }
+  }, [aspectRatio]);
+
   // Base and current colors
   const [baseBackgroundColor, setBaseBackgroundColor] = useState("#ffffff");
   const [backgroundColor, setBackgroundColor] = useState(baseBackgroundColor);
@@ -256,7 +283,7 @@ export default function Konami({}: Props) {
 
         {activeDialog === "LookupDialog" && (
           <LookupDialog
-            aspectRatio={aspectRatio}
+            aspectRatio={aspectRatioClass}
             imgSrc={uploadedImage}
             animate="true"
           />
