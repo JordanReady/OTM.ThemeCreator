@@ -240,7 +240,7 @@ $scale: var(--scale);
   align-items: center;
   justify-content: center;
   flex-direction: column;
-  z-index: 1000;
+  z-index: 900;
   width: 40dvw;
 }
 
@@ -253,6 +253,73 @@ $scale: var(--scale);
   grid-template-columns: repeat(3, 1fr);
   gap: 1rem;
   margin-top: 2rem;
+}
+
+.dialog-display-container {
+  position: relative;
+  width: 40%;
+}
+
+.settings-button {
+  position: fixed;
+  top: 0.25rem;
+  left: 0.25rem;
+  z-index: 1000;
+  background: linear-gradient(145deg, #ff6b81, #e63946);
+  color: white;
+  border-radius: 5px;
+  padding: 0.5rem;
+  border: 1px solid #353536;
+  margin-bottom: 0.5rem;
+}
+
+.settings-container {
+  position: fixed;
+  width: 40dvw;
+  height: min-content;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: #353536;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+  color: whitesmoke;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  z-index: 950;
+  opacity: 0; /* Hidden by default */
+}
+
+.animate-down {
+  animation: slideDown 0.5s ease-out forwards;
+}
+
+.animate-up {
+  animation: slideUp 0.5s ease-out forwards;
+}
+
+@keyframes slideDown {
+  from {
+    transform: translateY(-100%);
+    opacity: 0;
+  }
+  to {
+    transform: translateY(0);
+    opacity: 1;
+  }
+}
+
+@keyframes slideUp {
+  from {
+    transform: translateY(0);
+    opacity: 1;
+  }
+  to {
+    transform: translateY(-100%);
+    opacity: 0;
+  }
 }
 
 .active-border {

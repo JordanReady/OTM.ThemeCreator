@@ -21,6 +21,15 @@ export default function Konami({}: Props) {
   );
 
   const [cycle, setCycle] = useState(true);
+  const [cycleSpeed, setCycleSpeed] = useState(5000);
+  const [showSettings, setShowSettings] = useState(false);
+  const [baseScale, setBaseScale] = useState(0.8);
+  const [scale, setScale] = useState(baseScale);
+  const [uploadedImage, setUploadedImage] = useState<string | null>(null);
+
+  useEffect(() => {
+    console.log("show Settings:", showSettings);
+  }, [showSettings]);
 
   // Base and current colors
   const [baseBackgroundColor, setBaseBackgroundColor] = useState("#ffffff");
@@ -64,9 +73,6 @@ export default function Konami({}: Props) {
     "rgba(255, 23, 68, 0.3)"
   );
   const [shadowColor, setShadowColor] = useState(baseShadowColor);
-
-  const [baseScale, setBaseScale] = useState(0.8);
-  const [scale, setScale] = useState(baseScale);
 
   // New gradient-related states
   const [isGradientSelected, setIsGradientSelected] = useState(false);
@@ -157,6 +163,76 @@ export default function Konami({}: Props) {
   return (
     <div className="konami-container">
       <div className="dialog-display-container">
+        <button
+          onClick={() => setShowSettings(!showSettings)}
+          className="settings-button gradient-button animate"
+        >
+          Settings
+        </button>
+
+        <div
+          className={`settings-container ${
+            showSettings ? "animate-down" : "animate-up"
+          }`}
+        >
+          <h2>Settings</h2>
+
+          {/* Cycle Speed Slider */}
+          <div className="setting-option">
+            <label htmlFor="cycle-speed">
+              Cycle Speed ({cycleSpeed} seconds)
+            </label>
+            <input
+              id="cycle-speed"
+              type="range"
+              min="1"
+              max="30"
+              value={cycleSpeed}
+              onChange={(e) => setCycleSpeed(Number(e.target.value))}
+            />
+          </div>
+
+          {/* Scale Slider */}
+          <div className="setting-option">
+            <label htmlFor="scale">Scale ({scale.toFixed(2)})</label>
+            <input
+              id="scale"
+              type="range"
+              min="0.1"
+              max="1"
+              step="0.01"
+              value={scale}
+              onChange={(e) => setScale(Number(e.target.value))}
+            />
+          </div>
+
+          {/* Image Upload */}
+          <div className="setting-option">
+            <label htmlFor="image-upload">Upload Image</label>
+            <input
+              id="image-upload"
+              type="file"
+              accept="image/*"
+              onChange={(e) => {
+                const file = e.target.files?.[0];
+                if (file) {
+                  const reader = new FileReader();
+                  reader.onload = () =>
+                    setUploadedImage(reader.result as string);
+                  reader.readAsDataURL(file);
+                }
+              }}
+            />
+            {uploadedImage && (
+              <img
+                src={uploadedImage}
+                alt="Uploaded Preview"
+                className="uploaded-image"
+              />
+            )}
+          </div>
+        </div>
+
         {activeDialog === "LookupDialog" && <LookupDialog animate="true" />}
         {activeDialog === "LookupInputDialog" && (
           <LookupInputDialog animate="true" />
