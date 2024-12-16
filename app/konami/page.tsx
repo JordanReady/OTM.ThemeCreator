@@ -100,7 +100,7 @@ export default function Konami({}: Props) {
 
     if (allColorsAreSet && !isGradientSelected) {
       Object.entries(colorVariables).forEach(([variable, value]) => {
-        root.style.setProperty(variable, value);
+        root.style.setProperty(variable, value.toString());
       });
     }
   }, [
