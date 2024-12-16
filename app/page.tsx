@@ -15,7 +15,7 @@ export default function HomePage() {
     },
     {
       title: "Stay",
-      imageSrc: "/images/stay-interface.png",
+      imageSrc: "/StayUnderDevelopmentImg.png",
       description:
         "The Stay interface enables searching for player information by card, phone, or other identifiers.",
     },

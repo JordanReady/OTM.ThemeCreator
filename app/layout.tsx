@@ -26,7 +26,7 @@ export default async function RootLayout({
       <html lang="en">
         <body className={inter.className}>
           <FirebaseAuthProvider>
-            <Header />
+            {/* <Header /> */}
             {children}
           </FirebaseAuthProvider>
         </body>
