@@ -48,15 +48,27 @@ export default function VariableBox({
 
   // Extract the color values from the gradient or hex value
   const cleanColorValue = colorValue.startsWith("linear-gradient")
-    ? colorValue.replace(/linear-gradient\([^,]+, (.*)\)/, "$1")
+    ? colorValue.replace(/linear-gradient\((.*)\)/, "($1)")
     : colorValue;
 
   return (
-    <span className="css-variable-box animate">
+    <span
+      className={`css-variable-box animate ${
+        isGradient ? "active-border" : ""
+      }`}
+    >
       <span className="variable-name">{label}</span>
       <div className={`color-preview ${variableName}`}>
+        <div
+          onClick={() => navigator.clipboard.writeText(cleanColorValue)}
+          className="copy"
+        >
+          Copy
+        </div>
+        <span className="hex-display">{cleanColorValue}</span>
         <input
           type="color"
+          placeholder={cleanColorValue}
           className={`input ${variableName}`}
           value={
             colorValue.startsWith("linear-gradient") ? baseColor : colorValue
@@ -64,8 +76,6 @@ export default function VariableBox({
           onChange={(e) => {
             const newBase = e.target.value;
             onBaseColorChange(newBase);
-            // If gradient is off, directly set the chosen color
-            // If gradient is on, recalculate the gradient
             if (isGradient) {
               convertToGradient(percent, degree);
             } else {
@@ -132,8 +142,6 @@ export default function VariableBox({
           </label>
         </div>
       </div>
-
-      <span className="value-display">{cleanColorValue}</span>
     </span>
   );
 }

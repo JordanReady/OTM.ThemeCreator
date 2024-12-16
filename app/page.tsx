@@ -30,19 +30,21 @@ export default function HomePage() {
         alt={`OTMS Logo`}
         className="logo"
       />
-      <h1 className="page-title animate">Welcome to OTMS Theme Creator</h1>
-      <p className="page-subtitle animate">
-        Select an Interface to begin customizing the theme!
-      </p>
-      <div className="interface-card-container">
-        {interfaces.map((interfaceData, index) => (
-          <InterfaceCard
-            key={index}
-            title={interfaceData.title}
-            imageSrc={interfaceData.imageSrc}
-            description={interfaceData.description}
-          />
-        ))}
+      <div className="theme-creator-container">
+        <h1 className="page-title animate">Welcome to OTMS Theme Creator</h1>
+        <p className="page-subtitle animate">
+          Select an Interface to begin customizing the theme!
+        </p>
+        <div className="interface-card-container">
+          {interfaces.map((interfaceData, index) => (
+            <InterfaceCard
+              key={index}
+              title={interfaceData.title}
+              imageSrc={interfaceData.imageSrc}
+              description={interfaceData.description}
+            />
+          ))}
+        </div>
       </div>
     </div>
   );

@@ -9,7 +9,7 @@ import ErrorDialog from "./dialogs/ErrorDialog";
 import PinInputDialog from "./dialogs/PinInputDialog";
 import TimeoutDialog from "./dialogs/TimeoutDialog";
 
-import VariableBox from "./VariableBox";
+import VariableBox from "../../components/VariableBox";
 import Link from "next/link";
 
 type Props = {};
@@ -138,7 +138,11 @@ export default function Konami({}: Props) {
   // Rotate dialogs automatically
   useEffect(() => {
     if (!cycle) return; // Exit early if cycle is false
-
+    setDialogIndex((prevIndex) => {
+      const nextIndex = (prevIndex + 1) % dialogNames.length;
+      setActiveDialog(dialogNames[nextIndex]);
+      return nextIndex;
+    });
     const intervalId = setInterval(() => {
       setDialogIndex((prevIndex) => {
         const nextIndex = (prevIndex + 1) % dialogNames.length;
@@ -152,17 +156,18 @@ export default function Konami({}: Props) {
 
   return (
     <div className="konami-container">
-      {activeDialog === "LookupDialog" && <LookupDialog animate="true" />}
-      {activeDialog === "LookupInputDialog" && (
-        <LookupInputDialog animate="true" />
-      )}
-      {activeDialog === "LookupResultDialog" && (
-        <LookupResultDialog animate="true" />
-      )}
-      {activeDialog === "ErrorDialog" && <ErrorDialog animate="true" />}
-      {activeDialog === "PinInputDialog" && <PinInputDialog animate="true" />}
-      {activeDialog === "TimeoutDialog" && <TimeoutDialog animate="true" />}
-
+      <div className="dialog-display-container">
+        {activeDialog === "LookupDialog" && <LookupDialog animate="true" />}
+        {activeDialog === "LookupInputDialog" && (
+          <LookupInputDialog animate="true" />
+        )}
+        {activeDialog === "LookupResultDialog" && (
+          <LookupResultDialog animate="true" />
+        )}
+        {activeDialog === "ErrorDialog" && <ErrorDialog animate="true" />}
+        {activeDialog === "PinInputDialog" && <PinInputDialog animate="true" />}
+        {activeDialog === "TimeoutDialog" && <TimeoutDialog animate="true" />}
+      </div>
       <div className="theme-picker-container">
         <div className="dialog-picker animate">
           <div className="dialog-switch-buttons">

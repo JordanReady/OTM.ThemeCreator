@@ -14,8 +14,16 @@ $scale: 0.8;
   height: 100vh;
   display: flex;
   flex-direction: column;
-  justify-content: center;
+  // justify-content: center;
   align-items: center;
+}
+
+.theme-creator-container {
+  display: flex;
+  flex-direction: column;
+  // justify-content: center;
+  align-items: center;
+  margin-top: 8rem;
 }
 
 .interface-card-container {
