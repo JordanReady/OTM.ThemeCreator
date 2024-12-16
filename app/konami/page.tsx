@@ -23,10 +23,10 @@ export default function Konami({}: Props) {
   const [cycle, setCycle] = useState(true);
   // Store cycleSpeed in seconds
   const [cycleSpeed, setCycleSpeed] = useState(5);
-  const [showSettings, setShowSettings] = useState(true);
+  const [showSettings, setShowSettings] = useState(false);
   const [baseScale, setBaseScale] = useState(0.69);
   const [scale, setScale] = useState(baseScale);
-  const [uploadedImage, setUploadedImage] = useState<string | null>(null);
+  const [uploadedImage, setUploadedImage] = useState<string>("/OTMSLogo.png");
   const [aspectRatio, setAspectRatio] = useState("banner");
 
   // Base and current colors
@@ -244,17 +244,15 @@ export default function Konami({}: Props) {
               <option value="square">Square</option>
             </select>
           </div>
-
-          {uploadedImage && (
-            <img
-              src={uploadedImage}
-              alt="Uploaded Preview"
-              className="uploaded-image"
-            />
-          )}
         </div>
 
-        {activeDialog === "LookupDialog" && <LookupDialog animate="true" />}
+        {activeDialog === "LookupDialog" && (
+          <LookupDialog
+            aspectRatio={aspectRatio}
+            imgSrc={uploadedImage}
+            animate="true"
+          />
+        )}
         {activeDialog === "LookupInputDialog" && (
           <LookupInputDialog animate="true" />
         )}
