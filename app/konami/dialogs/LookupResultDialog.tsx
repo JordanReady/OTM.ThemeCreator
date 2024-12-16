@@ -22,7 +22,7 @@ export default function LookupResultDialog({ animate }: Props) {
         <div className="custom-dialog-header">
           <h2>Jordan R</h2>
           <span className="custom-order-dialog-content mb">
-            Your order total is $4.20.
+            Your order total is $4.30.
           </span>
           <br />
           <span className="custom-order-dialog-content mb">
@@ -45,7 +45,7 @@ export default function LookupResultDialog({ animate }: Props) {
                 <li>
                   <strong>Card Status</strong>
                   <br />
-                  <span style={{ color: "green" }}>Acitve</span>
+                  <span style={{ color: "green" }}>Active</span>
                 </li>
               </ul>
             </div>

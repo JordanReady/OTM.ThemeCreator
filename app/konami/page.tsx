@@ -24,7 +24,7 @@ export default function Konami({}: Props) {
   // Store cycleSpeed in seconds
   const [cycleSpeed, setCycleSpeed] = useState(5);
   const [showSettings, setShowSettings] = useState(false);
-  const [baseScale, setBaseScale] = useState(0.69);
+  const [baseScale, setBaseScale] = useState(0.7);
   const [scale, setScale] = useState(baseScale);
   const [uploadedImage, setUploadedImage] = useState<string>("/OTMSLogo.png");
   const [aspectRatio, setAspectRatio] = useState("banner");
@@ -74,6 +74,13 @@ export default function Konami({}: Props) {
 
   // New gradient-related states
   const [isGradientSelected, setIsGradientSelected] = useState(false);
+
+  useEffect(() => {
+    // wait 3 seconds before showing settings
+    setTimeout(() => {
+      setShowSettings(true);
+    }, 3000);
+  }, []);
 
   // Apply variables to root
   useEffect(() => {
