@@ -77,8 +77,7 @@ export default function Konami({}: Props) {
 
   useEffect(() => {
     // wait 3 seconds before showing settings
-    //refresh page
-    window.location.reload();
+
     setTimeout(() => {
       setShowSettings(true);
     }, 3000);
