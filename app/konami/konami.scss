@@ -273,6 +273,23 @@ $scale: var(--scale);
   margin-bottom: 0.5rem;
 }
 
+.import-export-container {
+  position: fixed;
+  top: 3.25rem;
+  left: 0.25rem;
+  display: flex;
+  flex-direction: column;
+}
+
+.import-export-button {
+  background: linear-gradient(145deg, #ff6b81, #e63946);
+  color: white;
+  border-radius: 5px;
+  padding: 0.5rem;
+  border: 1px solid #353536;
+  margin-bottom: 0.5rem;
+}
+
 .settings-container {
   position: fixed;
   width: 40dvw;
@@ -602,12 +619,12 @@ input[type="range"]::-ms-fill-upper {
   border: none;
   border-radius: 5px;
   background: linear-gradient(145deg, #ff6b81, #e63946);
-  color: $button-text-color;
+  color: white;
   cursor: pointer;
   transition: background-color 0.3s ease;
 
   &:hover {
-    background-color: $button-hover-background;
+    background-color: linear-gradient(145deg, #ff1744, #ff5252);
   }
 }
 

@@ -31,7 +31,6 @@ export default function Konami({}: Props) {
 
   const [aspectRatioClass, setAspectRatioClass] =
     useState("custom-logo-banner");
-  //add switch for different aspect ratios
 
   useEffect(() => {
     switch (aspectRatio) {
@@ -55,6 +54,102 @@ export default function Konami({}: Props) {
         break;
     }
   }, [aspectRatio]);
+
+  const [importTheme, setImportTheme] = useState(false);
+  const [importedTheme, setImportedTheme] = useState("");
+
+  const handleThemeSubmit = (event: string) => {
+    // List of variable names to extract
+    const variableExtractors = [
+      {
+        key: "backgroundColor",
+        setter: setBaseBackgroundColor,
+        setter2: setBackgroundColor,
+      },
+      {
+        key: "accentColor",
+        setter: setBaseAccentColor,
+        setter2: setAccentColor,
+      },
+      { key: "textColor", setter: setBaseTextColor, setter2: setTextColor },
+      {
+        key: "buttonBackground",
+        setter: setBaseButtonBackground,
+        setter2: setButtonBackground,
+      },
+      {
+        key: "buttonHoverBackground",
+        setter: setBaseButtonHoverBackground,
+        setter2: setButtonHoverBackground,
+      },
+      {
+        key: "buttonActiveBackground",
+        setter: setBaseButtonActiveBackground,
+        setter2: setButtonActiveBackground,
+      },
+      {
+        key: "buttonBorderColor",
+        setter: setBaseButtonBorderColor,
+        setter2: setButtonBorderColor,
+      },
+      {
+        key: "buttonTextColor",
+        setter: setBaseButtonTextColor,
+        setter2: setButtonTextColor,
+      },
+      {
+        key: "shadowColor",
+        setter: setBaseShadowColor,
+        setter2: setShadowColor,
+      },
+    ];
+
+    variableExtractors.forEach(({ key, setter, setter2 }) => {
+      const regex = new RegExp(`"${key}":\\s*"(.*?)"`, "i"); // Regex to extract value
+      const match = event.match(regex);
+      if (match && match[1]) {
+        setter(match[1]); // Update the base color
+        setter2(match[1]); // Update the active color
+        console.log(`Updated ${key} to`, match[1]); // Log for debugging
+      }
+    });
+
+    setImportedTheme(event); // Store the full imported theme as a string
+    setImportTheme(false); // Close the input
+  };
+
+  const exportTheme = () => {
+    const customTheme = {
+      backgroundColor: backgroundColor,
+      accentColor: accentColor,
+      textColor: textColor,
+      buttonBackground: buttonBackground,
+      buttonHoverBackground: buttonHoverBackground,
+      buttonActiveBackground: buttonActiveBackground,
+      buttonBorderColor: buttonBorderColor,
+      buttonTextColor: buttonTextColor,
+      shadowColor: shadowColor,
+    };
+
+    // Wrap it with CustomTheme and pretty-print it
+    const formattedTheme = JSON.stringify(
+      { CustomTheme: customTheme },
+      null,
+      2
+    );
+
+    // Remove leading and trailing curly braces from the entire JSON string
+    const trimmedTheme = formattedTheme.slice(1, -1).trim(); // Remove first and last characters (braces)
+
+    // Add the trailing comma to the end
+    const finalTheme = `${trimmedTheme},`; // Add a comma at the end
+
+    console.log("Exported Theme:", finalTheme);
+    navigator.clipboard
+      .writeText(finalTheme) // Copy to clipboard
+      .then(() => console.log("Theme copied to clipboard!"))
+      .catch((err) => console.error("Failed to copy theme to clipboard", err));
+  };
 
   // Base and current colors
   const [baseBackgroundColor, setBaseBackgroundColor] = useState("#ffffff");
@@ -214,6 +309,20 @@ export default function Konami({}: Props) {
             showSettings ? "animate-down" : "animate-up"
           }`}
         >
+          <div className="import-export-container">
+            <button
+              onClick={() => setImportTheme(!importTheme)}
+              className="import-export-button gradient-button animate"
+            >
+              Import Custom Theme
+            </button>
+            <button
+              onClick={() => exportTheme()}
+              className="import-export-button gradient-button animate"
+            >
+              Export Custom Theme
+            </button>
+          </div>
           {/* Cycle Speed Slider */}
           <div className="setting-option">
             <label htmlFor="cycle-speed">
@@ -279,6 +388,21 @@ export default function Konami({}: Props) {
               <option value="square">Square</option>
             </select>
           </div>
+          {importTheme && (
+            <div className="setting-option">
+              <label htmlFor="import-theme">
+                Paste Custom Theme JSON below{" "}
+              </label>
+              <br />
+              <textarea
+                id="import-theme"
+                className="import-theme-textarea"
+                value={importedTheme}
+                onChange={(e) => handleThemeSubmit(e.target.value)}
+              />
+              <span>{importedTheme}</span>
+            </div>
+          )}
         </div>
 
         {activeDialog === "LookupDialog" && (
