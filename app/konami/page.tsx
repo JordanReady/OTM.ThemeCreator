@@ -9,6 +9,8 @@ import ErrorDialog from "./dialogs/ErrorDialog";
 import PinInputDialog from "./dialogs/PinInputDialog";
 import TimeoutDialog from "./dialogs/TimeoutDialog";
 import SettingsDisplay from "@/components/SettingsDisplay";
+import ThemePickerDisplay from "@/components/ThemePickerDisplay";
+import DialogDisplay from "@/components/DialogDisplay";
 import VariableBox from "../../components/VariableBox";
 import Link from "next/link";
 
@@ -324,183 +326,54 @@ export default function Konami({}: Props) {
           handleThemeSubmit={handleThemeSubmit}
         />
 
-        {activeDialog === "LookupDialog" && (
-          <LookupDialog
-            aspectRatio={aspectRatioClass}
-            imgSrc={uploadedImage}
-            animate="true"
-            pos={pos}
-          />
-        )}
-        {activeDialog === "LookupInputDialog" && (
-          <LookupInputDialog animate="true" pos={pos} />
-        )}
-        {activeDialog === "LookupResultDialog" && (
-          <LookupResultDialog animate="true" pos={pos} />
-        )}
-        {activeDialog === "ErrorDialog" && (
-          <ErrorDialog animate="true" pos={pos} />
-        )}
-        {activeDialog === "PinInputDialog" && (
-          <PinInputDialog animate="true" pos={pos} />
-        )}
-        {activeDialog === "TimeoutDialog" && (
-          <TimeoutDialog animate="true" pos={pos} />
-        )}
+        <DialogDisplay
+          activeDialog={activeDialog}
+          aspectRatioClass={aspectRatio}
+          uploadedImage={uploadedImage}
+          pos={pos}
+        />
       </div>
-
-      <div className="theme-picker-container">
-        <div className="dialog-picker animate">
-          <div className="dialog-switch-buttons">
-            <button
-              className="dialog-switch-button"
-              onClick={() => openDialog("LookupDialog")}
-            >
-              Lookup Dialog
-            </button>
-            <button
-              className="dialog-switch-button"
-              onClick={() => openDialog("LookupInputDialog")}
-            >
-              Lookup Input Dialog
-            </button>
-            <button
-              className="dialog-switch-button"
-              onClick={() => openDialog("LookupResultDialog")}
-            >
-              Lookup Result Dialog
-            </button>
-            <button
-              className="dialog-switch-button"
-              onClick={() => openDialog("ErrorDialog")}
-            >
-              Error Dialog
-            </button>
-            <button
-              className="dialog-switch-button"
-              onClick={() => openDialog("PinInputDialog")}
-            >
-              Pin Input Dialog
-            </button>
-            <button
-              className="dialog-switch-button"
-              onClick={() => openDialog("TimeoutDialog")}
-            >
-              Timeout Dialog
-            </button>
-            <button
-              className="dialog-switch-button"
-              onClick={() => setCycle(true)}
-            >
-              Cycle Dialogs
-            </button>
-            <Link href="/" className="dialog-switch-button">
-              Home
-            </Link>
-          </div>
-        </div>
-
-        <div className="theme-picker">
-          {/* Background Color */}
-          <VariableBox
-            allowGradient={true}
-            label="Background Color"
-            variableName="background-color"
-            baseColor={baseBackgroundColor}
-            colorValue={backgroundColor}
-            onColorChange={(val) => setBackgroundColor(val)}
-            onBaseColorChange={(val) => setBaseBackgroundColor(val)}
-          />
-
-          {/* Accent Color */}
-          <VariableBox
-            allowGradient={false}
-            label="Accent Color"
-            variableName="accent-color"
-            baseColor={baseAccentColor}
-            colorValue={accentColor}
-            onColorChange={(val) => setAccentColor(val)}
-            onBaseColorChange={(val) => setBaseAccentColor(val)}
-          />
-
-          {/* Text Color */}
-          <VariableBox
-            allowGradient={false}
-            label="Text Color"
-            variableName="text-color"
-            baseColor={baseTextColor}
-            colorValue={textColor}
-            onColorChange={(val) => setTextColor(val)}
-            onBaseColorChange={(val) => setBaseTextColor(val)}
-          />
-
-          {/* Button Background */}
-          <VariableBox
-            allowGradient={true}
-            label="Button Background"
-            variableName="button-background"
-            baseColor={baseButtonBackground}
-            colorValue={buttonBackground}
-            onColorChange={(val) => setButtonBackground(val)}
-            onBaseColorChange={(val) => setBaseButtonBackground(val)}
-          />
-
-          {/* Button Hover Background */}
-          <VariableBox
-            allowGradient={true}
-            label="Button Hover Background"
-            variableName="button-hover-background"
-            baseColor={baseButtonHoverBackground}
-            colorValue={buttonHoverBackground}
-            onColorChange={(val) => setButtonHoverBackground(val)}
-            onBaseColorChange={(val) => setBaseButtonHoverBackground(val)}
-          />
-
-          {/* Button Active Background */}
-          <VariableBox
-            allowGradient={true}
-            label="Button Active Background"
-            variableName="button-active-background"
-            baseColor={baseButtonActiveBackground}
-            colorValue={buttonActiveBackground}
-            onColorChange={(val) => setButtonActiveBackground(val)}
-            onBaseColorChange={(val) => setBaseButtonActiveBackground(val)}
-          />
-
-          {/* Button Border Color */}
-          <VariableBox
-            allowGradient={false}
-            label="Button Border Color"
-            variableName="button-border-color"
-            baseColor={baseButtonBorderColor}
-            colorValue={buttonBorderColor}
-            onColorChange={(val) => setButtonBorderColor(val)}
-            onBaseColorChange={(val) => setBaseButtonBorderColor(val)}
-          />
-
-          {/* Button Text Color */}
-          <VariableBox
-            allowGradient={false}
-            label="Button Text Color"
-            variableName="button-text-color"
-            baseColor={baseButtonTextColor}
-            colorValue={buttonTextColor}
-            onColorChange={(val) => setButtonTextColor(val)}
-            onBaseColorChange={(val) => setBaseButtonTextColor(val)}
-          />
-
-          {/* Shadow Color */}
-          <VariableBox
-            allowGradient={false}
-            label="Shadow Color"
-            variableName="shadow-color"
-            baseColor={baseShadowColor}
-            colorValue={shadowColor}
-            onColorChange={(val) => setShadowColor(val)}
-            onBaseColorChange={(val) => setBaseShadowColor(val)}
-          />
-        </div>
-      </div>
+      {/* Theme Picker Display*/}
+      <ThemePickerDisplay
+        openDialog={openDialog}
+        setCycle={setCycle}
+        baseBackgroundColor={baseBackgroundColor}
+        backgroundColor={backgroundColor}
+        baseAccentColor={baseAccentColor}
+        accentColor={accentColor}
+        baseTextColor={baseTextColor}
+        textColor={textColor}
+        setBaseBackgroundColor={setBaseBackgroundColor}
+        setBackgroundColor={setBackgroundColor}
+        setBaseAccentColor={setBaseAccentColor}
+        setAccentColor={setAccentColor}
+        setBaseTextColor={setBaseTextColor}
+        setTextColor={setTextColor}
+        baseButtonBackground={baseButtonBackground}
+        buttonBackground={buttonBackground}
+        baseButtonHoverBackground={baseButtonHoverBackground}
+        buttonHoverBackground={buttonHoverBackground}
+        baseButtonActiveBackground={baseButtonActiveBackground}
+        buttonActiveBackground={buttonActiveBackground}
+        baseButtonBorderColor={baseButtonBorderColor}
+        buttonBorderColor={buttonBorderColor}
+        baseButtonTextColor={baseButtonTextColor}
+        buttonTextColor={buttonTextColor}
+        setBaseButtonBackground={setBaseButtonBackground}
+        setButtonBackground={setButtonBackground}
+        setBaseButtonHoverBackground={setBaseButtonHoverBackground}
+        setButtonHoverBackground={setButtonHoverBackground}
+        setBaseButtonActiveBackground={setBaseButtonActiveBackground}
+        setButtonActiveBackground={setButtonActiveBackground}
+        setBaseButtonBorderColor={setBaseButtonBorderColor}
+        setButtonBorderColor={setButtonBorderColor}
+        setBaseButtonTextColor={setBaseButtonTextColor}
+        setButtonTextColor={setButtonTextColor}
+        baseShadowColor={baseShadowColor}
+        shadowColor={shadowColor}
+        setBaseShadowColor={setBaseShadowColor}
+        setShadowColor={setShadowColor}
+      />
     </div>
   );
 }
