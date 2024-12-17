@@ -352,6 +352,7 @@ export default function Konami({}: Props) {
         <div className="theme-picker">
           {/* Background Color */}
           <VariableBox
+            allowGradient={true}
             label="Background Color"
             variableName="background-color"
             baseColor={baseBackgroundColor}
@@ -362,6 +363,7 @@ export default function Konami({}: Props) {
 
           {/* Accent Color */}
           <VariableBox
+            allowGradient={false}
             label="Accent Color"
             variableName="accent-color"
             baseColor={baseAccentColor}
@@ -372,6 +374,7 @@ export default function Konami({}: Props) {
 
           {/* Text Color */}
           <VariableBox
+            allowGradient={false}
             label="Text Color"
             variableName="text-color"
             baseColor={baseTextColor}
@@ -382,6 +385,7 @@ export default function Konami({}: Props) {
 
           {/* Button Background */}
           <VariableBox
+            allowGradient={true}
             label="Button Background"
             variableName="button-background"
             baseColor={baseButtonBackground}
@@ -392,6 +396,7 @@ export default function Konami({}: Props) {
 
           {/* Button Hover Background */}
           <VariableBox
+            allowGradient={true}
             label="Button Hover Background"
             variableName="button-hover-background"
             baseColor={baseButtonHoverBackground}
@@ -402,6 +407,7 @@ export default function Konami({}: Props) {
 
           {/* Button Active Background */}
           <VariableBox
+            allowGradient={true}
             label="Button Active Background"
             variableName="button-active-background"
             baseColor={baseButtonActiveBackground}
@@ -412,6 +418,7 @@ export default function Konami({}: Props) {
 
           {/* Button Border Color */}
           <VariableBox
+            allowGradient={false}
             label="Button Border Color"
             variableName="button-border-color"
             baseColor={baseButtonBorderColor}
@@ -422,6 +429,7 @@ export default function Konami({}: Props) {
 
           {/* Button Text Color */}
           <VariableBox
+            allowGradient={false}
             label="Button Text Color"
             variableName="button-text-color"
             baseColor={baseButtonTextColor}
@@ -432,6 +440,7 @@ export default function Konami({}: Props) {
 
           {/* Shadow Color */}
           <VariableBox
+            allowGradient={false}
             label="Shadow Color"
             variableName="shadow-color"
             baseColor={baseShadowColor}

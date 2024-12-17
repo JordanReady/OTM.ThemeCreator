@@ -8,6 +8,7 @@ interface VariableBoxProps {
   colorValue: string; // The currently applied color (could be hex or gradient)
   onColorChange: (val: string) => void; // Called when final color (gradient or hex) changes
   onBaseColorChange: (val: string) => void; // Called when the base hex color changes
+  allowGradient: boolean;
 }
 
 export default function VariableBox({
@@ -17,10 +18,18 @@ export default function VariableBox({
   colorValue,
   onColorChange,
   onBaseColorChange,
+  allowGradient,
 }: VariableBoxProps) {
   const [percent, setPercent] = useState(0.2);
   const [degree, setDegree] = useState(145);
   const [isGradient, setIsGradient] = useState(false);
+  const [isInputOpen, setIsInputOpen] = useState(false);
+
+  useEffect(() => {
+    if (isInputOpen) {
+      document.getElementById(`${variableName}-input`)?.focus();
+    }
+  }, [isInputOpen]);
 
   // Utility function to lighten a hex color by a given percent p (0 to 1)
   function lightenColor(hex: string, p: number) {
@@ -82,65 +91,75 @@ export default function VariableBox({
               onColorChange(newBase);
             }
           }}
+          onClick={() => setIsInputOpen(!isInputOpen)}
         />
       </div>
 
       <div className="gradient-container">
-        <button
-          className="gradient-button"
-          onClick={() => {
-            if (!isGradient) {
-              // Turning gradient on
-              setIsGradient(true);
-              convertToGradient(percent, degree);
-            } else {
-              // Turning gradient off - revert to base color
-              setIsGradient(false);
-              onColorChange(baseColor);
-            }
-          }}
-        >
-          {isGradient ? "Disable Gradient" : "Select Gradient"}
-        </button>
+        {allowGradient && (
+          <>
+            <button
+              className="gradient-button"
+              onClick={() => {
+                if (!isGradient) {
+                  // Turning gradient on
+                  setIsGradient(true);
+                  convertToGradient(percent, degree);
+                } else {
+                  // Turning gradient off - revert to base color
+                  setIsGradient(false);
+                  onColorChange(baseColor);
+                }
+              }}
+            >
+              {isGradient ? "Disable Gradient" : "Select Gradient"}
+            </button>
 
-        {/* Show sliders if gradient is selected, but they only apply if isGradient is true */}
-        <div className="slider-container">
-          <label
-            className="percent-slider"
-            htmlFor={`${variableName}-percent-slider`}
-          >
-            <span className="slider-label">Percent</span>
-            <input
-              id={`${variableName}-percent-slider`}
-              type="range"
-              min="0"
-              max="1"
-              step="0.01"
-              value={percent}
-              onChange={(e) => setPercent(Number(e.target.value))}
-              disabled={!isGradient}
-            />
-            <span className="value-display">{(percent * 100).toFixed(0)}%</span>
-          </label>
+            {/* Show sliders if gradient is selected, but they only apply if isGradient is true */}
+            <div className="slider-container">
+              <label
+                className="percent-slider"
+                htmlFor={`${variableName}-percent-slider`}
+              >
+                <span className="slider-label">Percent</span>
+                <input
+                  id={`${variableName}-percent-slider`}
+                  type="range"
+                  min="0"
+                  max="1"
+                  step="0.01"
+                  value={percent}
+                  onChange={(e) => setPercent(Number(e.target.value))}
+                  disabled={!isGradient}
+                />
+                <span className="value-display">
+                  {(percent * 100).toFixed(0)}%
+                </span>
+              </label>
 
-          <label
-            className="degree-slider"
-            htmlFor={`${variableName}-degree-slider`}
-          >
-            <span className="slider-label">Degree</span>
-            <input
-              id={`${variableName}-degree-slider`}
-              type="range"
-              min="0"
-              max="360"
-              step="1"
-              value={degree}
-              onChange={(e) => setDegree(Number(e.target.value))}
-              disabled={!isGradient}
-            />
-            <span className="value-display">{degree}°</span>
-          </label>
-        </div>
+              <label
+                className="degree-slider"
+                htmlFor={`${variableName}-degree-slider`}
+              >
+                <span className="slider-label">Degree</span>
+                <input
+                  id={`${variableName}-degree-slider`}
+                  type="range"
+                  min="0"
+                  max="360"
+                  step="1"
+                  value={degree}
+                  onChange={(e) => setDegree(Number(e.target.value))}
+                  disabled={!isGradient}
+                />
+                <span className="value-display">{degree}°</span>
+              </label>
+            </div>
+          </>
+        )}
+        {!allowGradient && (
+          <p>Gradient is unavailable for this style variable.</p>
+        )}
       </div>
     </span>
   );
