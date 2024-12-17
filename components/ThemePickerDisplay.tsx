@@ -42,6 +42,8 @@ type Props = {
   shadowColor: string;
   setBaseShadowColor: (color: string) => void;
   setShadowColor: (color: string) => void;
+  showTutorial: boolean;
+  tutorialStep: number;
 };
 
 export default function ThemePickerDisplay({
@@ -83,11 +85,19 @@ export default function ThemePickerDisplay({
   shadowColor,
   setBaseShadowColor,
   setShadowColor,
+  showTutorial,
+  tutorialStep,
 }: Props) {
   return (
     <>
-      <div className="theme-picker-container">
-        <div className="dialog-picker animate">
+      <div className={`theme-picker-container `}>
+        <div
+          className={`dialog-picker animate ${
+            showTutorial && (tutorialStep === 2 || tutorialStep === 3)
+              ? "blur"
+              : ""
+          }`}
+        >
           <div className="dialog-switch-buttons">
             <button
               className="dialog-switch-button"
@@ -137,7 +147,13 @@ export default function ThemePickerDisplay({
           </div>
         </div>
 
-        <div className="theme-picker">
+        <div
+          className={`theme-picker ${
+            showTutorial && (tutorialStep === 1 || tutorialStep === 3)
+              ? "blur"
+              : ""
+          }`}
+        >
           {/* Background Color */}
           <VariableBox
             allowGradient={true}

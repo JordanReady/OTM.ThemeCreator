@@ -16,6 +16,9 @@ type Props = {
   setAspectRatio: (aspectRatio: string) => void;
   importedTheme: string;
   handleThemeSubmit: (event: string) => void;
+  handleTutorial: () => void;
+  showTutorial: boolean;
+  tutorialStep: number;
 };
 
 export default function SettingsDisplay({
@@ -34,16 +37,25 @@ export default function SettingsDisplay({
   setAspectRatio,
   importedTheme,
   handleThemeSubmit,
+  handleTutorial,
+  showTutorial,
+  tutorialStep,
 }: Props) {
   return (
-    <>
+    <div
+      className={` ${
+        showTutorial && (tutorialStep === 1 || tutorialStep === 2) ? "blur" : ""
+      }`}
+    >
       {showSettings && (
-        <button
-          onClick={() => setShowSettings(!showSettings)}
-          className="settings-button gradient-button animate"
-        >
-          Hide Settings
-        </button>
+        <>
+          <button
+            onClick={() => setShowSettings(!showSettings)}
+            className="settings-button gradient-button animate"
+          >
+            Hide Settings
+          </button>
+        </>
       )}
       {!showSettings && (
         <button
@@ -60,6 +72,12 @@ export default function SettingsDisplay({
         }`}
       >
         <div className="import-export-container">
+          <button
+            onClick={() => handleTutorial()}
+            className="import-export-button gradient-button animate"
+          >
+            Tutorial
+          </button>
           <button
             onClick={() => setImportTheme(!importTheme)}
             className="import-export-button gradient-button animate"
@@ -163,6 +181,6 @@ export default function SettingsDisplay({
           </div>
         )}
       </div>
-    </>
+    </div>
   );
 }

@@ -245,7 +245,7 @@ $scale: var(--scale);
 }
 
 .gradient-container {
-  z-index: 1000;
+  z-index: 999;
 }
 
 .theme-picker {
@@ -264,7 +264,7 @@ $scale: var(--scale);
   position: fixed;
   top: 0.25rem;
   left: 0.25rem;
-  z-index: 1000;
+  z-index: 999;
   background: linear-gradient(145deg, #ff6b81, #e63946);
   color: white;
   border-radius: 5px;
@@ -293,6 +293,7 @@ $scale: var(--scale);
 .settings-container {
   position: fixed;
   width: 40dvw;
+  min-height: 200px;
   height: min-content;
   top: 0;
   left: 0;
@@ -458,7 +459,7 @@ input[type="range"]::-ms-fill-upper {
   justify-content: center;
   align-items: center;
   opacity: 0.85;
-  z-index: 1000;
+  z-index: 999;
   cursor: pointer;
 }
 
@@ -585,7 +586,7 @@ input[type="range"]::-ms-fill-upper {
   background-color: #353536;
   padding: 2rem;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
-  z-index: 1000;
+  z-index: 999;
   width: 60dvw;
   text-align: center;
   position: fixed;
@@ -744,6 +745,58 @@ input[type="range"]::-ms-fill-upper {
     opacity: 1;
     transform: scale(1);
   }
+}
+
+.tutorial-container {
+  padding: 1rem;
+  border: 1px solid #ccc;
+  border-radius: 8px;
+  background-color: #353536;
+
+  &.step-1 {
+    position: fixed;
+    top: 1rem;
+    left: 1rem;
+    z-index: 1000;
+    max-width: 35dvw;
+  }
+
+  &.step-2 {
+    position: fixed;
+    top: 1rem;
+    left: 1rem;
+    z-index: 1000;
+    max-width: 35dvw;
+  }
+
+  &.step-3 {
+    position: fixed;
+    top: 1rem;
+    right: 1rem;
+    z-index: 1000;
+    max-width: 55dvw;
+  }
+
+  &.step-4 {
+    position: fixed;
+    top: 1rem;
+    right: 1rem;
+    z-index: 1000;
+    max-width: 35dvw;
+  }
+
+  &.step-5 {
+    position: fixed;
+    top: 1rem;
+    right: 1rem;
+    z-index: 1000;
+    max-width: 55dvw;
+  }
+}
+
+.tutorial-description {
+  font-size: 1rem;
+  color: whitesmoke;
 }
 
 .custom-dialog-header h2 {
@@ -1030,7 +1083,7 @@ input[type="range"]::-ms-fill-upper {
   padding: 2rem;
   border-radius: 10px;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
-  z-index: 1000;
+  z-index: 999;
   width: 90%;
   max-width: 400px;
   text-align: center;

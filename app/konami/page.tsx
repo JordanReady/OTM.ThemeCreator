@@ -1,18 +1,10 @@
 "use client";
 import "./konami.scss";
 import { useState, useEffect } from "react";
-
-import LookupDialog from "./dialogs/LookupDialog";
-import LookupInputDialog from "./dialogs/LookupInputDialog";
-import LookupResultDialog from "./dialogs/LookupResultDialog";
-import ErrorDialog from "./dialogs/ErrorDialog";
-import PinInputDialog from "./dialogs/PinInputDialog";
-import TimeoutDialog from "./dialogs/TimeoutDialog";
 import SettingsDisplay from "@/components/SettingsDisplay";
 import ThemePickerDisplay from "@/components/ThemePickerDisplay";
 import DialogDisplay from "@/components/DialogDisplay";
-import VariableBox from "../../components/VariableBox";
-import Link from "next/link";
+import TutorialDisplay from "@/components/TutorialDisplay";
 
 type Props = {};
 
@@ -31,6 +23,19 @@ export default function Konami({}: Props) {
   const [uploadedImage, setUploadedImage] = useState<string>("/OTMSLogo.png");
   const [aspectRatio, setAspectRatio] = useState("banner");
   const [pos, setPos] = useState(0);
+  const [showTutorial, setShowTutorial] = useState(false);
+  const [tutorialStep, setTutorialStep] = useState(0);
+
+  const handleTutorial = () => {
+    setShowSettings(true);
+    setShowTutorial(true); // Start the tutorial
+    setTutorialStep(1); // Start with step 1
+    setPos(-10);
+    console.log("showTutorial:", true);
+  };
+  useEffect(() => {
+    console.log("tutorialStep:", tutorialStep);
+  }, [tutorialStep]);
 
   const handleSliderChange = (event: { target: { value: any } }) => {
     setPos(Number(event.target.value)); // Update position as a number
@@ -308,6 +313,12 @@ export default function Konami({}: Props) {
   return (
     <div className="konami-container">
       <div className="dialog-display-container">
+        <TutorialDisplay
+          tutorialStep={tutorialStep}
+          showTutorial={showTutorial}
+          setTutorialStep={setTutorialStep}
+          setShowTutorial={setShowTutorial}
+        />
         <SettingsDisplay
           showSettings={showSettings}
           setShowSettings={setShowSettings}
@@ -324,6 +335,9 @@ export default function Konami({}: Props) {
           setAspectRatio={setAspectRatio}
           importedTheme={importedTheme}
           handleThemeSubmit={handleThemeSubmit}
+          handleTutorial={handleTutorial}
+          tutorialStep={tutorialStep}
+          showTutorial={showTutorial}
         />
 
         <DialogDisplay
@@ -332,48 +346,51 @@ export default function Konami({}: Props) {
           uploadedImage={uploadedImage}
           pos={pos}
         />
+
+        {/* Theme Picker Display*/}
+        <ThemePickerDisplay
+          openDialog={openDialog}
+          setCycle={setCycle}
+          baseBackgroundColor={baseBackgroundColor}
+          backgroundColor={backgroundColor}
+          baseAccentColor={baseAccentColor}
+          accentColor={accentColor}
+          baseTextColor={baseTextColor}
+          textColor={textColor}
+          setBaseBackgroundColor={setBaseBackgroundColor}
+          setBackgroundColor={setBackgroundColor}
+          setBaseAccentColor={setBaseAccentColor}
+          setAccentColor={setAccentColor}
+          setBaseTextColor={setBaseTextColor}
+          setTextColor={setTextColor}
+          baseButtonBackground={baseButtonBackground}
+          buttonBackground={buttonBackground}
+          baseButtonHoverBackground={baseButtonHoverBackground}
+          buttonHoverBackground={buttonHoverBackground}
+          baseButtonActiveBackground={baseButtonActiveBackground}
+          buttonActiveBackground={buttonActiveBackground}
+          baseButtonBorderColor={baseButtonBorderColor}
+          buttonBorderColor={buttonBorderColor}
+          baseButtonTextColor={baseButtonTextColor}
+          buttonTextColor={buttonTextColor}
+          setBaseButtonBackground={setBaseButtonBackground}
+          setButtonBackground={setButtonBackground}
+          setBaseButtonHoverBackground={setBaseButtonHoverBackground}
+          setButtonHoverBackground={setButtonHoverBackground}
+          setBaseButtonActiveBackground={setBaseButtonActiveBackground}
+          setButtonActiveBackground={setButtonActiveBackground}
+          setBaseButtonBorderColor={setBaseButtonBorderColor}
+          setButtonBorderColor={setButtonBorderColor}
+          setBaseButtonTextColor={setBaseButtonTextColor}
+          setButtonTextColor={setButtonTextColor}
+          baseShadowColor={baseShadowColor}
+          shadowColor={shadowColor}
+          setBaseShadowColor={setBaseShadowColor}
+          setShadowColor={setShadowColor}
+          tutorialStep={tutorialStep}
+          showTutorial={showTutorial}
+        />
       </div>
-      {/* Theme Picker Display*/}
-      <ThemePickerDisplay
-        openDialog={openDialog}
-        setCycle={setCycle}
-        baseBackgroundColor={baseBackgroundColor}
-        backgroundColor={backgroundColor}
-        baseAccentColor={baseAccentColor}
-        accentColor={accentColor}
-        baseTextColor={baseTextColor}
-        textColor={textColor}
-        setBaseBackgroundColor={setBaseBackgroundColor}
-        setBackgroundColor={setBackgroundColor}
-        setBaseAccentColor={setBaseAccentColor}
-        setAccentColor={setAccentColor}
-        setBaseTextColor={setBaseTextColor}
-        setTextColor={setTextColor}
-        baseButtonBackground={baseButtonBackground}
-        buttonBackground={buttonBackground}
-        baseButtonHoverBackground={baseButtonHoverBackground}
-        buttonHoverBackground={buttonHoverBackground}
-        baseButtonActiveBackground={baseButtonActiveBackground}
-        buttonActiveBackground={buttonActiveBackground}
-        baseButtonBorderColor={baseButtonBorderColor}
-        buttonBorderColor={buttonBorderColor}
-        baseButtonTextColor={baseButtonTextColor}
-        buttonTextColor={buttonTextColor}
-        setBaseButtonBackground={setBaseButtonBackground}
-        setButtonBackground={setButtonBackground}
-        setBaseButtonHoverBackground={setBaseButtonHoverBackground}
-        setButtonHoverBackground={setButtonHoverBackground}
-        setBaseButtonActiveBackground={setBaseButtonActiveBackground}
-        setButtonActiveBackground={setButtonActiveBackground}
-        setBaseButtonBorderColor={setBaseButtonBorderColor}
-        setButtonBorderColor={setButtonBorderColor}
-        setBaseButtonTextColor={setBaseButtonTextColor}
-        setButtonTextColor={setButtonTextColor}
-        baseShadowColor={baseShadowColor}
-        shadowColor={shadowColor}
-        setBaseShadowColor={setBaseShadowColor}
-        setShadowColor={setShadowColor}
-      />
     </div>
   );
 }
