@@ -2,12 +2,13 @@ import { useEffect } from "react";
 import "../konami.scss";
 
 type Props = {
+  pos: number;
   animate: string;
 };
 
-export default function PinInputDialog({ animate }: Props) {
+export default function PinInputDialog({ pos, animate }: Props) {
   return (
-    <div className="custom-dialog-backdrop">
+    <div className={`custom-dialog-backdrop margin-${pos}`}>
       <div className={`custom-dialog ${animate === "true" ? "animate" : ""}`}>
         <div className="custom-dialog-header">
           <h2>Enter your PIN</h2>

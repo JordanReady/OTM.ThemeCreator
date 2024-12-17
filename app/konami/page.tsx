@@ -28,6 +28,15 @@ export default function Konami({}: Props) {
   const [scale, setScale] = useState(baseScale);
   const [uploadedImage, setUploadedImage] = useState<string>("/OTMSLogo.png");
   const [aspectRatio, setAspectRatio] = useState("banner");
+  const [pos, setPos] = useState(0);
+
+  const handleSliderChange = (event: { target: { value: any } }) => {
+    setPos(Number(event.target.value)); // Update position as a number
+  };
+
+  useEffect(() => {
+    console.log("pos:", pos);
+  }, [pos]);
 
   const [aspectRatioClass, setAspectRatioClass] =
     useState("custom-logo-banner");
@@ -297,12 +306,22 @@ export default function Konami({}: Props) {
   return (
     <div className="konami-container">
       <div className="dialog-display-container">
-        <button
-          onClick={() => setShowSettings(!showSettings)}
-          className="settings-button gradient-button animate"
-        >
-          Settings
-        </button>
+        {showSettings && (
+          <button
+            onClick={() => setShowSettings(!showSettings)}
+            className="settings-button gradient-button animate"
+          >
+            Hide Settings
+          </button>
+        )}
+        {!showSettings && (
+          <button
+            onClick={() => setShowSettings(!showSettings)}
+            className="settings-button gradient-button animate"
+          >
+            Open Settings
+          </button>
+        )}
 
         <div
           className={`settings-container ${
@@ -326,7 +345,7 @@ export default function Konami({}: Props) {
           {/* Cycle Speed Slider */}
           <div className="setting-option">
             <label htmlFor="cycle-speed">
-              Cycle Speed ({cycleSpeed} second{cycleSpeed > 1 ? "s" : ""})
+              Cycle Speed | ({cycleSpeed} second{cycleSpeed > 1 ? "s" : ""})
             </label>
             <input
               id="cycle-speed"
@@ -340,7 +359,7 @@ export default function Konami({}: Props) {
 
           {/* Scale Slider */}
           <div className="setting-option">
-            <label htmlFor="scale">Scale ({scale.toFixed(2)})</label>
+            <label htmlFor="scale">Scale | ({scale.toFixed(2)})</label>
             <input
               id="scale"
               type="range"
@@ -349,6 +368,19 @@ export default function Konami({}: Props) {
               step="0.01"
               value={scale}
               onChange={(e) => setScale(Number(e.target.value))}
+            />
+          </div>
+
+          {/* Y Level Slider */}
+          <div className="setting-option">
+            <label htmlFor="cycle-speed">Y Level | ({pos.toFixed(2)})</label>
+            <input
+              id="pos-slider"
+              type="range"
+              min="-10"
+              max="10"
+              value={pos}
+              onChange={handleSliderChange}
             />
           </div>
           <br />
@@ -400,7 +432,6 @@ export default function Konami({}: Props) {
                 value={importedTheme}
                 onChange={(e) => handleThemeSubmit(e.target.value)}
               />
-              <span>{importedTheme}</span>
             </div>
           )}
         </div>
@@ -410,17 +441,24 @@ export default function Konami({}: Props) {
             aspectRatio={aspectRatioClass}
             imgSrc={uploadedImage}
             animate="true"
+            pos={pos}
           />
         )}
         {activeDialog === "LookupInputDialog" && (
-          <LookupInputDialog animate="true" />
+          <LookupInputDialog animate="true" pos={pos} />
         )}
         {activeDialog === "LookupResultDialog" && (
-          <LookupResultDialog animate="true" />
+          <LookupResultDialog animate="true" pos={pos} />
         )}
-        {activeDialog === "ErrorDialog" && <ErrorDialog animate="true" />}
-        {activeDialog === "PinInputDialog" && <PinInputDialog animate="true" />}
-        {activeDialog === "TimeoutDialog" && <TimeoutDialog animate="true" />}
+        {activeDialog === "ErrorDialog" && (
+          <ErrorDialog animate="true" pos={pos} />
+        )}
+        {activeDialog === "PinInputDialog" && (
+          <PinInputDialog animate="true" pos={pos} />
+        )}
+        {activeDialog === "TimeoutDialog" && (
+          <TimeoutDialog animate="true" pos={pos} />
+        )}
       </div>
       <div className="theme-picker-container">
         <div className="dialog-picker animate">

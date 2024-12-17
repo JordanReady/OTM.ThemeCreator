@@ -3,12 +3,13 @@ import { useEffect } from "preact/compat";
 import "../konami.scss";
 
 type Props = {
+  pos: number;
   animate: string;
 };
 
-export default function LookupInputDialog({ animate }: Props) {
+export default function LookupInputDialog({ pos, animate }: Props) {
   return (
-    <div className="custom-dialog-backdrop">
+    <div className={`custom-dialog-backdrop margin-${pos}`}>
       <div className={`custom-dialog ${animate === "true" ? "animate" : ""}`}>
         <div className="custom-dialog-header">
           <h2>Please Swipe Your Card</h2>

@@ -3,10 +3,11 @@ import { useEffect, useState } from "react";
 import "../konami.scss";
 
 type Props = {
+  pos: number;
   animate: string;
 };
 
-export default function TimeoutDialog({ animate }: Props) {
+export default function TimeoutDialog({ pos, animate }: Props) {
   const [timeLeft, setTimeLeft] = useState(10);
 
   useEffect(() => {
@@ -21,7 +22,7 @@ export default function TimeoutDialog({ animate }: Props) {
   }, [timeLeft]);
 
   return (
-    <div className="custom-dialog-backdrop">
+    <div className={`custom-dialog-backdrop margin-${pos}`}>
       <div className={`custom-dialog ${animate === "true" ? "animate" : ""}`}>
         <div className="custom-dialog-header">
           <h2>Yooo, You Still there?</h2>
@@ -29,7 +30,7 @@ export default function TimeoutDialog({ animate }: Props) {
         <div className="custom-dialog-content">
           <p>
             Your session will timeout in {timeLeft} seconds due to inactivity.
-            Please continue to use the app.
+            Please continue to use thepos, app.
           </p>
         </div>
         <div className="custom-dialog-actions">

@@ -7,11 +7,17 @@ type Props = {
   animate: string;
   imgSrc: string;
   aspectRatio: string;
+  pos: number;
 };
 
-export default function LookupDialog({ animate, imgSrc, aspectRatio }: Props) {
+export default function LookupDialog({
+  pos,
+  animate,
+  imgSrc,
+  aspectRatio,
+}: Props) {
   return (
-    <div className="custom-dialog-backdrop">
+    <div className={`custom-dialog-backdrop margin-${pos}`}>
       <div className={`custom-dialog ${animate === "true" ? "animate" : ""}`}>
         <div className="custom-dialog-header">
           <Image

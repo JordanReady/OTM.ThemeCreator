@@ -4,9 +4,10 @@ import "../konami.scss";
 
 type Props = {
   animate: string;
+  pos: number;
 };
 
-export default function LookupResultDialog({ animate }: Props) {
+export default function LookupResultDialog({ animate, pos }: Props) {
   const [isHeld, setIsHeld] = useState(false);
 
   const handlePress = () => {
@@ -17,7 +18,7 @@ export default function LookupResultDialog({ animate }: Props) {
   };
 
   return (
-    <div className="custom-dialog-backdrop">
+    <div className={`custom-dialog-backdrop margin-${pos}`}>
       <div className={`custom-dialog ${animate === "true" ? "animate" : ""}`}>
         <div className="custom-dialog-header">
           <h2>Jordan R</h2>
