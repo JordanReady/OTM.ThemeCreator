@@ -9,7 +9,7 @@ type Props = {
 
 const stepDescriptions: Record<number, string> = {
   1: "Dialog Display Buttons - These buttons allow you to select a certain dialog box, cycle through the dialogs, and return home to select a different interface.",
-  2: "Variable Cards - These variable cards allow you to change in real time the color of all the customizable styles. Some styles allow you to select a gradient. Once slected, the variable card will display a red border indicating you can use the sliders to adjust the gradient. You can copy the value of the color by clicking the copy button. Or you can export an entire theme.",
+  2: "Variable Cards - These variable cards allow you to change in real time the color of all the customizable styles. Click on the color strip to select a color. You can drag your mouse around the popup to select a color, or you can use the color picker to select a color from a logo. Some styles allow you to select a gradient. Once slected, the variable card will display a red border indicating you can use the sliders to adjust the gradient. You can copy the value of the color by clicking the copy button. Or you can export an entire theme.",
   3: `Settings - Here you can change the cycle speed of the dialog boxes, the scale and position of the interfaces, import a logo with a selected aspect ratio, import and export a theme. Once you click Import theme, you can paste either the customTheme object or the entire KonamiSettings content record from EMC. Once you click Export theme, the theme will be copied to your clipboard in the format as follows: 
 `,
 };

@@ -92,7 +92,7 @@ export default function SettingsDisplay({
           </button>
         </div>
         {/* Cycle Speed Slider */}
-        <div className="setting-option">
+        <div className="setting-option first">
           <label htmlFor="cycle-speed">
             Cycle Speed | ({cycleSpeed} second{cycleSpeed > 1 ? "s" : ""})
           </label>
@@ -134,8 +134,11 @@ export default function SettingsDisplay({
         </div>
         <br />
         {/* Image Upload */}
-        <div className="setting-option ">
-          <label htmlFor="image-upload">Logo: </label>
+        <div className="setting-option">
+          <p>Logo: </p>
+          <label htmlFor="image-upload" className="custom-upload-label">
+            Upload Image
+          </label>
           <input
             id="image-upload"
             className="img-option"
@@ -151,6 +154,7 @@ export default function SettingsDisplay({
             }}
           />
         </div>
+
         <div className="setting-option">
           <label htmlFor="aspect-ratio">Aspect Ratio: </label>
           <select

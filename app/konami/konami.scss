@@ -260,11 +260,31 @@ $scale: var(--scale);
   width: 40%;
 }
 
+.setting-option {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  margin-right: 0.5rem;
+}
+
+.first {
+  margin-top: 0.25rem;
+}
+
 .settings-button {
   position: fixed;
   top: 0.25rem;
   left: 0.25rem;
   z-index: 999;
+  background: linear-gradient(145deg, #ff6b81, #e63946);
+  color: white;
+  border-radius: 5px;
+  padding: 0.5rem;
+  border: 1px solid #353536;
+  margin-bottom: 0.5rem;
+}
+
+.img-option::file-selector-button {
   background: linear-gradient(145deg, #ff6b81, #e63946);
   color: white;
   border-radius: 5px;
@@ -312,16 +332,38 @@ $scale: var(--scale);
 
 .img-option {
   margin-right: -7.5rem;
+  display: none;
+}
+
+.custom-upload-label {
+  background: linear-gradient(145deg, #ff6b81, #e63946);
+  color: #ffffff; /* Text color */
+  border: none;
+  border-radius: 4px;
+  padding: 0.5rem 2rem;
+  margin: 0.5rem 0.5rem;
+  font-size: 1rem;
+  cursor: pointer; /* Pointer cursor */
+  display: inline-block !important;
+  text-align: center;
 }
 
 .aspect-ratio-dropdown {
   color: whitesmoke;
-  background-color: #353536;
-  border: 1px solid #ff5252;
+  background: linear-gradient(145deg, #ff6b81, #e63946);
+  border: 1px solid #353536;
   margin-bottom: 0.5rem;
   margin-right: 0.5rem;
   border-radius: 5px;
   padding: 0.5rem;
+  cursor: pointer;
+}
+
+/* Use a workaround for styling options */
+.aspect-ratio-dropdown option {
+  background-color: #353536; /* Background for options */
+  color: #ffffff; /* Text color */
+  cursor: pointer; /* Pointer cursor */
 }
 
 /* Style the slider track */

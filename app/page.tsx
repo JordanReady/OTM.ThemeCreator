@@ -3,6 +3,7 @@ import React from "react";
 import Image from "next/image";
 import InterfaceCard from "../components/InterfaceCard";
 import "../components/interfaceCard.scss";
+import "../app/konami/konami.scss";
 
 export default function HomePage() {
   const KonamiImg = "./KonamiThumbnail.png";
@@ -28,7 +29,7 @@ export default function HomePage() {
         width={350}
         height={200}
         alt={`OTMS Logo`}
-        className="logo"
+        className="logo animate"
       />
       <div className="theme-creator-container">
         <h1 className="page-title animate">Welcome to OTMS Theme Creator</h1>
