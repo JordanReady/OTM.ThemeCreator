@@ -45,8 +45,9 @@ $scale: 0.8;
   border: 1px solid $button-border-color;
 
   &:hover {
-    transform: translateY(-5px);
-    box-shadow: 0 8px 16px $shadow-color;
+    transform: translateY(-5px) !important;
+    box-shadow: 0 8px 16px $shadow-color !important;
+    transition: all 0.3s ease-in-out !important;
   }
 }
 

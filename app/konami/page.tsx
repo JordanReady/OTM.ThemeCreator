@@ -30,7 +30,7 @@ export default function Konami({}: Props) {
     setShowSettings(true);
     setShowTutorial(true); // Start the tutorial
     setTutorialStep(1); // Start with step 1
-    setPos(-10);
+    setPos(-15);
     console.log("showTutorial:", true);
   };
   useEffect(() => {
@@ -318,6 +318,8 @@ export default function Konami({}: Props) {
           showTutorial={showTutorial}
           setTutorialStep={setTutorialStep}
           setShowTutorial={setShowTutorial}
+          setActiveDialog={setActiveDialog}
+          setCycle={setCycle}
         />
         <SettingsDisplay
           showSettings={showSettings}
@@ -338,6 +340,7 @@ export default function Konami({}: Props) {
           handleTutorial={handleTutorial}
           tutorialStep={tutorialStep}
           showTutorial={showTutorial}
+          setCycle={setCycle}
         />
 
         <DialogDisplay

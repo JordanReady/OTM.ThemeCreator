@@ -1,3 +1,4 @@
+import { useEffect } from "react";
 import "../app/konami/konami.scss";
 
 type Props = {
@@ -19,6 +20,7 @@ type Props = {
   handleTutorial: () => void;
   showTutorial: boolean;
   tutorialStep: number;
+  setCycle: (cycle: boolean) => void;
 };
 
 export default function SettingsDisplay({
@@ -40,7 +42,11 @@ export default function SettingsDisplay({
   handleTutorial,
   showTutorial,
   tutorialStep,
+  setCycle,
 }: Props) {
+  useEffect(() => {
+    setCycle(true);
+  }, [cycleSpeed]);
   return (
     <div
       className={` ${
@@ -126,8 +132,8 @@ export default function SettingsDisplay({
           <input
             id="pos-slider"
             type="range"
-            min="-10"
-            max="10"
+            min="-15"
+            max="15"
             value={pos}
             onChange={handleSliderChange}
           />

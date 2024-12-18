@@ -5,13 +5,14 @@ type Props = {
   tutorialStep: number;
   setTutorialStep: (step: number) => void;
   setShowTutorial: (showTutorial: boolean) => void;
+  setActiveDialog: (dialogName: string) => void;
+  setCycle: (cycle: boolean) => void;
 };
 
 const stepDescriptions: Record<number, string> = {
-  1: "Dialog Display Buttons - These buttons allow you to select a certain dialog box, cycle through the dialogs, and return home to select a different interface.",
-  2: "Variable Cards - These variable cards allow you to change in real time the color of all the customizable styles. Click on the color strip to select a color. You can drag your mouse around the popup to select a color, or you can use the color picker to select a color from a logo. Some styles allow you to select a gradient. Once slected, the variable card will display a red border indicating you can use the sliders to adjust the gradient. You can copy the value of the color by clicking the copy button. Or you can export an entire theme.",
-  3: `Settings - Here you can change the cycle speed of the dialog boxes, the scale and position of the interfaces, import a logo with a selected aspect ratio, import and export a theme. Once you click Import theme, you can paste either the customTheme object or the entire KonamiSettings content record from EMC. Once you click Export theme, the theme will be copied to your clipboard in the format as follows: 
-`,
+  1: "Dialog Display Buttons - Use these buttons to select a specific dialog box, cycle through available dialogs, or return to the home screen to choose a different interface.",
+  2: "Variable Cards - Adjust the color of customizable styles in real time. Click the color strip to open the color picker or use the eyedropper tool to select a color from a logo. For gradients, sliders appear once selected, indicated by a red border. Copy color values or export the full theme with one click.",
+  3: "Settings - Customize dialog cycle speed, interface scale, and position. Upload a logo with a specific aspect ratio, and import/export themes. Import themes by pasting a customTheme object or the full KonamiSettings record from EMC. Exporting copies the theme to your clipboard in the following format:",
 };
 
 export default function TutorialDisplay({
@@ -19,6 +20,8 @@ export default function TutorialDisplay({
   tutorialStep,
   setTutorialStep,
   setShowTutorial,
+  setActiveDialog,
+  setCycle,
 }: Props) {
   if (!showTutorial) {
     return null; // Don't render anything if tutorial is not shown
@@ -32,6 +35,8 @@ export default function TutorialDisplay({
     }
     const nextStep = tutorialStep + 1;
     setTutorialStep(nextStep);
+    setActiveDialog("LookupDialog");
+    setCycle(false);
   };
 
   const handleExit = () => {
