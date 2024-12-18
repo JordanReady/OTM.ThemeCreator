@@ -44,6 +44,7 @@ type Props = {
   setShadowColor: (color: string) => void;
   showTutorial: boolean;
   tutorialStep: number;
+  interfaceName: string;
 };
 
 export default function ThemePickerDisplay({
@@ -87,6 +88,7 @@ export default function ThemePickerDisplay({
   setShadowColor,
   showTutorial,
   tutorialStep,
+  interfaceName,
 }: Props) {
   return (
     <>
@@ -99,42 +101,68 @@ export default function ThemePickerDisplay({
           }`}
         >
           <div className="dialog-switch-buttons">
-            <button
-              className="dialog-switch-button"
-              onClick={() => openDialog("LookupDialog")}
-            >
-              Lookup Dialog
-            </button>
-            <button
-              className="dialog-switch-button"
-              onClick={() => openDialog("LookupInputDialog")}
-            >
-              Lookup Input Dialog
-            </button>
-            <button
-              className="dialog-switch-button"
-              onClick={() => openDialog("LookupResultDialog")}
-            >
-              Lookup Result Dialog
-            </button>
-            <button
-              className="dialog-switch-button"
-              onClick={() => openDialog("ErrorDialog")}
-            >
-              Error Dialog
-            </button>
-            <button
-              className="dialog-switch-button"
-              onClick={() => openDialog("PinInputDialog")}
-            >
-              Pin Input Dialog
-            </button>
-            <button
-              className="dialog-switch-button"
-              onClick={() => openDialog("TimeoutDialog")}
-            >
-              Timeout Dialog
-            </button>
+            {interfaceName === "OSB" && (
+              <>
+                <button
+                  className="dialog-switch-button"
+                  onClick={() => openDialog("OSBDisplay1")}
+                >
+                  Order Status Board
+                </button>
+                <button
+                  className="dialog-switch-button"
+                  onClick={() => openDialog("OSBDisplay2")}
+                >
+                  Order Status Board 2
+                </button>
+                <button
+                  className="dialog-switch-button"
+                  onClick={() => openDialog("OSBDisconnected")}
+                >
+                  Server Disconnected
+                </button>
+              </>
+            )}
+            {interfaceName === "Konami" && (
+              <>
+                <button
+                  className="dialog-switch-button"
+                  onClick={() => openDialog("LookupDialog")}
+                >
+                  Lookup Dialog
+                </button>
+                <button
+                  className="dialog-switch-button"
+                  onClick={() => openDialog("LookupInputDialog")}
+                >
+                  Lookup Input Dialog
+                </button>
+                <button
+                  className="dialog-switch-button"
+                  onClick={() => openDialog("LookupResultDialog")}
+                >
+                  Lookup Result Dialog
+                </button>
+                <button
+                  className="dialog-switch-button"
+                  onClick={() => openDialog("ErrorDialog")}
+                >
+                  Error Dialog
+                </button>
+                <button
+                  className="dialog-switch-button"
+                  onClick={() => openDialog("PinInputDialog")}
+                >
+                  Pin Input Dialog
+                </button>
+                <button
+                  className="dialog-switch-button"
+                  onClick={() => openDialog("TimeoutDialog")}
+                >
+                  Timeout Dialog
+                </button>
+              </>
+            )}
             <button
               className="dialog-switch-button"
               onClick={() => setCycle(true)}

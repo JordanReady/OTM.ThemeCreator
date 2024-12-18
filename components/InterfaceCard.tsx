@@ -7,17 +7,17 @@ interface InterfaceCardProps {
   title: string;
   imageSrc?: string;
   description: string;
+  link?: string;
 }
 
 export default function InterfaceCard({
   title,
   imageSrc,
   description,
+  link,
 }: InterfaceCardProps) {
-  const link = title.toLowerCase();
-
   return (
-    <Link href={`/${link}`} className="interface-card animate">
+    <Link href={`${link}`} className="interface-card animate">
       <h2 className="interface-title ">{title}</h2>
       <img
         src={imageSrc}

@@ -7,12 +7,13 @@ type Props = {
   setShowTutorial: (showTutorial: boolean) => void;
   setActiveDialog: (dialogName: string) => void;
   setCycle: (cycle: boolean) => void;
+  tutorialInterface: string;
 };
 
 const stepDescriptions: Record<number, string> = {
   1: "Dialog Display Buttons - Use these buttons to select a specific dialog box, cycle through available dialogs, or return to the home screen to choose a different interface.",
   2: "Variable Cards - Adjust the color of customizable styles in real time. Click the color strip to open the color picker or use the eyedropper tool to select a color from a logo. For gradients, sliders appear once selected, indicated by a red border. Copy color values or export the full theme with one click.",
-  3: "Settings - Customize dialog cycle speed, interface scale, and position. Upload a logo with a specific aspect ratio, and import/export themes. Import themes by pasting a customTheme object or the full KonamiSettings record from EMC. Exporting copies the theme to your clipboard in the following format:",
+  3: "Settings - Customize dialog cycle speed, interface scale, and position. Upload a logo with a specific aspect ratio, and import/export themes. Import themes by pasting a customTheme object or the full KonamiSettings record from EMC. Exporting copies the theme to your clipboard in the format bellow. Click the Import Custom Theme button and paste the object below.",
 };
 
 export default function TutorialDisplay({
@@ -22,6 +23,7 @@ export default function TutorialDisplay({
   setShowTutorial,
   setActiveDialog,
   setCycle,
+  tutorialInterface,
 }: Props) {
   if (!showTutorial) {
     return null; // Don't render anything if tutorial is not shown
@@ -35,8 +37,13 @@ export default function TutorialDisplay({
     }
     const nextStep = tutorialStep + 1;
     setTutorialStep(nextStep);
-    setActiveDialog("LookupDialog");
     setCycle(false);
+    if (tutorialInterface === "Konami") {
+      setActiveDialog("LookupDialog");
+    }
+    if (tutorialInterface === "OrderStatusBoard") {
+      setActiveDialog("OSBDisplay1");
+    }
   };
 
   const handleExit = () => {

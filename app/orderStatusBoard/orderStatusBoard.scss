@@ -1,0 +1,36 @@
+/* Common aspect ratios for a custom logo */
+
+/* Square logo (1:1 aspect ratio) */
+.server-disconnected-square {
+  width: 400px;
+  height: 400px;
+  margin: auto;
+}
+
+/* Wide logo (16:9 aspect ratio) */
+.server-disconnected-wide {
+  width: 320px;
+  height: 180px;
+  margin: auto;
+}
+
+/* Portrait logo (9:16 aspect ratio) */
+.server-disconnected-portrait {
+  width: 180px;
+  height: 320px;
+  margin: auto;
+}
+
+/* Classic logo (4:3 aspect ratio) */
+.server-disconnected-classic {
+  width: 240px;
+  height: 180px;
+  margin: auto;
+}
+
+/* Banner logo (3:1 aspect ratio) */
+.server-disconnected-banner {
+  width: 600px;
+  height: 200px;
+  margin: auto;
+}

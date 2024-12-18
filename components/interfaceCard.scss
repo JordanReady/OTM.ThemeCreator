@@ -11,7 +11,6 @@ $scale: 0.8;
 
 .homepage {
   background-color: $background-color;
-  height: 100vh;
   display: flex;
   flex-direction: column;
   // justify-content: center;
@@ -23,11 +22,15 @@ $scale: 0.8;
   flex-direction: column;
   // justify-content: center;
   align-items: center;
-  margin-top: 8rem;
+}
+
+.welcome-container {
+  position: fixed;
 }
 
 .interface-card-container {
   background-color: $background-color;
+  margin-bottom: 2rem;
 }
 
 .interface-card {

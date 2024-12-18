@@ -1,18 +1,21 @@
 "use client";
-import "./konami.scss";
+import "./orderStatusBoard.scss";
+
 import { useState, useEffect } from "react";
 import SettingsDisplay from "@/components/SettingsDisplay";
 import ThemePickerDisplay from "@/components/ThemePickerDisplay";
-import DialogDisplay from "@/components/DialogDisplay";
+import DialogDisplay from "@/components/OSBDialogDisplay.tsx";
 import TutorialDisplay from "@/components/TutorialDisplay";
 
 type Props = {};
 
-export default function Konami({}: Props) {
+export default function OrderStatusBoard({}: Props) {
   // State to track which dialog is active
   const [activeDialog, setActiveDialog] = useState<string | null>(
-    "LookupDialog"
+    "OSBDisplay1"
   );
+  // Array of dialog names to cycle through
+  const dialogNames = ["OSBDisplay1", "OSBDisconnected"];
 
   const [cycle, setCycle] = useState(true);
   // Store cycleSpeed in seconds
@@ -21,7 +24,7 @@ export default function Konami({}: Props) {
   const [baseScale, setBaseScale] = useState(0.7);
   const [scale, setScale] = useState(baseScale);
   const [uploadedImage, setUploadedImage] = useState<string>("/OTMSLogo.png");
-  const [aspectRatio, setAspectRatio] = useState("banner");
+  const [aspectRatio, setAspectRatio] = useState("square");
   const [pos, setPos] = useState(0);
   const [showTutorial, setShowTutorial] = useState(false);
   const [tutorialStep, setTutorialStep] = useState(0);
@@ -30,7 +33,7 @@ export default function Konami({}: Props) {
     setShowSettings(true);
     setShowTutorial(true); // Start the tutorial
     setTutorialStep(1); // Start with step 1
-    setPos(-15);
+    setPos(-5);
     console.log("showTutorial:", true);
   };
   useEffect(() => {
@@ -263,16 +266,6 @@ export default function Konami({}: Props) {
     scale,
   ]);
 
-  // Array of dialog names to cycle through
-  const dialogNames = [
-    "LookupDialog",
-    "LookupInputDialog",
-    "LookupResultDialog",
-    "ErrorDialog",
-    "PinInputDialog",
-    "TimeoutDialog",
-  ];
-
   // Index to track which dialog is currently being displayed
   const [dialogIndex, setDialogIndex] = useState<number>(0);
 
@@ -311,10 +304,10 @@ export default function Konami({}: Props) {
   }, [cycle, cycleSpeed]);
 
   return (
-    <div className="konami-container">
+    <div className="OSB-container">
       <div className="dialog-display-container">
         <TutorialDisplay
-          tutorialInterface={"Konami"}
+          tutorialInterface={"OrderStatusBoard"}
           tutorialStep={tutorialStep}
           showTutorial={showTutorial}
           setTutorialStep={setTutorialStep}
@@ -353,7 +346,7 @@ export default function Konami({}: Props) {
 
         {/* Theme Picker Display*/}
         <ThemePickerDisplay
-          interfaceName="Konami"
+          interfaceName="OSB"
           openDialog={openDialog}
           setCycle={setCycle}
           baseBackgroundColor={baseBackgroundColor}
