@@ -34,6 +34,11 @@ export default function TutorialDisplay({
     setTutorialStep(nextStep);
   };
 
+  const handleExit = () => {
+    setTutorialStep(0); // Reset to step 1
+    setShowTutorial(false);
+  };
+
   const stepDescription =
     stepDescriptions[tutorialStep] || "Invalid Step. Please try again.";
 
@@ -63,9 +68,14 @@ export default function TutorialDisplay({
         </>
       )}
       <br />
-      <button className="dialog-switch-button" onClick={handleNext}>
-        Next
-      </button>
+      <div className="tutorial-buttons">
+        <button className="dialog-switch-button" onClick={handleNext}>
+          Next
+        </button>
+        <button className="exit-button" onClick={handleExit}>
+          Exit Tutorial
+        </button>
+      </div>
     </div>
   );
 }

@@ -282,6 +282,13 @@ $scale: var(--scale);
   padding: 0.5rem;
   border: 1px solid #353536;
   margin-bottom: 0.5rem;
+
+  &:hover {
+    background: $button-hover-background;
+    transform: translateY(-2px) !important;
+    // ease in and out
+    transition: all 0.1s ease-in-out !important;
+  }
 }
 
 .img-option::file-selector-button {
@@ -308,6 +315,13 @@ $scale: var(--scale);
   padding: 0.5rem;
   border: 1px solid #353536;
   margin-bottom: 0.5rem;
+
+  &:hover {
+    background: $button-hover-background;
+    transform: translateY(-2px) !important;
+    // ease in and out
+    transition: all 0.1s ease-in-out !important;
+  }
 }
 
 .settings-container {
@@ -346,6 +360,13 @@ $scale: var(--scale);
   cursor: pointer; /* Pointer cursor */
   display: inline-block !important;
   text-align: center;
+
+  &:hover {
+    background: $button-hover-background;
+    transform: translateY(-2px) !important;
+    // ease in and out
+    transition: all 0.1s ease-in-out !important;
+  }
 }
 
 .aspect-ratio-dropdown {
@@ -357,6 +378,13 @@ $scale: var(--scale);
   border-radius: 5px;
   padding: 0.5rem;
   cursor: pointer;
+
+  &:hover {
+    background: $button-hover-background;
+    transform: translateY(-2px) !important;
+    // ease in and out
+    transition: all 0.1s ease-in-out !important;
+  }
 }
 
 /* Use a workaround for styling options */
@@ -667,7 +695,28 @@ input[type="range"]::-ms-fill-upper {
   transition: background-color 0.3s ease;
 
   &:hover {
-    background-color: linear-gradient(145deg, #ff1744, #ff5252);
+    background: $button-hover-background;
+    transform: translateY(-2px);
+    // ease in and out
+    transition: all 0.1s ease-in-out;
+  }
+}
+
+.exit-button {
+  padding: 0.5rem 1rem;
+  font-size: 1rem;
+  border: 1px solid var(--button-border-color);
+  border-radius: 5px;
+  background: #2c2c2c;
+  color: white;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+
+  &:hover {
+    background: $button-hover-background;
+    transform: translateY(-2px);
+    // ease in and out
+    transition: all 0.1s ease-in-out;
   }
 }
 
@@ -787,6 +836,11 @@ input[type="range"]::-ms-fill-upper {
     opacity: 1;
     transform: scale(1);
   }
+}
+
+.tutorial-buttons {
+  display: flex;
+  justify-content: space-between;
 }
 
 .tutorial-container {
@@ -1191,6 +1245,9 @@ input[type="range"]::-ms-fill-upper {
 
         &:hover {
           background: $button-hover-background;
+          transform: translateY(-2px);
+          // ease in and out
+          transition: all 0.1s ease-in-out;
         }
 
         &:active {

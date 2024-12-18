@@ -25,6 +25,32 @@ export default function VariableBox({
   const [isGradient, setIsGradient] = useState(false);
   const [isInputOpen, setIsInputOpen] = useState(false);
 
+  // Utility to convert color names to HEX values
+  function getHexFromName(colorName: string): string {
+    const ctx = document.createElement("canvas").getContext("2d");
+    if (ctx) {
+      ctx.fillStyle = colorName;
+      return ctx.fillStyle; // Returns hex value
+    }
+    return colorName; // Fallback to original if no context
+  }
+
+  // Check if colorValue is gradient or named color
+  useEffect(() => {
+    // Check if the color is a gradient
+    if (colorValue.startsWith("linear-gradient")) {
+      setIsGradient(true);
+    } else {
+      setIsGradient(false);
+
+      // If the color value is a named color, convert it to HEX
+      const hexColor = getHexFromName(colorValue);
+      if (hexColor !== colorValue) {
+        onColorChange(hexColor);
+      }
+    }
+  }, [colorValue]);
+
   useEffect(() => {
     if (isInputOpen) {
       document.getElementById(`${variableName}-input`)?.focus();
