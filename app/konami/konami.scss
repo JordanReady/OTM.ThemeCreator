@@ -886,6 +886,43 @@ input[type="range"]::-ms-fill-upper {
   }
 }
 
+@keyframes wiggle {
+  0%,
+  100% {
+    transform: rotate(0deg);
+  }
+  20% {
+    transform: rotate(-5deg);
+  }
+  40% {
+    transform: rotate(5deg);
+  }
+  65% {
+    transform: rotate(-5deg);
+  }
+  80% {
+    transform: rotate(5deg);
+  }
+}
+
+.tutorial-button {
+  display: inline-block;
+  padding: 0.5rem 1rem;
+  font-size: 1rem;
+  background-color: #007bff;
+  color: #ffffff;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+
+  /* Animation */
+  animation: wiggle 1s ease-in-out 5s 2 forwards;
+}
+
+.tutorial-button:hover {
+  background-color: #0056b3;
+}
+
 .tutorial-buttons {
   display: flex;
   justify-content: space-between;

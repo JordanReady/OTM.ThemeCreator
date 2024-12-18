@@ -80,9 +80,9 @@ export default function SettingsDisplay({
         <div className="import-export-container">
           <button
             onClick={() => handleTutorial()}
-            className="import-export-button gradient-button animate"
+            className="import-export-button gradient-button tutorial-button animate"
           >
-            Tutorial
+            Interactive Tutorial
           </button>
           <button
             onClick={() => setImportTheme(!importTheme)}
