@@ -80,7 +80,7 @@ export default function SettingsDisplay({
         <div className="import-export-container">
           <button
             onClick={() => handleTutorial()}
-            className="import-export-button gradient-button tutorial-button animate"
+            className="import-export-button gradient-button tutorial-button shake-lr animate"
           >
             Interactive Tutorial
           </button>
