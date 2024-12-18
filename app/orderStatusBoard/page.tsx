@@ -21,7 +21,7 @@ export default function OrderStatusBoard({}: Props) {
   // Store cycleSpeed in seconds
   const [cycleSpeed, setCycleSpeed] = useState(5);
   const [showSettings, setShowSettings] = useState(false);
-  const [baseScale, setBaseScale] = useState(0.7);
+  const [baseScale, setBaseScale] = useState(0.85);
   const [scale, setScale] = useState(baseScale);
   const [uploadedImage, setUploadedImage] = useState<string>("/OTMSLogo.png");
   const [aspectRatio, setAspectRatio] = useState("square");
