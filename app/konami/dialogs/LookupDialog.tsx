@@ -25,7 +25,7 @@ export default function LookupDialog({
             width={350}
             height={200}
             alt={`OTMS Logo`}
-            className={`logo ${aspectRatio}`}
+            className={`logo custom-logo-${aspectRatio}`}
           />
           <h2>Player Account Lookup</h2>
         </div>
