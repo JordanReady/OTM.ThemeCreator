@@ -2,7 +2,8 @@
 import React from "react";
 import Image from "next/image";
 import InterfaceCard from "../components/InterfaceCard";
-import "../components/interfaceCard.scss";
+import "./homepage.scss";
+
 import "../app/konami/konami.scss";
 
 export default function HomePage() {

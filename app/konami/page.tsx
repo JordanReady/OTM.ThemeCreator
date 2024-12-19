@@ -323,6 +323,7 @@ export default function Konami({}: Props) {
           setCycle={setCycle}
         />
         <SettingsDisplay
+          settingInterface={"Konami"}
           showSettings={showSettings}
           setShowSettings={setShowSettings}
           importTheme={importTheme}
@@ -342,6 +343,12 @@ export default function Konami({}: Props) {
           tutorialStep={tutorialStep}
           showTutorial={showTutorial}
           setCycle={setCycle}
+          headingSize={0}
+          handleHeadingSize={function (event: {
+            target: { value: any };
+          }): void {
+            throw new Error("Function not implemented.");
+          }}
         />
 
         <DialogDisplay

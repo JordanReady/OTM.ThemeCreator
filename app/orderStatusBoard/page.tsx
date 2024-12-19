@@ -28,6 +28,11 @@ export default function OrderStatusBoard({}: Props) {
   const [pos, setPos] = useState(0);
   const [showTutorial, setShowTutorial] = useState(false);
   const [tutorialStep, setTutorialStep] = useState(0);
+  const [headingSize, setHeadingSize] = useState(0);
+
+  const handleHeadingSize = (event: { target: { value: any } }) => {
+    setHeadingSize(Number(event.target.value));
+  };
 
   const handleTutorial = () => {
     setShowSettings(true);
@@ -316,6 +321,7 @@ export default function OrderStatusBoard({}: Props) {
           setCycle={setCycle}
         />
         <SettingsDisplay
+          settingInterface={"OrderStatusBoard"}
           showSettings={showSettings}
           setShowSettings={setShowSettings}
           importTheme={importTheme}
@@ -335,6 +341,8 @@ export default function OrderStatusBoard({}: Props) {
           tutorialStep={tutorialStep}
           showTutorial={showTutorial}
           setCycle={setCycle}
+          handleHeadingSize={handleHeadingSize}
+          headingSize={0}
         />
 
         <DialogDisplay
