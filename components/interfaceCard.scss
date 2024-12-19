@@ -35,7 +35,7 @@ $scale: 0.8;
   text-align: center;
   transition: transform 0.3s ease, box-shadow 0.3s ease;
   width: 600px;
-
+  height: min-content;
   display: flex;
   flex-direction: column;
   border: 1px solid $button-border-color;
