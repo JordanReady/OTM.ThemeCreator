@@ -100,6 +100,29 @@ export default function VariableBox({
         >
           Copy
         </div>
+        <div
+          onClick={async () => {
+            try {
+              const pastedText = await navigator.clipboard.readText();
+              // Determine if the pasted text is a gradient or a direct color.
+              if (pastedText.startsWith("linear-gradient")) {
+                // If it's a gradient, just call onColorChange directly:
+                onColorChange(pastedText);
+                setIsGradient(true);
+              } else {
+                // If not a gradient, treat it as a regular color.
+                onColorChange(pastedText);
+                onBaseColorChange(pastedText);
+                setIsGradient(false);
+              }
+            } catch (err) {
+              console.error("Failed to read clipboard contents: ", err);
+            }
+          }}
+          className="paste"
+        >
+          Paste
+        </div>
         <span className="hex-display">{cleanColorValue}</span>
         <input
           type="color"
