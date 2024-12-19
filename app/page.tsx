@@ -1,10 +1,9 @@
 "use client";
+import { useEffect } from "react";
 import React from "react";
 import Image from "next/image";
 import InterfaceCard from "../components/InterfaceCard";
 import "./homepage.scss";
-
-import "../app/konami/konami.scss";
 
 export default function HomePage() {
   const KonamiImg = "./KonamiThumbnail.png";
@@ -33,6 +32,27 @@ export default function HomePage() {
     },
   ];
 
+  useEffect(() => {
+    const root = document.documentElement;
+
+    const colorVariables = {
+      "--accent-color": "grey",
+      "--background-color": "white",
+      "--button-active-background": "#e83e8c",
+      "--button-background": "#ffa500",
+      "--button-border-color": "#800080",
+      "--button-hover-background": "linear-gradient(145deg, #FF1744, #FF5252)",
+      "--button-text-color": "#ff0000",
+      "--shadow-color": "#808080",
+      "--text-color": "grey",
+      "--scale": 0.7,
+    };
+
+    const allColorsAreSet = Object.values(colorVariables).every(
+      (color) => color !== "default"
+    );
+  }, []);
+
   return (
     <div className="homepage">
       <div className="theme-creator-container welcome-container">
@@ -48,8 +68,8 @@ export default function HomePage() {
           Select an Interface to begin customizing the theme!
         </p>
       </div>
+      <div className="spacer"></div>
       <div className="interface-card-container">
-        <div className="spacer"></div>
         {interfaces.map((interfaceData, index) => (
           <InterfaceCard
             key={index}
