@@ -291,7 +291,7 @@ body {
   margin-bottom: 0.5rem;
 
   &:hover {
-    background: $button-hover-background;
+    background: linear-gradient(145deg, #ec7f8f, #e62a39);
     transform: translateY(-2px) !important;
     // ease in and out
     transition: all 0.1s ease-in-out !important;
@@ -324,7 +324,7 @@ body {
   margin-bottom: 0.5rem;
 
   &:hover {
-    background: $button-hover-background;
+    background: linear-gradient(145deg, #ec7f8f, #e62a39);
     transform: translateY(-2px) !important;
     // ease in and out
     transition: all 0.1s ease-in-out !important;
@@ -369,7 +369,7 @@ body {
   text-align: center;
 
   &:hover {
-    background: $button-hover-background;
+    background: linear-gradient(145deg, #ec7f8f, #e62a39);
     transform: translateY(-2px) !important;
     // ease in and out
     transition: all 0.1s ease-in-out !important;
@@ -387,7 +387,7 @@ body {
   cursor: pointer;
 
   &:hover {
-    background: $button-hover-background;
+    background: linear-gradient(145deg, #ec7f8f, #e62a39);
     transform: translateY(-2px) !important;
     // ease in and out
     transition: all 0.1s ease-in-out !important;
@@ -600,6 +600,10 @@ input[type="range"]::-ms-fill-upper {
     border: 1px solid #444;
     margin-bottom: 0.5rem;
     width: 100%;
+
+    &:hover {
+      background: linear-gradient(145deg, #ff6b81, #e63946) !important;
+    }
   }
 
   .slider-container {
@@ -719,7 +723,7 @@ input[type="range"]::-ms-fill-upper {
   transition: background-color 0.3s ease;
 
   &:hover {
-    background: $button-hover-background;
+    background: linear-gradient(145deg, #da6778, #b92e3a);
     transform: translateY(-2px);
     // ease in and out
     transition: all 0.1s ease-in-out;
