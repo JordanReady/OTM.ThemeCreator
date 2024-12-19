@@ -14,14 +14,13 @@ export default function ErrorDialog({ pos, animate }: Props) {
         </div>
         <div className="custom-dialog-content">
           <p>
-            Redeem Comp Points failed. Thepos, amount total must be greater than
-            zero. It is likely you havepos, already completed payment for your
-            order. Check yourpos, acount balancepos, and trypos, again if
-            necessary.
+            Redeem Comp Points failed. The amount total must be greater than
+            zero. It is likely you have already completed payment for your
+            order. Check your acount balance and try again if necessary.
           </p>
         </div>
         <div className="custom-dialog-actions">
-          <button className="dialog-button retry-button">Trypos, again</button>
+          <button className="dialog-button retry-button">Try again</button>
           <button className="dialog-button cancel-button">Close</button>
         </div>
         <p className="custom-dialog-content">

@@ -30,7 +30,7 @@ export default function TimeoutDialog({ pos, animate }: Props) {
         <div className="custom-dialog-content">
           <p>
             Your session will timeout in {timeLeft} seconds due to inactivity.
-            Please continue to use thepos, app.
+            Please continue to use the app.
           </p>
         </div>
         <div className="custom-dialog-actions">
