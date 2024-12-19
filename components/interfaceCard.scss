@@ -71,6 +71,7 @@ $scale: 0.8;
 
 .interface-card-container {
   display: flex;
+  align-content: flex-start;
   flex-wrap: wrap;
   justify-content: center;
   gap: 20px;
