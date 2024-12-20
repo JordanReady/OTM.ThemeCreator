@@ -133,10 +133,20 @@ export default function VariableBox({
           }
           onChange={(e) => {
             const newBase = e.target.value;
-            onBaseColorChange(newBase);
+
+            // If currently a gradient, we need to temporarily disable it to apply the new base color
             if (isGradient) {
+              // Turn off gradient
+              setIsGradient(false);
+              onBaseColorChange(newBase);
+              onColorChange(newBase);
+
+              // Re-enable gradient with the updated base color
+              setIsGradient(true);
               convertToGradient(percent, degree);
             } else {
+              // Not currently a gradient, just set the base color and the color
+              onBaseColorChange(newBase);
               onColorChange(newBase);
             }
           }}
