@@ -8,6 +8,7 @@ type Props = {
   activeDialog: string | null;
   aspectRatioClass: string;
   uploadedImage: string;
+  setActiveDialog: (activeDialog: string) => void;
   pos: number;
 };
 
@@ -15,10 +16,16 @@ export default function DialogDisplay({
   activeDialog,
   aspectRatioClass,
   pos,
+  uploadedImage,
+  setActiveDialog,
 }: Props) {
   useEffect(() => {
     console.log("activeDialog:", activeDialog);
   }, [activeDialog]);
+
+  useEffect(() => {
+    setActiveDialog("OSBDisplay1");
+  }, []);
 
   const orders = [
     // Preparing Orders (StatusId=1)
@@ -34,7 +41,7 @@ export default function DialogDisplay({
     <>
       {activeDialog === "OSBDisplay1" && (
         <OSBDisplay1
-          imgSrc="/OTMLogo.png"
+          imgSrc={uploadedImage}
           aspectRatio={aspectRatioClass}
           pos={pos}
           orders={orders}
@@ -44,7 +51,7 @@ export default function DialogDisplay({
       )}
       {activeDialog === "OSBDisplay2" && (
         <OSBDisplay2
-          imgSrc="/OTMLogo.png"
+          imgSrc={uploadedImage}
           aspectRatio={aspectRatioClass}
           pos={pos}
           orders={orders}

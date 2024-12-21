@@ -81,10 +81,36 @@ export default function VariableBox({
     }
   }, [percent, degree]);
 
-  // Extract the color values from the gradient or hex value
+  // Extract the color values from the gradient or hex value for display
   const cleanColorValue = colorValue.startsWith("linear-gradient")
     ? colorValue.replace(/linear-gradient\((.*)\)/, "($1)")
     : colorValue;
+
+  // Utility to extract the last color from a gradient string
+  const extractLastColorFromGradient = (gradient: string): string | null => {
+    const regex =
+      /linear-gradient\([^,]+,\s*(#[0-9A-Fa-f]{3,6})(?:\s*,\s*#[0-9A-Fa-f]{3,6})*\s*\)$/;
+    const match = gradient.match(regex);
+    if (match) {
+      const colors = gradient.match(/#([0-9A-Fa-f]{3,6})/g);
+      return colors ? colors[colors.length - 1] : null;
+    }
+    return null;
+  };
+
+  // Helper function to ensure gradient string has 'linear-gradient' prefix
+  const ensureLinearGradient = (text: string): string => {
+    if (text.startsWith("linear-gradient")) {
+      return text;
+    }
+    // Attempt to add 'linear-gradient' if the format matches
+    const gradientPattern =
+      /^\(\s*\d+deg\s*,\s*#[0-9A-Fa-f]{3,6}\s*,\s*#[0-9A-Fa-f]{3,6}\s*\)$/;
+    if (gradientPattern.test(text)) {
+      return `linear-gradient${text}`;
+    }
+    return text;
+  };
 
   return (
     <span
@@ -95,7 +121,7 @@ export default function VariableBox({
       <span className="variable-name">{label}</span>
       <div className={`color-preview ${variableName}`}>
         <div
-          onClick={() => navigator.clipboard.writeText(cleanColorValue)}
+          onClick={() => navigator.clipboard.writeText(colorValue)}
           className="copy"
         >
           Copy
@@ -103,16 +129,36 @@ export default function VariableBox({
         <div
           onClick={async () => {
             try {
-              const pastedText = await navigator.clipboard.readText();
-              // Determine if the pasted text is a gradient or a direct color.
-              if (pastedText.startsWith("linear-gradient")) {
-                // If it's a gradient, just call onColorChange directly:
-                onColorChange(pastedText);
-                setIsGradient(true);
+              const pastedText = (await navigator.clipboard.readText()).trim();
+              const normalizedText = ensureLinearGradient(pastedText);
+
+              if (normalizedText.startsWith("linear-gradient")) {
+                if (allowGradient) {
+                  onColorChange(normalizedText);
+                  setIsGradient(true);
+                  const lastColor =
+                    extractLastColorFromGradient(normalizedText);
+                  if (lastColor) {
+                    onBaseColorChange(lastColor);
+                  }
+                } else {
+                  const lastColor =
+                    extractLastColorFromGradient(normalizedText);
+                  if (lastColor) {
+                    onColorChange(lastColor);
+                    onBaseColorChange(lastColor);
+                    setIsGradient(false);
+                  } else {
+                    console.warn(
+                      "Failed to extract color from pasted gradient."
+                    );
+                  }
+                }
               } else {
-                // If not a gradient, treat it as a regular color.
-                onColorChange(pastedText);
-                onBaseColorChange(pastedText);
+                // If not a gradient, treat it as a regular color
+                const hexColor = getHexFromName(normalizedText);
+                onColorChange(hexColor);
+                onBaseColorChange(hexColor);
                 setIsGradient(false);
               }
             } catch (err) {
@@ -165,9 +211,9 @@ export default function VariableBox({
                   setIsGradient(true);
                   convertToGradient(percent, degree);
                 } else {
-                  // Turning gradient off - revert to base color
-                  setIsGradient(false);
+                  // Turning gradient off - revert to baseColor
                   onColorChange(baseColor);
+                  setIsGradient(false);
                 }
               }}
             >

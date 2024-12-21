@@ -23,6 +23,13 @@ export default function HomePage() {
         "The Order Status Board displays when orders are being prepared and ready to be picked up.",
     },
     {
+      title: "Aristocrat Kiosk",
+      imageSrc: "/AristocratThumbnail.png",
+      link: "/aristocrat",
+      description:
+        "The Aristocrat interface allows users to look up player information and process payments using Aristocrat player accounts.",
+    },
+    {
       title: "Stay Kiosk",
 
       imageSrc: "/StayUnderDevelopmentImg.png",

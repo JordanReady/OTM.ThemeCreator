@@ -3,7 +3,7 @@ import "./konami.scss";
 import { useState, useEffect } from "react";
 import SettingsDisplay from "@/components/SettingsDisplay";
 import ThemePickerDisplay from "@/components/ThemePickerDisplay";
-import DialogDisplay from "@/components/DialogDisplay";
+import DialogDisplay from "@/components/KonamiDialogDisplay";
 import TutorialDisplay from "@/components/TutorialDisplay";
 
 type Props = {};
@@ -311,97 +311,100 @@ export default function Konami({}: Props) {
   }, [cycle, cycleSpeed]);
 
   return (
-    <div className="konami-container">
-      <div className="dialog-display-container">
-        <TutorialDisplay
-          tutorialInterface={"Konami"}
-          tutorialStep={tutorialStep}
-          showTutorial={showTutorial}
-          setTutorialStep={setTutorialStep}
-          setShowTutorial={setShowTutorial}
-          setActiveDialog={setActiveDialog}
-          setCycle={setCycle}
-        />
-        <SettingsDisplay
-          settingInterface={"Konami"}
-          showSettings={showSettings}
-          setShowSettings={setShowSettings}
-          importTheme={importTheme}
-          setImportTheme={setImportTheme}
-          exportTheme={exportTheme}
-          cycleSpeed={cycleSpeed}
-          setCycleSpeed={setCycleSpeed}
-          scale={scale}
-          setScale={setScale}
-          pos={pos}
-          handleSliderChange={handleSliderChange}
-          setUploadedImage={setUploadedImage}
-          setAspectRatio={setAspectRatio}
-          importedTheme={importedTheme}
-          handleThemeSubmit={handleThemeSubmit}
-          handleTutorial={handleTutorial}
-          tutorialStep={tutorialStep}
-          showTutorial={showTutorial}
-          setCycle={setCycle}
-          headingSize={0}
-          handleHeadingSize={function (event: {
-            target: { value: any };
-          }): void {
-            throw new Error("Function not implemented.");
-          }}
-        />
+    <div className="background">
+      <div className="konami-container">
+        <div className="dialog-display-container">
+          <TutorialDisplay
+            tutorialInterface={"Konami"}
+            tutorialStep={tutorialStep}
+            showTutorial={showTutorial}
+            setTutorialStep={setTutorialStep}
+            setShowTutorial={setShowTutorial}
+            setActiveDialog={setActiveDialog}
+            setCycle={setCycle}
+          />
+          <SettingsDisplay
+            settingInterface={"Konami"}
+            showSettings={showSettings}
+            setShowSettings={setShowSettings}
+            importTheme={importTheme}
+            setImportTheme={setImportTheme}
+            exportTheme={exportTheme}
+            cycleSpeed={cycleSpeed}
+            setCycleSpeed={setCycleSpeed}
+            scale={scale}
+            setScale={setScale}
+            pos={pos}
+            handleSliderChange={handleSliderChange}
+            setUploadedImage={setUploadedImage}
+            setAspectRatio={setAspectRatio}
+            importedTheme={importedTheme}
+            handleThemeSubmit={handleThemeSubmit}
+            handleTutorial={handleTutorial}
+            tutorialStep={tutorialStep}
+            showTutorial={showTutorial}
+            setCycle={setCycle}
+            headingSize={0}
+            setPlayerImgScale={setScale}
+            handleHeadingSize={function (event: {
+              target: { value: any };
+            }): void {
+              throw new Error("Function not implemented.");
+            }}
+          />
 
-        <DialogDisplay
-          activeDialog={activeDialog}
-          aspectRatioClass={aspectRatio}
-          uploadedImage={uploadedImage}
-          pos={pos}
-        />
+          <DialogDisplay
+            activeDialog={activeDialog}
+            aspectRatioClass={aspectRatio}
+            uploadedImage={uploadedImage}
+            pos={pos}
+          />
 
-        {/* Theme Picker Display*/}
-        <ThemePickerDisplay
-          interfaceName="Konami"
-          openDialog={openDialog}
-          setCycle={setCycle}
-          baseBackgroundColor={baseBackgroundColor}
-          backgroundColor={backgroundColor}
-          baseAccentColor={baseAccentColor}
-          accentColor={accentColor}
-          baseTextColor={baseTextColor}
-          textColor={textColor}
-          setBaseBackgroundColor={setBaseBackgroundColor}
-          setBackgroundColor={setBackgroundColor}
-          setBaseAccentColor={setBaseAccentColor}
-          setAccentColor={setAccentColor}
-          setBaseTextColor={setBaseTextColor}
-          setTextColor={setTextColor}
-          baseButtonBackground={baseButtonBackground}
-          buttonBackground={buttonBackground}
-          baseButtonHoverBackground={baseButtonHoverBackground}
-          buttonHoverBackground={buttonHoverBackground}
-          baseButtonActiveBackground={baseButtonActiveBackground}
-          buttonActiveBackground={buttonActiveBackground}
-          baseButtonBorderColor={baseButtonBorderColor}
-          buttonBorderColor={buttonBorderColor}
-          baseButtonTextColor={baseButtonTextColor}
-          buttonTextColor={buttonTextColor}
-          setBaseButtonBackground={setBaseButtonBackground}
-          setButtonBackground={setButtonBackground}
-          setBaseButtonHoverBackground={setBaseButtonHoverBackground}
-          setButtonHoverBackground={setButtonHoverBackground}
-          setBaseButtonActiveBackground={setBaseButtonActiveBackground}
-          setButtonActiveBackground={setButtonActiveBackground}
-          setBaseButtonBorderColor={setBaseButtonBorderColor}
-          setButtonBorderColor={setButtonBorderColor}
-          setBaseButtonTextColor={setBaseButtonTextColor}
-          setButtonTextColor={setButtonTextColor}
-          baseShadowColor={baseShadowColor}
-          shadowColor={shadowColor}
-          setBaseShadowColor={setBaseShadowColor}
-          setShadowColor={setShadowColor}
-          tutorialStep={tutorialStep}
-          showTutorial={showTutorial}
-        />
+          {/* Theme Picker Display*/}
+          <ThemePickerDisplay
+            interfaceName="Konami"
+            openDialog={openDialog}
+            setCycle={setCycle}
+            baseBackgroundColor={baseBackgroundColor}
+            backgroundColor={backgroundColor}
+            baseAccentColor={baseAccentColor}
+            accentColor={accentColor}
+            baseTextColor={baseTextColor}
+            textColor={textColor}
+            setBaseBackgroundColor={setBaseBackgroundColor}
+            setBackgroundColor={setBackgroundColor}
+            setBaseAccentColor={setBaseAccentColor}
+            setAccentColor={setAccentColor}
+            setBaseTextColor={setBaseTextColor}
+            setTextColor={setTextColor}
+            baseButtonBackground={baseButtonBackground}
+            buttonBackground={buttonBackground}
+            baseButtonHoverBackground={baseButtonHoverBackground}
+            buttonHoverBackground={buttonHoverBackground}
+            baseButtonActiveBackground={baseButtonActiveBackground}
+            buttonActiveBackground={buttonActiveBackground}
+            baseButtonBorderColor={baseButtonBorderColor}
+            buttonBorderColor={buttonBorderColor}
+            baseButtonTextColor={baseButtonTextColor}
+            buttonTextColor={buttonTextColor}
+            setBaseButtonBackground={setBaseButtonBackground}
+            setButtonBackground={setButtonBackground}
+            setBaseButtonHoverBackground={setBaseButtonHoverBackground}
+            setButtonHoverBackground={setButtonHoverBackground}
+            setBaseButtonActiveBackground={setBaseButtonActiveBackground}
+            setButtonActiveBackground={setButtonActiveBackground}
+            setBaseButtonBorderColor={setBaseButtonBorderColor}
+            setButtonBorderColor={setButtonBorderColor}
+            setBaseButtonTextColor={setBaseButtonTextColor}
+            setButtonTextColor={setButtonTextColor}
+            baseShadowColor={baseShadowColor}
+            shadowColor={shadowColor}
+            setBaseShadowColor={setBaseShadowColor}
+            setShadowColor={setShadowColor}
+            tutorialStep={tutorialStep}
+            showTutorial={showTutorial}
+          />
+        </div>
       </div>
     </div>
   );

@@ -123,6 +123,16 @@ export default function ThemePickerDisplay({
                 </button>
               </>
             )}
+            {interfaceName === "PlayerInformation" && (
+              <>
+                <button
+                  className="dialog-switch-button"
+                  onClick={() => openDialog("PlayerInformation")}
+                >
+                  Player Information
+                </button>
+              </>
+            )}
             {interfaceName === "Konami" && (
               <>
                 <button

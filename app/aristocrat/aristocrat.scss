@@ -1,0 +1,441 @@
+// SCSS Variables
+$background-color: var(--background-color);
+$accent-color: var(--accent-color);
+$text-color: var(--text-color);
+$button-background: var(--button-background);
+$button-hover-background: var(--button-hover-background);
+$button-active-background: var(--button-active-background);
+$button-border-color: var(--button-border-color);
+$button-text-color: var(--button-text-color);
+$shadow-color: var(--shadow-color);
+$scale: var(--scale);
+
+.animate {
+  animation: fadeInScale 0.5s ease-in-out forwards;
+}
+
+.animate-down {
+  animation: slideDown 0.5s ease-out forwards;
+}
+
+.animate-up {
+  animation: 2s slideUp 2s ease-out forwards;
+}
+
+@keyframes slideDown {
+  from {
+    transform: translateY(-30%);
+    opacity: 0;
+  }
+  to {
+    transform: translateY(0);
+    opacity: 1;
+  }
+}
+
+@keyframes slideUp {
+  from {
+    transform: translateY(0);
+    opacity: 1;
+  }
+  to {
+    transform: translateY(-50%);
+    opacity: 0;
+  }
+}
+
+@keyframes fadeInScale {
+  0% {
+    opacity: 0;
+    transform: scale(0.9);
+  }
+
+  100% {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+.custom-dialog-backdrop {
+  scale: $scale;
+}
+
+.background {
+  position: absolute;
+  background-color: $background-color;
+  width: 100%;
+  height: 100%;
+}
+
+.aristocrat-container {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: $background-color;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  z-index: 900;
+  width: 40dvw;
+}
+
+.player-information {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  background-color: $background-color;
+  padding: 2rem;
+  border-radius: 12px;
+  box-shadow: 0 4px 8px $shadow-color;
+  max-width: 600px;
+  margin: 2rem auto;
+  border: 1px solid $button-border-color;
+
+  h1 {
+    font-size: 36px;
+    margin-bottom: 20px;
+    color: $text-color;
+    font-weight: 700;
+    text-transform: uppercase;
+    text-shadow: -1px -1px 0 $accent-color, 1px -1px 0 $accent-color,
+      -1px 1px 0 $accent-color, 1px 1px 0 $accent-color;
+  }
+
+  .buttons-container {
+    display: flex;
+    justify-content: center;
+    gap: 1rem;
+
+    margin-top: 1.5rem;
+
+    .btn {
+      padding: 0.75rem 1.5rem;
+      border: 2px solid $button-border-color;
+      border-radius: 8px;
+      font-size: 1rem;
+      color: $button-text-color;
+      background: $button-background;
+      cursor: pointer;
+      box-shadow: 0 4px 6px $shadow-color;
+      transition: background 0.3s ease, transform 0.2s ease;
+
+      &:hover:not(:disabled) {
+        background: $button-hover-background;
+        transform: translateY(-2px);
+      }
+
+      &:active:not(:disabled) {
+        background: $button-active-background;
+        transform: translateY(0);
+      }
+
+      &:disabled {
+        background: $button-background;
+        cursor: not-allowed;
+        opacity: 0.7;
+      }
+
+      //   &.inquire-points {
+      //     // Additional styles if needed
+      //   }
+
+      //   &.redeem-points {
+      //     // Additional styles if needed
+      //   }
+    }
+  }
+
+  .error-message {
+    background-color: $background-color;
+    color: $text-color;
+    padding: 0.75rem 1rem;
+    border: 1px solid $button-border-color;
+    border-radius: 4px;
+    margin-bottom: 1.5rem;
+    text-align: center;
+    width: 100%;
+  }
+
+  .player-info {
+    background-color: $background-color;
+
+    width: 100%;
+
+    h2 {
+      font-size: 1.5rem;
+      font-weight: 600;
+      margin-bottom: 1rem;
+      color: $text-color;
+      border-bottom: 2px solid $accent-color;
+      padding-bottom: 0.5rem;
+      text-align: center;
+    }
+    .display {
+      display: flex;
+      justify-content: space-around;
+      align-items: center;
+    }
+
+    p {
+      margin: 0.5rem 0;
+      font-size: 1rem;
+      color: $text-color;
+
+      strong {
+        color: $text-color;
+      }
+    }
+  }
+}
+
+.player-logo {
+  border-radius: 8px;
+  margin: 1rem;
+  position: relative;
+  box-sizing: border-box;
+  font-size: 4rem;
+}
+
+.margin--15 {
+  margin-top: 15rem;
+}
+
+.margin--14 {
+  margin-top: 14rem;
+}
+
+.margin--13 {
+  margin-top: 13rem;
+}
+
+.margin--12 {
+  margin-top: 12rem;
+}
+
+.margin--11 {
+  margin-top: 11rem;
+}
+
+.margin--10 {
+  margin-top: 10rem;
+}
+
+.margin--9 {
+  margin-top: 9rem;
+}
+
+.margin--8 {
+  margin-top: 8rem;
+}
+
+.margin--7 {
+  margin-top: 7rem;
+}
+
+.margin--6 {
+  margin-top: 6rem;
+}
+
+.margin--5 {
+  margin-top: 5rem;
+}
+
+.margin--4 {
+  margin-top: 4rem;
+}
+
+.margin--3 {
+  margin-top: 3rem;
+}
+
+.margin--2 {
+  margin-top: 2rem;
+}
+
+.margin--1 {
+  margin-top: 1rem;
+}
+
+.margin-0 {
+  margin-top: 0;
+}
+
+.margin-1 {
+  margin-top: -1rem;
+}
+
+.margin-2 {
+  margin-top: -2rem;
+}
+
+.margin-3 {
+  margin-top: -3rem;
+}
+
+.margin-4 {
+  margin-top: -4rem;
+}
+
+.margin-5 {
+  margin-top: -5rem;
+}
+
+.margin-6 {
+  margin-top: -6rem;
+}
+
+.margin-7 {
+  margin-top: -7rem;
+}
+
+.margin-8 {
+  margin-top: -8rem;
+}
+
+.margin-9 {
+  margin-top: -9rem;
+}
+
+.margin-10 {
+  margin-top: -10rem;
+}
+
+.margin-11 {
+  margin-top: -11rem;
+}
+
+.margin-12 {
+  margin-top: -12rem;
+}
+
+.margin-13 {
+  margin-top: -13rem;
+}
+
+.margin-14 {
+  margin-top: -14rem;
+}
+
+.margin-15 {
+  margin-top: -15rem;
+}
+
+/* styles.css */
+
+/* styles.css */
+
+/* Negative Scales: -10 to -1 mapped to 100px to 190px */
+.scale--10 {
+  width: 100px;
+  height: 100px;
+}
+
+.scale--9 {
+  width: 110px;
+  height: 110px;
+}
+
+.scale--8 {
+  width: 120px;
+  height: 120px;
+}
+
+.scale--7 {
+  width: 130px;
+  height: 130px;
+}
+
+.scale--6 {
+  width: 140px;
+  height: 140px;
+}
+
+.scale--5 {
+  width: 150px;
+  height: 150px;
+}
+
+.scale--4 {
+  width: 160px;
+  height: 160px;
+}
+
+.scale--3 {
+  width: 170px;
+  height: 170px;
+}
+
+.scale--2 {
+  width: 180px;
+  height: 180px;
+}
+
+.scale--1 {
+  width: 190px;
+  height: 190px;
+}
+
+/* Zero Scale: 0 mapped to 200px */
+.scale-0 {
+  width: 200px;
+  height: 200px;
+}
+
+/* Positive Scales: 1 to 10 mapped to 210px to 300px */
+.scale-1 {
+  width: 210px;
+  height: 210px;
+}
+
+.scale-2 {
+  width: 220px;
+  height: 220px;
+}
+
+.scale-3 {
+  width: 230px;
+  height: 230px;
+}
+
+.scale-4 {
+  width: 240px;
+  height: 240px;
+}
+
+.scale-5 {
+  width: 250px;
+  height: 250px;
+}
+
+.scale-6 {
+  width: 260px;
+  height: 260px;
+}
+
+.scale-7 {
+  width: 270px;
+  height: 270px;
+}
+
+.scale-8 {
+  width: 280px;
+  height: 280px;
+}
+
+.scale-9 {
+  width: 290px;
+  height: 290px;
+}
+
+.scale-10 {
+  width: 300px;
+  height: 300px;
+}
+
+/* Optional: Add transition for smooth scaling */
+.player-logo {
+  transition: width 0.3s ease, height 0.3s ease;
+}

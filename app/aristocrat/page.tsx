@@ -1,10 +1,10 @@
 "use client";
-import "./orderStatusBoard.scss";
+import "./aristocrat.scss";
 
 import { useState, useEffect, use } from "react";
 import SettingsDisplay from "@/components/SettingsDisplay";
 import ThemePickerDisplay from "@/components/ThemePickerDisplay";
-import DialogDisplay from "@/app/orderStatusBoard/dialogs/OSBDialogDisplay.tsx";
+import DialogDisplay from "@/app/aristocrat/aristocratDialogDisplay";
 import TutorialDisplay from "@/components/TutorialDisplay";
 
 type Props = {};
@@ -15,20 +15,25 @@ export default function OrderStatusBoard({}: Props) {
     "OSBDisplay1"
   );
   // Array of dialog names to cycle through
-  const dialogNames = ["OSBDisplay2", "OSBDisconnected", "OSBDisplay1"];
+  const dialogNames = ["PlayerInformation"];
 
   const [cycle, setCycle] = useState(true);
   // Store cycleSpeed in seconds
   const [cycleSpeed, setCycleSpeed] = useState(5);
   const [showSettings, setShowSettings] = useState(false);
-  const [baseScale, setBaseScale] = useState(0.85);
+  const [baseScale, setBaseScale] = useState(1);
   const [scale, setScale] = useState(baseScale);
   const [uploadedImage, setUploadedImage] = useState<string>("/OTMSLogo.png");
-  const [aspectRatio, setAspectRatio] = useState("square");
+  const [aspectRatio, setAspectRatio] = useState("banner");
   const [pos, setPos] = useState(0);
   const [showTutorial, setShowTutorial] = useState(false);
   const [tutorialStep, setTutorialStep] = useState(0);
   const [headingSize, setHeadingSize] = useState(0);
+  const [playerImgScale, setPlayerImgScale] = useState(1.5);
+
+  useEffect(() => {
+    console.log("playerImgScale:", playerImgScale);
+  }, [playerImgScale]);
 
   const handleHeadingSize = (event: { target: { value: any } }) => {
     setHeadingSize(Number(event.target.value));
@@ -310,7 +315,7 @@ export default function OrderStatusBoard({}: Props) {
 
   return (
     <div className="background">
-      <div className="OSB-container">
+      <div className="aristocrat-container">
         <div className="dialog-display-container">
           <TutorialDisplay
             tutorialInterface={"OrderStatusBoard"}
@@ -322,7 +327,7 @@ export default function OrderStatusBoard({}: Props) {
             setCycle={setCycle}
           />
           <SettingsDisplay
-            settingInterface={"OrderStatusBoard"}
+            settingInterface={"Aristocrat"}
             showSettings={showSettings}
             setShowSettings={setShowSettings}
             importTheme={importTheme}
@@ -344,20 +349,21 @@ export default function OrderStatusBoard({}: Props) {
             setCycle={setCycle}
             handleHeadingSize={handleHeadingSize}
             headingSize={0}
-            setPlayerImgScale={setScale}
+            playerImgScale={playerImgScale}
+            setPlayerImgScale={setPlayerImgScale}
           />
 
           <DialogDisplay
             activeDialog={activeDialog}
             aspectRatioClass={aspectRatio}
             uploadedImage={uploadedImage}
-            setActiveDialog={setActiveDialog}
             pos={pos}
+            playerImgScale={playerImgScale}
           />
 
           {/* Theme Picker Display*/}
           <ThemePickerDisplay
-            interfaceName="OSB"
+            interfaceName="PlayerInformation"
             openDialog={openDialog}
             setCycle={setCycle}
             baseBackgroundColor={baseBackgroundColor}

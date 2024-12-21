@@ -217,8 +217,7 @@ export default function OSBDisplay1({
     <div className={`custom-dialog-backdrop margin-${pos}`}>
       <div className={`osb-dialog ${animate ? "animate" : ""}`}>
         <Image
-          className="osb-logo"
-          id="graphic-top-left"
+          className={`osb-logo osb-logo-${aspectRatio}`}
           src={imgSrc}
           alt="Logo"
           width={600}
