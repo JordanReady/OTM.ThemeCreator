@@ -34,6 +34,7 @@ type Props = {
   buttonTextColor: string;
   shadowColor: string;
   showHtml: boolean;
+  disconnectedImgAspectRatio: string;
 };
 
 export default function DialogDisplay({
@@ -54,6 +55,7 @@ export default function DialogDisplay({
   buttonTextColor,
   shadowColor,
   showHtml,
+  disconnectedImgAspectRatio,
 }: Props) {
   const [orders, setOrders] = useState<Order[]>([
     // Preparing Orders (StatusId=1)
@@ -251,7 +253,7 @@ export default function DialogDisplay({
           ) : (
             <OSBDisconnected
               imgSrc="/ServerDisconnected.png"
-              aspectRatio={aspectRatioClass}
+              aspectRatio={disconnectedImgAspectRatio}
               pos={pos}
             />
           )}

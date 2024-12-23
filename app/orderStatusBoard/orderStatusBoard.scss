@@ -36,36 +36,36 @@
 }
 
 .osb-logo-square {
-  width: 100px;
-  height: 100px;
+  width: 100px !important;
+  height: 100px !important;
   margin: auto;
 }
 
 /* Wide logo (16:9 aspect ratio) */
 .osb-logo-wide {
-  width: 160px;
-  height: 90px;
+  width: 160px !important;
+  height: 90px !important;
   margin: auto;
 }
 
 /* Portrait logo (9:16 aspect ratio) */
 .osb-logo-portrait {
-  width: 90px;
-  height: 160px;
+  width: 90px !important;
+  height: 160px !important;
   margin: auto;
 }
 
 /* Classic logo (4:3 aspect ratio) */
 .osb-logo-classic {
-  width: 120px;
-  height: 90px;
+  width: 120px !important;
+  height: 90px !important;
   margin: auto;
 }
 
 /* Banner logo (3:1 aspect ratio) */
 .osb-logo-banner {
-  width: 300px;
-  height: 100px;
+  width: 300px !important;
+  height: 100px !important;
   margin: auto;
 }
 

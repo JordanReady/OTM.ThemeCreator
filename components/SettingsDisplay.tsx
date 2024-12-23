@@ -29,6 +29,7 @@ type Props = {
   importTheme: boolean;
   setImportTheme: (importTheme: boolean) => void;
   importedTheme: string;
+  setDisconnectedImgAspectRatio: (disconnectedImgAspectRatio: string) => void;
 };
 
 type ButtonType =
@@ -63,6 +64,7 @@ export default function SettingsDisplay({
   setPlayerImgScale,
   showHtml,
   setShowHtml,
+  setDisconnectedImgAspectRatio,
 }: Props) {
   useEffect(() => {
     setCycle(true);
@@ -378,6 +380,23 @@ export default function SettingsDisplay({
               className="aspect-ratio-dropdown"
               onChange={(e) => {
                 setAspectRatio(e.target.value);
+              }}
+            >
+              <option value="wide">Wide</option>
+              <option value="portrait">Portrait</option>
+              <option value="classic">Classic</option>
+              <option value="banner">Banner</option>
+              <option value="square">Square</option>
+            </select>
+          </div>
+          {/* Aspect Ratio Selector */}
+          <div className="setting-option">
+            <label htmlFor="aspect-ratio">Disconnected Aspect Ratio: </label>
+            <select
+              id="aspect-ratio"
+              className="aspect-ratio-dropdown"
+              onChange={(e) => {
+                setDisconnectedImgAspectRatio(e.target.value);
               }}
             >
               <option value="wide">Wide</option>

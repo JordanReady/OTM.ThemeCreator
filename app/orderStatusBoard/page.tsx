@@ -24,7 +24,9 @@ export default function OrderStatusBoard({}: Props) {
   const [baseScale, setBaseScale] = useState(0.85);
   const [scale, setScale] = useState(baseScale);
   const [uploadedImage, setUploadedImage] = useState<string>("/OTMSLogo.png");
-  const [aspectRatio, setAspectRatio] = useState("square");
+  const [aspectRatio, setAspectRatio] = useState("banner");
+  const [disconnectedImgAspectRatio, setDisconnectedImgAspectRatio] =
+    useState("square");
   const [pos, setPos] = useState(0);
   const [showTutorial, setShowTutorial] = useState(false);
   const [tutorialStep, setTutorialStep] = useState(0);
@@ -348,6 +350,7 @@ export default function OrderStatusBoard({}: Props) {
             setPlayerImgScale={setScale}
             showHtml={showHtml}
             setShowHtml={setShowHtml}
+            setDisconnectedImgAspectRatio={setDisconnectedImgAspectRatio}
           />
 
           <DialogDisplay
@@ -368,6 +371,7 @@ export default function OrderStatusBoard({}: Props) {
             buttonTextColor={buttonTextColor}
             shadowColor={shadowColor}
             showHtml={showHtml}
+            disconnectedImgAspectRatio={disconnectedImgAspectRatio}
           />
 
           {/* Theme Picker Display*/}
