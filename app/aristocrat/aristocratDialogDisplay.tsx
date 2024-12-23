@@ -17,10 +17,6 @@ export default function DialogDisplay({
   uploadedImage,
   playerImgScale,
 }: Props) {
-  useEffect(() => {
-    console.log("activeDialog:", activeDialog);
-  }, [activeDialog]);
-
   return (
     <>
       {activeDialog === "PlayerInformation" && (

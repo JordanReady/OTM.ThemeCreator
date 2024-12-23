@@ -31,19 +31,11 @@ export default function Konami({}: Props) {
     setShowTutorial(true); // Start the tutorial
     setTutorialStep(1); // Start with step 1
     setPos(-15);
-    console.log("showTutorial:", true);
   };
-  useEffect(() => {
-    console.log("tutorialStep:", tutorialStep);
-  }, [tutorialStep]);
 
   const handleSliderChange = (event: { target: { value: any } }) => {
     setPos(Number(event.target.value)); // Update position as a number
   };
-
-  useEffect(() => {
-    console.log("pos:", pos);
-  }, [pos]);
 
   const [aspectRatioClass, setAspectRatioClass] =
     useState("custom-logo-banner");
@@ -126,7 +118,6 @@ export default function Konami({}: Props) {
       if (match && match[1]) {
         setter(match[1]); // Update the base color
         setter2(match[1]); // Update the active color
-        console.log(`Updated ${key} to`, match[1]); // Log for debugging
       }
     });
 
@@ -349,6 +340,10 @@ export default function Konami({}: Props) {
             handleHeadingSize={function (event: {
               target: { value: any };
             }): void {
+              throw new Error("Function not implemented.");
+            }}
+            showHtml={false}
+            setShowHtml={function (showHtml: boolean): void {
               throw new Error("Function not implemented.");
             }}
           />

@@ -31,10 +31,6 @@ export default function OrderStatusBoard({}: Props) {
   const [headingSize, setHeadingSize] = useState(0);
   const [playerImgScale, setPlayerImgScale] = useState(1.5);
 
-  useEffect(() => {
-    console.log("playerImgScale:", playerImgScale);
-  }, [playerImgScale]);
-
   const handleHeadingSize = (event: { target: { value: any } }) => {
     setHeadingSize(Number(event.target.value));
   };
@@ -44,19 +40,11 @@ export default function OrderStatusBoard({}: Props) {
     setShowTutorial(true); // Start the tutorial
     setTutorialStep(1); // Start with step 1
     setPos(-5);
-    console.log("showTutorial:", true);
   };
-  useEffect(() => {
-    console.log("tutorialStep:", tutorialStep);
-  }, [tutorialStep]);
 
   const handleSliderChange = (event: { target: { value: any } }) => {
     setPos(Number(event.target.value)); // Update position as a number
   };
-
-  useEffect(() => {
-    console.log("pos:", pos);
-  }, [pos]);
 
   const [aspectRatioClass, setAspectRatioClass] =
     useState("custom-logo-banner");
@@ -139,7 +127,6 @@ export default function OrderStatusBoard({}: Props) {
       if (match && match[1]) {
         setter(match[1]); // Update the base color
         setter2(match[1]); // Update the active color
-        console.log(`Updated ${key} to`, match[1]); // Log for debugging
       }
     });
 
@@ -173,7 +160,6 @@ export default function OrderStatusBoard({}: Props) {
     // Add the trailing comma to the end
     const finalTheme = `${trimmedTheme},`; // Add a comma at the end
 
-    console.log("Exported Theme:", finalTheme);
     navigator.clipboard
       .writeText(finalTheme) // Copy to clipboard
       .then(() => console.log("Theme copied to clipboard!"))
@@ -351,6 +337,10 @@ export default function OrderStatusBoard({}: Props) {
             headingSize={0}
             playerImgScale={playerImgScale}
             setPlayerImgScale={setPlayerImgScale}
+            showHtml={false}
+            setShowHtml={function (showHtml: boolean): void {
+              throw new Error("Function not implemented.");
+            }}
           />
 
           <DialogDisplay

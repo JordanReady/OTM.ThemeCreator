@@ -4,7 +4,7 @@ import "./orderStatusBoard.scss";
 import { useState, useEffect, use } from "react";
 import SettingsDisplay from "@/components/SettingsDisplay";
 import ThemePickerDisplay from "@/components/ThemePickerDisplay";
-import DialogDisplay from "@/app/orderStatusBoard/dialogs/OSBDialogDisplay.tsx";
+import DialogDisplay from "@/app/orderStatusBoard/dialogs/OSBDialogDisplay";
 import TutorialDisplay from "@/components/TutorialDisplay";
 
 type Props = {};
@@ -29,6 +29,16 @@ export default function OrderStatusBoard({}: Props) {
   const [showTutorial, setShowTutorial] = useState(false);
   const [tutorialStep, setTutorialStep] = useState(0);
   const [headingSize, setHeadingSize] = useState(0);
+  const [componentHtml, setComponentHtml] = useState("");
+  const [showHtml, setShowHtml] = useState(false);
+
+  useEffect(() => {
+    console.log("html from page:", showHtml);
+  }, [showHtml]);
+
+  useEffect(() => {
+    console.log("componentHtml from page:", componentHtml);
+  }, [componentHtml]);
 
   const handleHeadingSize = (event: { target: { value: any } }) => {
     setHeadingSize(Number(event.target.value));
@@ -39,19 +49,11 @@ export default function OrderStatusBoard({}: Props) {
     setShowTutorial(true); // Start the tutorial
     setTutorialStep(1); // Start with step 1
     setPos(-5);
-    console.log("showTutorial:", true);
   };
-  useEffect(() => {
-    console.log("tutorialStep:", tutorialStep);
-  }, [tutorialStep]);
 
   const handleSliderChange = (event: { target: { value: any } }) => {
     setPos(Number(event.target.value)); // Update position as a number
   };
-
-  useEffect(() => {
-    console.log("pos:", pos);
-  }, [pos]);
 
   const [aspectRatioClass, setAspectRatioClass] =
     useState("custom-logo-banner");
@@ -168,7 +170,6 @@ export default function OrderStatusBoard({}: Props) {
     // Add the trailing comma to the end
     const finalTheme = `${trimmedTheme},`; // Add a comma at the end
 
-    console.log("Exported Theme:", finalTheme);
     navigator.clipboard
       .writeText(finalTheme) // Copy to clipboard
       .then(() => console.log("Theme copied to clipboard!"))
@@ -345,14 +346,28 @@ export default function OrderStatusBoard({}: Props) {
             handleHeadingSize={handleHeadingSize}
             headingSize={0}
             setPlayerImgScale={setScale}
+            showHtml={showHtml}
+            setShowHtml={setShowHtml}
           />
 
           <DialogDisplay
+            componentHtml={componentHtml}
+            setComponentHtml={setComponentHtml}
             activeDialog={activeDialog}
             aspectRatioClass={aspectRatio}
             uploadedImage={uploadedImage}
             setActiveDialog={setActiveDialog}
             pos={pos}
+            backgroundColor={backgroundColor}
+            accentColor={accentColor}
+            textColor={textColor}
+            buttonBackground={buttonBackground}
+            buttonHoverBackground={buttonHoverBackground}
+            buttonActiveBackground={buttonActiveBackground}
+            buttonBorderColor={buttonBorderColor}
+            buttonTextColor={buttonTextColor}
+            shadowColor={shadowColor}
+            showHtml={showHtml}
           />
 
           {/* Theme Picker Display*/}

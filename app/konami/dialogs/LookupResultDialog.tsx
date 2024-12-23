@@ -60,7 +60,7 @@ export default function LookupResultDialog({ animate, pos }: Props) {
                 <li>
                   <strong>Slot Point Balance</strong>
                   <br />
-                  <span className={`${isHeld ? "" : "blurred"}`}>$420.69</span>
+                  <span className={`${isHeld ? "" : "blurred"}`}>$420.37</span>
                 </li>
               </ul>
             </div>
@@ -79,6 +79,8 @@ export default function LookupResultDialog({ animate, pos }: Props) {
             className="dialog-button cancel-button full mb no-select"
             onTouchStart={handlePress}
             onTouchEnd={handleRelease}
+            onMouseDown={handlePress}
+            onMouseUp={handleRelease}
           >
             Reveal Point Balance
           </button>

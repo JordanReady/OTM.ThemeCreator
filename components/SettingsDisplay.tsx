@@ -1,11 +1,10 @@
 import { useEffect } from "react";
 import "../app/konami/konami.scss";
+import "../app/orderStatusBoard/orderStatusBoard.scss";
 
 type Props = {
   showSettings: boolean;
   setShowSettings: (showSettings: boolean) => void;
-  importTheme: boolean;
-  setImportTheme: (importTheme: boolean) => void;
   exportTheme: () => void;
   cycleSpeed: number;
   setCycleSpeed: (cycleSpeed: number) => void;
@@ -15,8 +14,7 @@ type Props = {
   handleSliderChange: (event: { target: { value: any } }) => void;
   setUploadedImage: (uploadedImage: string) => void;
   setAspectRatio: (aspectRatio: string) => void;
-  importedTheme: string;
-  handleThemeSubmit: (event: string) => void;
+  handleThemeSubmit: (theme: string) => void;
   handleTutorial: () => void;
   showTutorial: boolean;
   tutorialStep: number;
@@ -26,13 +24,24 @@ type Props = {
   handleHeadingSize: (event: { target: { value: any } }) => void;
   playerImgScale?: number;
   setPlayerImgScale: (playerImgScale: number) => void;
+  showHtml: boolean;
+  setShowHtml: (showHtml: boolean) => void;
+  importTheme: boolean;
+  setImportTheme: (importTheme: boolean) => void;
+  importedTheme: string;
 };
+
+type ButtonType =
+  | "openSettings"
+  | "hideSettings"
+  | "interactiveTutorial"
+  | "importCustomTheme"
+  | "exportCustomTheme"
+  | "toggleShowHtml";
 
 export default function SettingsDisplay({
   showSettings,
   setShowSettings,
-  importTheme,
-  setImportTheme,
   exportTheme,
   cycleSpeed,
   setCycleSpeed,
@@ -42,7 +51,6 @@ export default function SettingsDisplay({
   handleSliderChange,
   setUploadedImage,
   setAspectRatio,
-  importedTheme,
   handleThemeSubmit,
   handleTutorial,
   showTutorial,
@@ -53,61 +61,125 @@ export default function SettingsDisplay({
   handleHeadingSize,
   playerImgScale,
   setPlayerImgScale,
+  showHtml,
+  setShowHtml,
 }: Props) {
   useEffect(() => {
     setCycle(true);
-  }, [cycleSpeed]);
+  }, [cycleSpeed, setCycle]);
+
+  /**
+   * Centralized click handler for all buttons.
+   * @param buttonType - Identifier for the button clicked.
+   */
+  const handleClick = async (buttonType: ButtonType) => {
+    switch (buttonType) {
+      case "openSettings":
+        setShowSettings(true);
+        break;
+      case "hideSettings":
+        setShowSettings(false);
+        break;
+      case "interactiveTutorial":
+        handleTutorial();
+        setShowSettings(false);
+        break;
+      case "importCustomTheme":
+        try {
+          // Check if the Clipboard API is available
+          if (!navigator.clipboard) {
+            alert("Clipboard API not supported in this browser.");
+            return;
+          }
+
+          // Read text from the clipboard
+          const clipboardText = await navigator.clipboard.readText();
+
+          if (!clipboardText) {
+            alert("Clipboard is empty. Please copy a valid theme string.");
+            return;
+          }
+
+          // Apply the theme using handleThemeSubmit without validating JSON
+          handleThemeSubmit(clipboardText);
+        } catch (error) {
+          console.error("Failed to read clipboard contents: ", error);
+          alert("Failed to import theme from clipboard.");
+        } finally {
+          setShowSettings(false);
+        }
+        break;
+      case "exportCustomTheme":
+        exportTheme();
+        setShowSettings(false);
+        break;
+      case "toggleShowHtml":
+        setShowHtml(!showHtml);
+        setShowSettings(false);
+        break;
+      default:
+        console.warn(`Unhandled button type: ${buttonType}`);
+        break;
+    }
+  };
 
   return (
     <div
-      className={` ${
+      className={`${
         showTutorial && (tutorialStep === 1 || tutorialStep === 2) ? "blur" : ""
       }`}
     >
-      {showSettings && (
-        <>
-          <button
-            onClick={() => setShowSettings(!showSettings)}
-            className="settings-button gradient-button animate"
-          >
-            Hide Settings
-          </button>
-        </>
-      )}
-      {!showSettings && (
+      {/* Toggle Settings Button */}
+      {showSettings ? (
         <button
-          onClick={() => setShowSettings(!showSettings)}
+          onClick={() => handleClick("hideSettings")}
           className="settings-button gradient-button animate"
+          aria-label="Hide Settings"
+        >
+          Hide Settings
+        </button>
+      ) : (
+        <button
+          onClick={() => handleClick("openSettings")}
+          className="settings-button gradient-button animate"
+          aria-label="Open Settings"
         >
           Open Settings
         </button>
       )}
-      {settingInterface === "Konami" && (
+
+      {/* Settings Interfaces */}
+      {settingInterface === "Konami" && showSettings && (
         <div
           className={`settings-container ${
             showSettings ? "animate-down" : "animate-up"
           }`}
         >
+          {/* Import-Export Button Group */}
           <div className="import-export-container">
             <button
-              onClick={() => handleTutorial()}
+              onClick={() => handleClick("interactiveTutorial")}
               className="import-export-button gradient-button tutorial-button shake-lr animate"
+              aria-label="Start Interactive Tutorial"
             >
               Interactive Tutorial
             </button>
             <button
-              onClick={() => setImportTheme(!importTheme)}
+              onClick={() => handleClick("importCustomTheme")}
               className="import-export-button gradient-button animate"
+              aria-label="Import Custom Theme from Clipboard"
             >
               Import Custom Theme
             </button>
             <button
-              onClick={() => exportTheme()}
+              onClick={() => handleClick("exportCustomTheme")}
               className="import-export-button gradient-button animate"
+              aria-label="Export Custom Theme"
             >
               Export Custom Theme
             </button>
           </div>
+
           {/* Cycle Speed Slider */}
           <div className="setting-option first">
             <label htmlFor="cycle-speed">
@@ -139,7 +211,7 @@ export default function SettingsDisplay({
 
           {/* Y Level Slider */}
           <div className="setting-option">
-            <label htmlFor="cycle-speed">Y Level | ({pos.toFixed(2)})</label>
+            <label htmlFor="pos-slider">Y Level | ({pos.toFixed(2)})</label>
             <input
               id="pos-slider"
               type="range"
@@ -150,6 +222,7 @@ export default function SettingsDisplay({
             />
           </div>
           <br />
+
           {/* Image Upload */}
           <div className="setting-option">
             <p>Logo: </p>
@@ -173,6 +246,7 @@ export default function SettingsDisplay({
             />
           </div>
 
+          {/* Aspect Ratio Selector */}
           <div className="setting-option">
             <label htmlFor="aspect-ratio">Aspect Ratio: </label>
             <select
@@ -180,7 +254,6 @@ export default function SettingsDisplay({
               className="aspect-ratio-dropdown"
               onChange={(e) => {
                 setAspectRatio(e.target.value);
-                console.log("Selected aspect ratio:", e.target.value);
               }}
             >
               <option value="wide">Wide</option>
@@ -190,48 +263,47 @@ export default function SettingsDisplay({
               <option value="square">Square</option>
             </select>
           </div>
-          {importTheme && (
-            <div className="setting-option">
-              <label htmlFor="import-theme">
-                Paste Custom Theme JSON below{" "}
-              </label>
-              <br />
-              <textarea
-                id="import-theme"
-                className="import-theme-textarea"
-                value={importedTheme}
-                onChange={(e) => handleThemeSubmit(e.target.value)}
-              />
-            </div>
-          )}
         </div>
       )}
-      {settingInterface === "OrderStatusBoard" && (
+
+      {settingInterface === "OrderStatusBoard" && showSettings && (
         <div
-          className={`settings-container ${
+          className={`settings-container osb-settings-container ${
             showSettings ? "animate-down" : "animate-up"
           }`}
         >
+          {/* Import-Export Button Group */}
           <div className="import-export-container">
             <button
-              onClick={() => handleTutorial()}
+              onClick={() => handleClick("interactiveTutorial")}
               className="import-export-button gradient-button tutorial-button shake-lr animate"
+              aria-label="Start Interactive Tutorial"
             >
               Interactive Tutorial
             </button>
             <button
-              onClick={() => setImportTheme(!importTheme)}
+              onClick={() => handleClick("importCustomTheme")}
               className="import-export-button gradient-button animate"
+              aria-label="Import Custom Theme from Clipboard"
             >
               Import Custom Theme
             </button>
             <button
-              onClick={() => exportTheme()}
+              onClick={() => handleClick("exportCustomTheme")}
               className="import-export-button gradient-button animate"
+              aria-label="Export Custom Theme"
             >
               Export Custom Theme
             </button>
+            <button
+              onClick={() => handleClick("toggleShowHtml")}
+              className="import-export-button gradient-button animate"
+              aria-label="Toggle HTML Display"
+            >
+              {showHtml ? "Show Display" : "Show HTML"}
+            </button>
           </div>
+
           {/* Cycle Speed Slider */}
           <div className="setting-option first">
             <label htmlFor="cycle-speed">
@@ -263,7 +335,7 @@ export default function SettingsDisplay({
 
           {/* Y Level Slider */}
           <div className="setting-option">
-            <label htmlFor="cycle-speed">Y Level | ({pos.toFixed(2)})</label>
+            <label htmlFor="pos-slider">Y Level | ({pos.toFixed(2)})</label>
             <input
               id="pos-slider"
               type="range"
@@ -273,8 +345,8 @@ export default function SettingsDisplay({
               onChange={handleSliderChange}
             />
           </div>
-
           <br />
+
           {/* Image Upload */}
           <div className="setting-option">
             <p>Logo: </p>
@@ -298,6 +370,7 @@ export default function SettingsDisplay({
             />
           </div>
 
+          {/* Aspect Ratio Selector */}
           <div className="setting-option">
             <label htmlFor="aspect-ratio">Aspect Ratio: </label>
             <select
@@ -305,7 +378,6 @@ export default function SettingsDisplay({
               className="aspect-ratio-dropdown"
               onChange={(e) => {
                 setAspectRatio(e.target.value);
-                console.log("Selected aspect ratio:", e.target.value);
               }}
             >
               <option value="wide">Wide</option>
@@ -315,48 +387,40 @@ export default function SettingsDisplay({
               <option value="square">Square</option>
             </select>
           </div>
-          {importTheme && (
-            <div className="setting-option">
-              <label htmlFor="import-theme">
-                Paste Custom Theme JSON below{" "}
-              </label>
-              <br />
-              <textarea
-                id="import-theme"
-                className="import-theme-textarea"
-                value={importedTheme}
-                onChange={(e) => handleThemeSubmit(e.target.value)}
-              />
-            </div>
-          )}
         </div>
       )}
-      {settingInterface === "Aristocrat" && (
+
+      {settingInterface === "Aristocrat" && showSettings && (
         <div
           className={`settings-container ${
             showSettings ? "animate-down" : "animate-up"
           }`}
         >
+          {/* Import-Export Button Group */}
           <div className="import-export-container">
             <button
-              onClick={() => handleTutorial()}
+              onClick={() => handleClick("interactiveTutorial")}
               className="import-export-button gradient-button tutorial-button shake-lr animate"
+              aria-label="Start Interactive Tutorial"
             >
               Interactive Tutorial
             </button>
             <button
-              onClick={() => setImportTheme(!importTheme)}
+              onClick={() => handleClick("importCustomTheme")}
               className="import-export-button gradient-button animate"
+              aria-label="Import Custom Theme from Clipboard"
             >
               Import Custom Theme
             </button>
             <button
-              onClick={() => exportTheme()}
+              onClick={() => handleClick("exportCustomTheme")}
               className="import-export-button gradient-button animate"
+              aria-label="Export Custom Theme"
             >
               Export Custom Theme
             </button>
           </div>
+
           {/* Cycle Speed Slider */}
           <div className="setting-option first">
             <label htmlFor="cycle-speed">
@@ -388,7 +452,7 @@ export default function SettingsDisplay({
 
           {/* Y Level Slider */}
           <div className="setting-option">
-            <label htmlFor="cycle-speed">Y Level | ({pos.toFixed(2)})</label>
+            <label htmlFor="pos-slider">Y Level | ({pos.toFixed(2)})</label>
             <input
               id="pos-slider"
               type="range"
@@ -398,25 +462,26 @@ export default function SettingsDisplay({
               onChange={handleSliderChange}
             />
           </div>
-          <div className="setting-option">
-            {playerImgScale !== undefined && (
-              <>
-                <label htmlFor="player-img-scale">
-                  Player Image Scale | ({playerImgScale.toFixed(2)})
-                </label>
 
-                <input
-                  id="player-img-scale"
-                  type="range"
-                  min="-10"
-                  max="10"
-                  value={playerImgScale}
-                  onChange={(e) => setPlayerImgScale(Number(e.target.value))}
-                />
-              </>
-            )}
-          </div>
+          {/* Player Image Scale Slider */}
+          {playerImgScale !== undefined && (
+            <div className="setting-option">
+              <label htmlFor="player-img-scale">
+                Player Image Scale | ({playerImgScale.toFixed(2)})
+              </label>
+              <input
+                id="player-img-scale"
+                type="range"
+                min="-10"
+                max="10"
+                step="0.01"
+                value={playerImgScale}
+                onChange={(e) => setPlayerImgScale(Number(e.target.value))}
+              />
+            </div>
+          )}
           <br />
+
           {/* Image Upload */}
           <div className="setting-option">
             <p>Logo: </p>
@@ -440,6 +505,7 @@ export default function SettingsDisplay({
             />
           </div>
 
+          {/* Aspect Ratio Selector */}
           <div className="setting-option">
             <label htmlFor="aspect-ratio">Aspect Ratio: </label>
             <select
@@ -447,7 +513,6 @@ export default function SettingsDisplay({
               className="aspect-ratio-dropdown"
               onChange={(e) => {
                 setAspectRatio(e.target.value);
-                console.log("Selected aspect ratio:", e.target.value);
               }}
             >
               <option value="wide">Wide</option>
@@ -457,20 +522,6 @@ export default function SettingsDisplay({
               <option value="square">Square</option>
             </select>
           </div>
-          {importTheme && (
-            <div className="setting-option">
-              <label htmlFor="import-theme">
-                Paste Custom Theme JSON below{" "}
-              </label>
-              <br />
-              <textarea
-                id="import-theme"
-                className="import-theme-textarea"
-                value={importedTheme}
-                onChange={(e) => handleThemeSubmit(e.target.value)}
-              />
-            </div>
-          )}
         </div>
       )}
     </div>

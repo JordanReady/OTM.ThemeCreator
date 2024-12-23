@@ -72,7 +72,7 @@ export default function HomePage() {
         />
         <h1 className="page-title animate">Welcome to OTMS Theme Creator</h1>
         <p className="page-subtitle animate">
-          Select an Interface to begin customizing the theme!
+          Select an Interface to begin customizing your theme!
         </p>
       </div>
       <div className="spacer"></div>

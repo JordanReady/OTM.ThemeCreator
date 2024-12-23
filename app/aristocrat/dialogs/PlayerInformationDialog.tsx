@@ -60,10 +60,10 @@ export default function PlayerInformation({
               </p>
               <br />
               <p>
-                <strong>Points Balance:</strong> 500
+                <strong>Points Balance:</strong> $500.13
               </p>
               <p>
-                <strong>Comp Balance:</strong> 300
+                <strong>Comp Balance:</strong> $312.74
               </p>
             </div>
             <Image
