@@ -346,6 +346,11 @@ export default function Konami({}: Props) {
             setShowHtml={function (showHtml: boolean): void {
               throw new Error("Function not implemented.");
             }}
+            setDisconnectedImgAspectRatio={function (
+              disconnectedImgAspectRatio: string
+            ): void {
+              throw new Error("Function not implemented.");
+            }}
           />
 
           <DialogDisplay
