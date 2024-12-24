@@ -346,6 +346,10 @@ export default function OrderStatusBoard({}: Props) {
             ): void {
               throw new Error("Function not implemented.");
             }}
+            setDisconnectedImg={function (disconnectedImg: string): void {
+              throw new Error("Function not implemented.");
+            }}
+            disconnectedImg=""
           />
 
           <DialogDisplay
