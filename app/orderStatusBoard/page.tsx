@@ -27,6 +27,9 @@ export default function OrderStatusBoard({}: Props) {
   const [aspectRatio, setAspectRatio] = useState("banner");
   const [disconnectedImgAspectRatio, setDisconnectedImgAspectRatio] =
     useState("square");
+  const [disconnectedImg, setDisconnectedImg] = useState(
+    "/ServerDisconnected.png"
+  );
   const [pos, setPos] = useState(0);
   const [showTutorial, setShowTutorial] = useState(false);
   const [tutorialStep, setTutorialStep] = useState(0);
@@ -351,6 +354,8 @@ export default function OrderStatusBoard({}: Props) {
             showHtml={showHtml}
             setShowHtml={setShowHtml}
             setDisconnectedImgAspectRatio={setDisconnectedImgAspectRatio}
+            disconnectedImg={disconnectedImg}
+            setDisconnectedImg={setDisconnectedImg}
           />
 
           <DialogDisplay
@@ -372,6 +377,7 @@ export default function OrderStatusBoard({}: Props) {
             shadowColor={shadowColor}
             showHtml={showHtml}
             disconnectedImgAspectRatio={disconnectedImgAspectRatio}
+            disconnectedImg={disconnectedImg}
           />
 
           {/* Theme Picker Display*/}

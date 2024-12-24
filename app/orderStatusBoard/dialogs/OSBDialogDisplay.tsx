@@ -35,6 +35,7 @@ type Props = {
   shadowColor: string;
   showHtml: boolean;
   disconnectedImgAspectRatio: string;
+  disconnectedImg: string;
 };
 
 export default function DialogDisplay({
@@ -56,6 +57,7 @@ export default function DialogDisplay({
   shadowColor,
   showHtml,
   disconnectedImgAspectRatio,
+  disconnectedImg,
 }: Props) {
   const [orders, setOrders] = useState<Order[]>([
     // Preparing Orders (StatusId=1)
@@ -122,7 +124,7 @@ export default function DialogDisplay({
       case "OSBDisconnected":
         return getOSBDisconnectedHtml(
           "/images/ServerDisconnected.png", // imgSrc
-          aspectRatioClass, // aspectRatio: 'square', 'wide', 'portrait', 'classic', 'banner'
+          disconnectedImgAspectRatio, // aspectRatio: 'square', 'wide', 'portrait', 'classic', 'banner'
           backgroundColor, // backgroundColor
           accentColor, // accentColor
           buttonBackground, // buttonBackground
@@ -177,7 +179,6 @@ export default function DialogDisplay({
                   className="copy"
                   onClick={() => {
                     navigator.clipboard.writeText(componentHtml);
-                    alert("HTML copied to clipboard!");
                   }}
                 >
                   Copy
@@ -209,7 +210,6 @@ export default function DialogDisplay({
                   className="copy"
                   onClick={() => {
                     navigator.clipboard.writeText(componentHtml);
-                    alert("HTML copied to clipboard!");
                   }}
                 >
                   Copy
@@ -241,7 +241,6 @@ export default function DialogDisplay({
                   className="copy"
                   onClick={() => {
                     navigator.clipboard.writeText(componentHtml);
-                    alert("HTML copied to clipboard!");
                   }}
                 >
                   Copy
@@ -252,7 +251,7 @@ export default function DialogDisplay({
             </div>
           ) : (
             <OSBDisconnected
-              imgSrc="/ServerDisconnected.png"
+              imgSrc={disconnectedImg}
               aspectRatio={disconnectedImgAspectRatio}
               pos={pos}
             />

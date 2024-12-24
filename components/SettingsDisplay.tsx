@@ -30,6 +30,8 @@ type Props = {
   setImportTheme: (importTheme: boolean) => void;
   importedTheme: string;
   setDisconnectedImgAspectRatio: (disconnectedImgAspectRatio: string) => void;
+  disconnectedImg: string;
+  setDisconnectedImg: (disconnectedImg: string) => void;
 };
 
 type ButtonType =
@@ -65,6 +67,8 @@ export default function SettingsDisplay({
   showHtml,
   setShowHtml,
   setDisconnectedImgAspectRatio,
+  disconnectedImg,
+  setDisconnectedImg,
 }: Props) {
   useEffect(() => {
     setCycle(true);
@@ -388,6 +392,29 @@ export default function SettingsDisplay({
               <option value="banner">Banner</option>
               <option value="square">Square</option>
             </select>
+          </div>
+
+          {/* Disconnected Upload */}
+          <div className="setting-option">
+            <p>Disconnected Image: </p>
+            <label htmlFor="disconnected-img" className="custom-upload-label">
+              Upload Image
+            </label>
+            <input
+              id="disconnected-img"
+              className="img-option"
+              type="file"
+              accept="image/*"
+              onChange={(e) => {
+                const file = e.target.files?.[0];
+                if (file) {
+                  const reader = new FileReader();
+                  reader.onload = () =>
+                    setDisconnectedImg(reader.result as string);
+                  reader.readAsDataURL(file);
+                }
+              }}
+            />
           </div>
           {/* Aspect Ratio Selector */}
           <div className="setting-option">

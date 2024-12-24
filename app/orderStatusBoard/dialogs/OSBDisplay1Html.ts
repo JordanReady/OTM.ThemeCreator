@@ -337,7 +337,7 @@ export function getOSBDisplay1Html(
               <img
                 class="osb-logo ${getOsbLogoClass(aspectRatio)}"
                 id="graphic-top-left"
-                src="./images${imgSrc}"
+                src="./images/OSBLogo.png"
                 alt="Logo"
               />
               <!-- <h2 class="custom-dialog-header">Current Orders</h2> -->

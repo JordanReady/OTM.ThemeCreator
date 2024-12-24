@@ -175,7 +175,7 @@ export function getOSBDisconnectedHtml(
               <h1>Disconnected</h1>
               <img
                 class="disconnected-logo server-disconnected-${aspectRatio}"
-                src="${imgSrc}"
+                src="./images/ServerDisconnected.png"
                 alt="Disconnected Logo"
               />
               <p>The server is currently unavailable. Please try again later.</p>
