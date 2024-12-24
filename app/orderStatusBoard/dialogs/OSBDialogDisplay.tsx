@@ -70,10 +70,6 @@ export default function DialogDisplay({
     { CheckNumber: 202, StatusId: 2, CheckTextId: "Margaret Taylor" },
   ]);
 
-  useEffect(() => {
-    console.log("activeDialog:", activeDialog);
-  }, [activeDialog]);
-
   // Set default active dialog on mount
   useEffect(() => {
     if (!activeDialog) {
@@ -147,8 +143,6 @@ export default function DialogDisplay({
     if (activeDialog) {
       const htmlString = generateComponentHtml();
       setComponentHtml(htmlString);
-      console.log("htmlString:", htmlString);
-      console.log("componentHtml:", componentHtml);
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [

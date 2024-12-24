@@ -141,7 +141,6 @@ export default function OrderStatusBoard({}: Props) {
       if (match && match[1]) {
         setter(match[1]); // Update the base color
         setter2(match[1]); // Update the active color
-        console.log(`Updated ${key} to`, match[1]); // Log for debugging
       }
     });
 
