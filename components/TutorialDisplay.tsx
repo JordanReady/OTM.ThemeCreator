@@ -8,12 +8,13 @@ type Props = {
   setActiveDialog: (dialogName: string) => void;
   setCycle: (cycle: boolean) => void;
   tutorialInterface: string;
+  setShowSettings: (showSettings: boolean) => void;
 };
 
 const stepDescriptions: Record<number, string> = {
   1: "Dialog Display Buttons - Use these buttons to select a specific dialog box, cycle through available dialogs, or return to the home screen to choose a different interface.",
   2: "Variable Cards - Adjust the color of customizable styles in real time. Click the color strip to open the color picker or use the eyedropper tool to select a color from a logo. Copy a color value and paste it with the copy paste buttons. For gradients, sliders are available to change the gradient, indicated by a red border around the color picker. Copy color values or export the full theme with one click.",
-  3: "Settings - Customize dialog cycle speed, interface scale, and position. Upload a logo with a specific aspect ratio, and import/export themes. Import themes by pasting a customTheme object or the full KonamiSettings record from EMC. Exporting copies the theme to your clipboard in the format bellow. Click the Import Custom Theme button and paste the object below.",
+  3: "Settings - Customize dialog cycle speed, interface scale, and position. Upload a logo with a specific aspect ratio, and import/export themes. Import themes by automatically applying a customTheme object or the full KonamiSettings record from EMC that has been copied to your clipboard. Exporting automatically copies the current theme to your clipboard in the format below. You can try it out by copying the theme below and clicking on the import button.",
 };
 
 export default function TutorialDisplay({
@@ -24,12 +25,16 @@ export default function TutorialDisplay({
   setActiveDialog,
   setCycle,
   tutorialInterface,
+  setShowSettings,
 }: Props) {
   if (!showTutorial) {
     return null; // Don't render anything if tutorial is not shown
   }
 
   const handleNext = () => {
+    if (tutorialStep === 2) {
+      setShowSettings(true);
+    }
     if (tutorialStep === 3) {
       setTutorialStep(0); // Reset to step 1
       setShowTutorial(false);
@@ -60,6 +65,14 @@ export default function TutorialDisplay({
   return (
     <div className={containerClass}>
       <p className="tutorial-description">{stepDescription}</p>
+      {tutorialStep === 3 && tutorialInterface === "OrderStatusBoard" && (
+        <>
+          <p className="tutorial-description">
+            This interface alows you to view and convert into raw html after you
+            have customized it.
+          </p>
+        </>
+      )}
       {tutorialStep === 3 && (
         <>
           <br />

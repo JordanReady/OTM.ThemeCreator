@@ -304,13 +304,14 @@ export default function OrderStatusBoard({}: Props) {
       <div className="aristocrat-container">
         <div className="dialog-display-container">
           <TutorialDisplay
-            tutorialInterface={"OrderStatusBoard"}
+            tutorialInterface={"Aristocrat"}
             tutorialStep={tutorialStep}
             showTutorial={showTutorial}
             setTutorialStep={setTutorialStep}
             setShowTutorial={setShowTutorial}
             setActiveDialog={setActiveDialog}
             setCycle={setCycle}
+            setShowSettings={setShowSettings}
           />
           <SettingsDisplay
             settingInterface={"Aristocrat"}

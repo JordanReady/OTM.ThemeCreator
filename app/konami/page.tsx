@@ -256,9 +256,9 @@ export default function Konami({}: Props) {
 
   // Array of dialog names to cycle through
   const dialogNames = [
-    "LookupDialog",
-    "LookupInputDialog",
     "LookupResultDialog",
+    "LookupInputDialog",
+    "LookupDialog",
     "ErrorDialog",
     "PinInputDialog",
     "TimeoutDialog",
@@ -313,6 +313,7 @@ export default function Konami({}: Props) {
             setShowTutorial={setShowTutorial}
             setActiveDialog={setActiveDialog}
             setCycle={setCycle}
+            setShowSettings={setShowSettings}
           />
           <SettingsDisplay
             settingInterface={"Konami"}

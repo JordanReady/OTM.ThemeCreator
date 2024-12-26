@@ -32,6 +32,7 @@ type Props = {
   setDisconnectedImgAspectRatio: (disconnectedImgAspectRatio: string) => void;
   disconnectedImg: string;
   setDisconnectedImg: (disconnectedImg: string) => void;
+  componentHtml?: string;
 };
 
 type ButtonType =
@@ -40,7 +41,8 @@ type ButtonType =
   | "interactiveTutorial"
   | "importCustomTheme"
   | "exportCustomTheme"
-  | "toggleShowHtml";
+  | "toggleShowHtml"
+  | "exportHtml";
 
 export default function SettingsDisplay({
   showSettings,
@@ -69,6 +71,7 @@ export default function SettingsDisplay({
   setDisconnectedImgAspectRatio,
   disconnectedImg,
   setDisconnectedImg,
+  componentHtml,
 }: Props) {
   useEffect(() => {
     setCycle(true);
@@ -122,6 +125,12 @@ export default function SettingsDisplay({
       case "toggleShowHtml":
         setShowHtml(!showHtml);
         setShowSettings(false);
+        break;
+      case "exportHtml":
+        if (componentHtml) {
+          navigator.clipboard.writeText(componentHtml);
+        }
+
         break;
       default:
         console.warn(`Unhandled button type: ${buttonType}`);
@@ -307,6 +316,13 @@ export default function SettingsDisplay({
               aria-label="Toggle HTML Display"
             >
               {showHtml ? "Show Display" : "Show HTML"}
+            </button>
+            <button
+              onClick={() => handleClick("exportHtml")}
+              className="import-export-button gradient-button animate"
+              aria-label="Export Custom Theme"
+            >
+              Export HTML File
             </button>
           </div>
 

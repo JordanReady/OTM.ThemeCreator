@@ -325,6 +325,7 @@ export default function OrderStatusBoard({}: Props) {
             setShowTutorial={setShowTutorial}
             setActiveDialog={setActiveDialog}
             setCycle={setCycle}
+            setShowSettings={setShowSettings}
           />
           <SettingsDisplay
             settingInterface={"OrderStatusBoard"}
@@ -355,6 +356,7 @@ export default function OrderStatusBoard({}: Props) {
             setDisconnectedImgAspectRatio={setDisconnectedImgAspectRatio}
             disconnectedImg={disconnectedImg}
             setDisconnectedImg={setDisconnectedImg}
+            componentHtml={componentHtml}
           />
 
           <DialogDisplay
