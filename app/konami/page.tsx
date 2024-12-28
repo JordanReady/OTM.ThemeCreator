@@ -30,7 +30,7 @@ export default function Konami({}: Props) {
     setShowSettings(true);
     setShowTutorial(true); // Start the tutorial
     setTutorialStep(1); // Start with step 1
-    setPos(-15);
+    setPos(-5);
   };
 
   const handleSliderChange = (event: { target: { value: any } }) => {
@@ -357,13 +357,14 @@ export default function Konami({}: Props) {
             }}
             disconnectedImg=""
           />
-
-          <DialogDisplay
-            activeDialog={activeDialog}
-            aspectRatioClass={aspectRatio}
-            uploadedImage={uploadedImage}
-            pos={pos}
-          />
+          <div className="display-box" onClick={() => setShowSettings(false)}>
+            <DialogDisplay
+              activeDialog={activeDialog}
+              aspectRatioClass={aspectRatio}
+              uploadedImage={uploadedImage}
+              pos={pos}
+            />
+          </div>
 
           {/* Theme Picker Display*/}
           <ThemePickerDisplay

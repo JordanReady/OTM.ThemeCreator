@@ -352,15 +352,15 @@ export default function OrderStatusBoard({}: Props) {
             }}
             disconnectedImg=""
           />
-
-          <DialogDisplay
-            activeDialog={activeDialog}
-            aspectRatioClass={aspectRatio}
-            uploadedImage={uploadedImage}
-            pos={pos}
-            playerImgScale={playerImgScale}
-          />
-
+          <div className="display-box" onClick={() => setShowSettings(false)}>
+            <DialogDisplay
+              activeDialog={activeDialog}
+              aspectRatioClass={aspectRatio}
+              uploadedImage={uploadedImage}
+              pos={pos}
+              playerImgScale={playerImgScale}
+            />
+          </div>
           {/* Theme Picker Display*/}
           <ThemePickerDisplay
             interfaceName="PlayerInformation"

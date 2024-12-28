@@ -358,29 +358,29 @@ export default function OrderStatusBoard({}: Props) {
             setDisconnectedImg={setDisconnectedImg}
             componentHtml={componentHtml}
           />
-
-          <DialogDisplay
-            componentHtml={componentHtml}
-            setComponentHtml={setComponentHtml}
-            activeDialog={activeDialog}
-            aspectRatioClass={aspectRatio}
-            uploadedImage={uploadedImage}
-            setActiveDialog={setActiveDialog}
-            pos={pos}
-            backgroundColor={backgroundColor}
-            accentColor={accentColor}
-            textColor={textColor}
-            buttonBackground={buttonBackground}
-            buttonHoverBackground={buttonHoverBackground}
-            buttonActiveBackground={buttonActiveBackground}
-            buttonBorderColor={buttonBorderColor}
-            buttonTextColor={buttonTextColor}
-            shadowColor={shadowColor}
-            showHtml={showHtml}
-            disconnectedImgAspectRatio={disconnectedImgAspectRatio}
-            disconnectedImg={disconnectedImg}
-          />
-
+          <div className="display-box" onClick={() => setShowSettings(false)}>
+            <DialogDisplay
+              componentHtml={componentHtml}
+              setComponentHtml={setComponentHtml}
+              activeDialog={activeDialog}
+              aspectRatioClass={aspectRatio}
+              uploadedImage={uploadedImage}
+              setActiveDialog={setActiveDialog}
+              pos={pos}
+              backgroundColor={backgroundColor}
+              accentColor={accentColor}
+              textColor={textColor}
+              buttonBackground={buttonBackground}
+              buttonHoverBackground={buttonHoverBackground}
+              buttonActiveBackground={buttonActiveBackground}
+              buttonBorderColor={buttonBorderColor}
+              buttonTextColor={buttonTextColor}
+              shadowColor={shadowColor}
+              showHtml={showHtml}
+              disconnectedImgAspectRatio={disconnectedImgAspectRatio}
+              disconnectedImg={disconnectedImg}
+            />
+          </div>
           {/* Theme Picker Display*/}
           <ThemePickerDisplay
             interfaceName="OSB"
