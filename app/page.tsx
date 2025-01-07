@@ -47,7 +47,7 @@ export default function HomePage() {
       "--background-color": "white",
       "--button-active-background": "#e83e8c",
       "--button-background": "#ffa500",
-      "--button-border-color": "#800080",
+      "--border-color": "#800080",
       "--button-hover-background": "linear-gradient(145deg, #FF1744, #FF5252)",
       "--button-text-color": "#ff0000",
       "--shadow-color": "#808080",

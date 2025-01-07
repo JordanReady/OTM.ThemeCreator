@@ -8,6 +8,10 @@ type Props = {
   setCycle: (cycle: boolean) => void;
   baseBackgroundColor: string;
   backgroundColor: string;
+  baseBoxBackgroundColor: string;
+  boxBackgroundColor: string;
+  setBoxBackgroundColor: (color: string) => void;
+  setBaseBoxBackgroundColor: (color: string) => void;
   baseAccentColor: string;
   accentColor: string;
   baseTextColor: string;
@@ -30,10 +34,10 @@ type Props = {
   buttonActiveBackground: string;
   setBaseButtonActiveBackground: (color: string) => void;
   setButtonActiveBackground: (color: string) => void;
-  baseButtonBorderColor: string;
-  buttonBorderColor: string;
-  setBaseButtonBorderColor: (color: string) => void;
-  setButtonBorderColor: (color: string) => void;
+  baseBorderColor: string;
+  borderColor: string;
+  setBaseBorderColor: (color: string) => void;
+  setBorderColor: (color: string) => void;
   baseButtonTextColor: string;
   buttonTextColor: string;
   setBaseButtonTextColor: (color: string) => void;
@@ -52,12 +56,16 @@ export default function ThemePickerDisplay({
   setCycle,
   baseBackgroundColor,
   backgroundColor,
+  baseBoxBackgroundColor,
+  boxBackgroundColor,
   baseAccentColor,
   accentColor,
   baseTextColor,
   textColor,
   setBaseBackgroundColor,
   setBackgroundColor,
+  setBoxBackgroundColor,
+  setBaseBoxBackgroundColor,
   setBaseAccentColor,
   setAccentColor,
   setBaseTextColor,
@@ -74,10 +82,10 @@ export default function ThemePickerDisplay({
   buttonActiveBackground,
   setBaseButtonActiveBackground,
   setButtonActiveBackground,
-  baseButtonBorderColor,
-  buttonBorderColor,
-  setBaseButtonBorderColor,
-  setButtonBorderColor,
+  baseBorderColor,
+  borderColor,
+  setBaseBorderColor,
+  setBorderColor,
   baseButtonTextColor,
   buttonTextColor,
   setBaseButtonTextColor,
@@ -203,26 +211,15 @@ export default function ThemePickerDisplay({
             onBaseColorChange={(val) => setBaseBackgroundColor(val)}
           />
 
-          {/* Accent Color */}
+          {/* Box Background Color */}
           <VariableBox
-            allowGradient={false}
-            label="Accent Color"
-            variableName="accent-color"
-            baseColor={baseAccentColor}
-            colorValue={accentColor}
-            onColorChange={(val) => setAccentColor(val)}
-            onBaseColorChange={(val) => setBaseAccentColor(val)}
-          />
-
-          {/* Text Color */}
-          <VariableBox
-            allowGradient={false}
-            label="Text Color"
-            variableName="text-color"
-            baseColor={baseTextColor}
-            colorValue={textColor}
-            onColorChange={(val) => setTextColor(val)}
-            onBaseColorChange={(val) => setBaseTextColor(val)}
+            allowGradient={true}
+            label="Box Background Color"
+            variableName="box-background-color"
+            baseColor={baseBoxBackgroundColor}
+            colorValue={boxBackgroundColor}
+            onColorChange={(val) => setBoxBackgroundColor(val)}
+            onBaseColorChange={(val) => setBaseBoxBackgroundColor(val)}
           />
 
           {/* Button Background */}
@@ -258,15 +255,37 @@ export default function ThemePickerDisplay({
             onBaseColorChange={(val) => setBaseButtonActiveBackground(val)}
           />
 
-          {/* Button Border Color */}
+          {/* Accent Color */}
           <VariableBox
             allowGradient={false}
-            label="Button Border Color"
-            variableName="button-border-color"
-            baseColor={baseButtonBorderColor}
-            colorValue={buttonBorderColor}
-            onColorChange={(val) => setButtonBorderColor(val)}
-            onBaseColorChange={(val) => setBaseButtonBorderColor(val)}
+            label="Accent Color"
+            variableName="accent-color"
+            baseColor={baseAccentColor}
+            colorValue={accentColor}
+            onColorChange={(val) => setAccentColor(val)}
+            onBaseColorChange={(val) => setBaseAccentColor(val)}
+          />
+
+          {/* Text Color */}
+          <VariableBox
+            allowGradient={false}
+            label="Text Color"
+            variableName="text-color"
+            baseColor={baseTextColor}
+            colorValue={textColor}
+            onColorChange={(val) => setTextColor(val)}
+            onBaseColorChange={(val) => setBaseTextColor(val)}
+          />
+
+          {/* Border Color */}
+          <VariableBox
+            allowGradient={false}
+            label="Border Color"
+            variableName="border-color"
+            baseColor={baseBorderColor}
+            colorValue={borderColor}
+            onColorChange={(val) => setBorderColor(val)}
+            onBaseColorChange={(val) => setBaseBorderColor(val)}
           />
 
           {/* Button Text Color */}

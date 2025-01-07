@@ -85,7 +85,7 @@ export default function TutorialDisplay({
             "buttonBackground": "#ffa500",
             "buttonHoverBackground": "linear-gradient(145deg, #FF1744, #FF5252)",
             "buttonActiveBackground": "#e83e8c",
-            "buttonBorderColor": "#800080",
+            "borderColor": "#800080",
             "buttonTextColor": "#ff0000",
             "shadowColor": "#808080" 
           }, `}

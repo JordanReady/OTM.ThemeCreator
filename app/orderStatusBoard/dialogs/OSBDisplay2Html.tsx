@@ -1,14 +1,13 @@
-// utils/getOSBDisplay1Html.ts
-
 export function getOSBDisplay2Html(
   imgSrc: string, // Path to the main logo image
   aspectRatio: string, // e.g., 'square', 'wide', 'portrait', 'classic', 'banner'
   backgroundColor: string,
   accentColor: string,
   buttonBackground: string,
+  boxBackgroundColor: string,
   buttonHoverBackground: string,
   buttonActiveBackground: string,
-  buttonBorderColor: string,
+  borderColor: string,
   buttonTextColor: string,
   shadowColor: string,
   textColor: string,
@@ -62,9 +61,10 @@ export function getOSBDisplay2Html(
               :root {
                 --accent-color: ${accentColor};
                 --background-color: ${backgroundColor};
+                --box-background-color: ${boxBackgroundColor};
                 --button-active-background: ${buttonActiveBackground};
                 --button-background: ${buttonBackground};
-                --button-border-color: ${buttonBorderColor};
+                --border-color: ${borderColor};
                 --button-hover-background: ${buttonHoverBackground};
                 --button-text-color: ${buttonTextColor};
                 --shadow-color: ${shadowColor};
@@ -107,7 +107,7 @@ export function getOSBDisplay2Html(
               }
         
               .custom-dialog {
-                background-color: var(--background-color);
+                background: var(--background-color);
                 color: var(--text-color);
                 text-align: left;
                 font-size: 26px;
@@ -175,6 +175,14 @@ export function getOSBDisplay2Html(
                 border-top: 1px solid var(--accent-color);
                 background: var(--background-color);
               }
+
+              #listView1 {
+                border-left: none;
+              }
+
+              #listView2 {
+                border-right: none;
+              }
         
               /* .vertical-line {
                 position: absolute;
@@ -194,8 +202,8 @@ export function getOSBDisplay2Html(
               }
         
               .orderItem {
-                background: var(--background-color);
-                border: 1px solid var(--button-border-color);
+                background: var(--box-background-color);
+                border: 1px solid var(--border-color);
                 border-radius: 8px;
                 margin: 1rem;
                 padding: 0.25rem 0.5rem;

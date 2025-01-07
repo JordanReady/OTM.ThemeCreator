@@ -98,6 +98,11 @@ export default function OrderStatusBoard({}: Props) {
         setter2: setBackgroundColor,
       },
       {
+        key: "boxBackgroundColor",
+        setter: setBaseBoxBackgroundColor,
+        setter2: setBoxBackgroundColor,
+      },
+      {
         key: "accentColor",
         setter: setBaseAccentColor,
         setter2: setAccentColor,
@@ -119,9 +124,9 @@ export default function OrderStatusBoard({}: Props) {
         setter2: setButtonActiveBackground,
       },
       {
-        key: "buttonBorderColor",
-        setter: setBaseButtonBorderColor,
-        setter2: setButtonBorderColor,
+        key: "borderColor",
+        setter: setBaseBorderColor,
+        setter2: setBorderColor,
       },
       {
         key: "buttonTextColor",
@@ -151,12 +156,13 @@ export default function OrderStatusBoard({}: Props) {
   const exportTheme = () => {
     const customTheme = {
       backgroundColor: backgroundColor,
+      boxBackgroundColor: boxBackgroundColor,
       accentColor: accentColor,
       textColor: textColor,
       buttonBackground: buttonBackground,
       buttonHoverBackground: buttonHoverBackground,
       buttonActiveBackground: buttonActiveBackground,
-      buttonBorderColor: buttonBorderColor,
+      borderColor: borderColor,
       buttonTextColor: buttonTextColor,
       shadowColor: shadowColor,
     };
@@ -184,6 +190,12 @@ export default function OrderStatusBoard({}: Props) {
   const [baseBackgroundColor, setBaseBackgroundColor] = useState("#ffffff");
   const [backgroundColor, setBackgroundColor] = useState(baseBackgroundColor);
 
+  const [baseBoxBackgroundColor, setBaseBoxBackgroundColor] =
+    useState("#ffffff");
+  const [boxBackgroundColor, setBoxBackgroundColor] = useState(
+    baseBoxBackgroundColor
+  );
+
   const [baseAccentColor, setBaseAccentColor] = useState("grey");
   const [accentColor, setAccentColor] = useState(baseAccentColor);
 
@@ -210,10 +222,8 @@ export default function OrderStatusBoard({}: Props) {
     baseButtonActiveBackground
   );
 
-  const [baseButtonBorderColor, setBaseButtonBorderColor] = useState("#ff1744");
-  const [buttonBorderColor, setButtonBorderColor] = useState(
-    baseButtonBorderColor
-  );
+  const [baseBorderColor, setBaseBorderColor] = useState("#ff1744");
+  const [borderColor, setBorderColor] = useState(baseBorderColor);
 
   const [baseButtonTextColor, setBaseButtonTextColor] = useState("#ffffff");
   const [buttonTextColor, setButtonTextColor] = useState(baseButtonTextColor);
@@ -243,9 +253,12 @@ export default function OrderStatusBoard({}: Props) {
       "--background-color": isGradientSelected
         ? root.style.getPropertyValue("--background-color")
         : backgroundColor,
+      "--box-background-color": isGradientSelected
+        ? root.style.getPropertyValue("--box-background-color")
+        : boxBackgroundColor,
       "--button-active-background": buttonActiveBackground,
       "--button-background": buttonBackground,
-      "--button-border-color": buttonBorderColor,
+      "--border-color": borderColor,
       "--button-hover-background": buttonHoverBackground,
       "--button-text-color": buttonTextColor,
       "--shadow-color": shadowColor,
@@ -265,9 +278,10 @@ export default function OrderStatusBoard({}: Props) {
   }, [
     accentColor,
     backgroundColor,
+    boxBackgroundColor,
     buttonActiveBackground,
     buttonBackground,
-    buttonBorderColor,
+    borderColor,
     buttonHoverBackground,
     shadowColor,
     textColor,
@@ -368,12 +382,13 @@ export default function OrderStatusBoard({}: Props) {
               setActiveDialog={setActiveDialog}
               pos={pos}
               backgroundColor={backgroundColor}
+              boxBackgroundColor={boxBackgroundColor}
               accentColor={accentColor}
               textColor={textColor}
               buttonBackground={buttonBackground}
               buttonHoverBackground={buttonHoverBackground}
               buttonActiveBackground={buttonActiveBackground}
-              buttonBorderColor={buttonBorderColor}
+              borderColor={borderColor}
               buttonTextColor={buttonTextColor}
               shadowColor={shadowColor}
               showHtml={showHtml}
@@ -388,7 +403,11 @@ export default function OrderStatusBoard({}: Props) {
             setCycle={setCycle}
             baseBackgroundColor={baseBackgroundColor}
             backgroundColor={backgroundColor}
+            baseBoxBackgroundColor={baseBoxBackgroundColor}
+            boxBackgroundColor={boxBackgroundColor}
+            setBoxBackgroundColor={setBoxBackgroundColor}
             baseAccentColor={baseAccentColor}
+            setBaseBoxBackgroundColor={setBaseBoxBackgroundColor}
             accentColor={accentColor}
             baseTextColor={baseTextColor}
             textColor={textColor}
@@ -404,8 +423,8 @@ export default function OrderStatusBoard({}: Props) {
             buttonHoverBackground={buttonHoverBackground}
             baseButtonActiveBackground={baseButtonActiveBackground}
             buttonActiveBackground={buttonActiveBackground}
-            baseButtonBorderColor={baseButtonBorderColor}
-            buttonBorderColor={buttonBorderColor}
+            baseBorderColor={baseBorderColor}
+            borderColor={borderColor}
             baseButtonTextColor={baseButtonTextColor}
             buttonTextColor={buttonTextColor}
             setBaseButtonBackground={setBaseButtonBackground}
@@ -414,8 +433,8 @@ export default function OrderStatusBoard({}: Props) {
             setButtonHoverBackground={setButtonHoverBackground}
             setBaseButtonActiveBackground={setBaseButtonActiveBackground}
             setButtonActiveBackground={setButtonActiveBackground}
-            setBaseButtonBorderColor={setBaseButtonBorderColor}
-            setButtonBorderColor={setButtonBorderColor}
+            setBaseBorderColor={setBaseBorderColor}
+            setBorderColor={setBorderColor}
             setBaseButtonTextColor={setBaseButtonTextColor}
             setButtonTextColor={setButtonTextColor}
             baseShadowColor={baseShadowColor}

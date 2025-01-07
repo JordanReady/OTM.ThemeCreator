@@ -25,12 +25,13 @@ type Props = {
   componentHtml: string;
   setComponentHtml: (componentHtml: string) => void;
   backgroundColor: string;
+  boxBackgroundColor: string;
   accentColor: string;
   textColor: string;
   buttonBackground: string;
   buttonHoverBackground: string;
   buttonActiveBackground: string;
-  buttonBorderColor: string;
+  borderColor: string;
   buttonTextColor: string;
   shadowColor: string;
   showHtml: boolean;
@@ -47,12 +48,13 @@ export default function DialogDisplay({
   componentHtml,
   setComponentHtml,
   backgroundColor,
+  boxBackgroundColor,
   accentColor,
   textColor,
   buttonBackground,
   buttonHoverBackground,
   buttonActiveBackground,
-  buttonBorderColor,
+  borderColor,
   buttonTextColor,
   shadowColor,
   showHtml,
@@ -85,11 +87,12 @@ export default function DialogDisplay({
           uploadedImage, // imgSrc
           aspectRatioClass, // aspectRatio: 'square', 'wide', 'portrait', 'classic', 'banner'
           backgroundColor, // backgroundColor
+          boxBackgroundColor, // boxBackgroundColor
           accentColor, // accentColor
           buttonBackground, // buttonBackground
           buttonHoverBackground, // buttonHoverBackground
           buttonActiveBackground, // buttonActiveBackground
-          buttonBorderColor, // buttonBorderColor
+          borderColor, // borderColor
           buttonTextColor, // buttonTextColor
           shadowColor, // shadowColor
           textColor, // textColor
@@ -105,11 +108,12 @@ export default function DialogDisplay({
           uploadedImage, // imgSrc
           aspectRatioClass, // aspectRatio: 'square', 'wide', 'portrait', 'classic', 'banner'
           backgroundColor, // backgroundColor
+          boxBackgroundColor, // boxBackgroundColor
           accentColor, // accentColor
           buttonBackground, // buttonBackground
           buttonHoverBackground, // buttonHoverBackground
           buttonActiveBackground, // buttonActiveBackground
-          buttonBorderColor, // buttonBorderColor
+          borderColor, // borderColor
           buttonTextColor, // buttonTextColor
           shadowColor, // shadowColor
           textColor, // textColor
@@ -122,11 +126,12 @@ export default function DialogDisplay({
           "/images/ServerDisconnected.png", // imgSrc
           disconnectedImgAspectRatio, // aspectRatio: 'square', 'wide', 'portrait', 'classic', 'banner'
           backgroundColor, // backgroundColor
+          boxBackgroundColor, // boxBackgroundColor
           accentColor, // accentColor
           buttonBackground, // buttonBackground
           buttonHoverBackground, // buttonHoverBackground
           buttonActiveBackground, // buttonActiveBackground
-          buttonBorderColor, // buttonBorderColor
+          borderColor, // borderColor
           buttonTextColor, // buttonTextColor
           shadowColor, // shadowColor
           textColor, // textColor
@@ -155,7 +160,7 @@ export default function DialogDisplay({
     buttonBackground,
     buttonHoverBackground,
     buttonActiveBackground,
-    buttonBorderColor,
+    borderColor,
     buttonTextColor,
     shadowColor,
     // Add other dependencies if necessary

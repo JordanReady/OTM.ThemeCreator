@@ -1,14 +1,13 @@
-// utils/getOSBDisconnectedHtml.ts
-
 export function getOSBDisconnectedHtml(
   imgSrc: string,
   aspectRatio: string, // e.g., 'square', 'wide', 'portrait', 'classic', 'banner'
   backgroundColor: string,
+  boxBackgroundColor: string,
   accentColor: string,
   buttonBackground: string,
   buttonHoverBackground: string,
   buttonActiveBackground: string,
-  buttonBorderColor: string,
+  borderColor: string,
   buttonTextColor: string,
   shadowColor: string,
   textColor: string,
@@ -27,9 +26,10 @@ export function getOSBDisconnectedHtml(
             :root {
               --accent-color: ${accentColor};
               --background-color: ${backgroundColor};
+              --box-background-color: ${boxBackgroundColor};
               --button-active-background: ${buttonActiveBackground};
               --button-background: ${buttonBackground};
-              --button-border-color: ${buttonBorderColor};
+              --border-color: ${borderColor};
               --button-hover-background: ${buttonHoverBackground};
               --button-text-color: ${buttonTextColor};
               --shadow-color: ${shadowColor};
@@ -64,7 +64,7 @@ export function getOSBDisconnectedHtml(
             }
       
             .custom-dialog {
-              background-color: var(--background-color);
+              background: var(--box-background-color);
               border-radius: 12px;
               padding: 40px;
               width: 600px;
@@ -73,7 +73,7 @@ export function getOSBDisconnectedHtml(
               color: var(--text-color);
               text-align: center;
               font-size: 26px;
-              border: 1px solid var(--button-border-color);
+              border: 1px solid var(--border-color);
               transform: scale(var(--scale));
               transition: transform 0.3s ease-in-out;
             }
@@ -96,7 +96,7 @@ export function getOSBDisconnectedHtml(
               font-weight: bold;
               color: var(--button-text-color);
               background: var(--button-background);
-              border: 2px solid var(--button-border-color);
+              border: 2px solid var(--border-color);
               border-radius: 8px;
               cursor: pointer;
               transition: background 0.3s ease, transform 0.3s ease;
