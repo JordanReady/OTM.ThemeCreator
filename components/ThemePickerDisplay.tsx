@@ -125,6 +125,12 @@ export default function ThemePickerDisplay({
                 </button>
                 <button
                   className="dialog-switch-button"
+                  onClick={() => openDialog("OSBDisplay3")}
+                >
+                  Order Status Board 3
+                </button>
+                <button
+                  className="dialog-switch-button"
                   onClick={() => openDialog("OSBDisconnected")}
                 >
                   Server Disconnected

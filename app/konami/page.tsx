@@ -369,6 +369,21 @@ export default function Konami({}: Props) {
               throw new Error("Function not implemented.");
             }}
             disconnectedImg=""
+            setImageRight={function (imageRight: string): void {
+              throw new Error("Function not implemented.");
+            }}
+            setImageLeft={function (imageLeft: string): void {
+              throw new Error("Function not implemented.");
+            }}
+            setImageCenter={function (imageCenter: string): void {
+              throw new Error("Function not implemented.");
+            }}
+            setThreeImageAspectRatio={function (
+              threeImageAspectRatio: string
+            ): void {
+              throw new Error("Function not implemented.");
+            }}
+            aspectRatio={""}
           />
           <div className="display-box" onClick={() => setShowSettings(false)}>
             <DialogDisplay

@@ -15,7 +15,12 @@ export default function OrderStatusBoard({}: Props) {
     "OSBDisplay1"
   );
   // Array of dialog names to cycle through
-  const dialogNames = ["OSBDisplay2", "OSBDisconnected", "OSBDisplay1"];
+  const dialogNames = [
+    "OSBDisplay2",
+    "OSBDisconnected",
+    "OSBDisplay1",
+    "OSBDisplay3",
+  ];
 
   const [cycle, setCycle] = useState(true);
   // Store cycleSpeed in seconds
@@ -36,6 +41,10 @@ export default function OrderStatusBoard({}: Props) {
   const [headingSize, setHeadingSize] = useState(0);
   const [componentHtml, setComponentHtml] = useState("");
   const [showHtml, setShowHtml] = useState(false);
+  const [imageLeft, setImageLeft] = useState<string>("/OTMSGrillLogo.png");
+  const [imageCenter, setImageCenter] = useState<string>("/OTMSBakeryLogo.png");
+  const [imageRight, setImageRight] = useState<string>("/OTMSDrinksLogo.png");
+  const [threeImageAspectRatio, setThreeImageAspectRatio] = useState("banner");
 
   useEffect(() => {
     console.log("html from page:", showHtml);
@@ -368,9 +377,19 @@ export default function OrderStatusBoard({}: Props) {
             showHtml={showHtml}
             setShowHtml={setShowHtml}
             setDisconnectedImgAspectRatio={setDisconnectedImgAspectRatio}
+            disconnectedImgAspectRatio={disconnectedImgAspectRatio}
             disconnectedImg={disconnectedImg}
             setDisconnectedImg={setDisconnectedImg}
             componentHtml={componentHtml}
+            imageLeft={imageLeft}
+            imageRight={imageRight}
+            imageCenter={imageCenter}
+            setImageLeft={setImageLeft}
+            setImageRight={setImageRight}
+            setImageCenter={setImageCenter}
+            threeImageAspectRatio={threeImageAspectRatio}
+            setThreeImageAspectRatio={setThreeImageAspectRatio}
+            aspectRatio={aspectRatio}
           />
           <div className="display-box" onClick={() => setShowSettings(false)}>
             <DialogDisplay
@@ -394,6 +413,10 @@ export default function OrderStatusBoard({}: Props) {
               showHtml={showHtml}
               disconnectedImgAspectRatio={disconnectedImgAspectRatio}
               disconnectedImg={disconnectedImg}
+              imageRight={imageRight}
+              imageLeft={imageLeft}
+              imageCenter={imageCenter}
+              threeImageAspectRatio={threeImageAspectRatio}
             />
           </div>
           {/* Theme Picker Display*/}

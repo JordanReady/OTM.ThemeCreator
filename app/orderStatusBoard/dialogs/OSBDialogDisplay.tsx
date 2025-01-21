@@ -6,9 +6,11 @@ import React, { useEffect, useState } from "react";
 import OSBDisplay1 from "@/app/orderStatusBoard/dialogs/OSBDisplay1";
 import OSBDisconnected from "@/app/orderStatusBoard/dialogs/OSBDisconnected";
 import OSBDisplay2 from "@/app/orderStatusBoard/dialogs/OSBDisplay2";
+import OSBDisplay3 from "@/app/orderStatusBoard/dialogs/OSBDisplay3";
 import { getOSBDisconnectedHtml } from "./OSBDisconnectedHtml";
 import { getOSBDisplay1Html } from "./OSBDisplay1Html";
 import { getOSBDisplay2Html } from "./OSBDisplay2Html";
+import { getOSBDisplay3Html } from "./OSBDisplay3Html";
 
 type Order = {
   CheckNumber: number;
@@ -37,6 +39,10 @@ type Props = {
   showHtml: boolean;
   disconnectedImgAspectRatio: string;
   disconnectedImg: string;
+  imageRight: string;
+  imageLeft: string;
+  imageCenter: string;
+  threeImageAspectRatio: string;
 };
 
 export default function DialogDisplay({
@@ -60,6 +66,10 @@ export default function DialogDisplay({
   showHtml,
   disconnectedImgAspectRatio,
   disconnectedImg,
+  imageRight,
+  imageLeft,
+  imageCenter,
+  threeImageAspectRatio,
 }: Props) {
   const [orders, setOrders] = useState<Order[]>([
     // Preparing Orders (StatusId=1)
@@ -105,6 +115,27 @@ export default function DialogDisplay({
         // return getOSBDisplay2Html(...);
         // Placeholder for OSBDisplay2 HTML generation
         return getOSBDisplay2Html(
+          uploadedImage, // imgSrc
+          aspectRatioClass, // aspectRatio: 'square', 'wide', 'portrait', 'classic', 'banner'
+          backgroundColor, // backgroundColor
+          boxBackgroundColor, // boxBackgroundColor
+          accentColor, // accentColor
+          buttonBackground, // buttonBackground
+          buttonHoverBackground, // buttonHoverBackground
+          buttonActiveBackground, // buttonActiveBackground
+          borderColor, // borderColor
+          buttonTextColor, // buttonTextColor
+          shadowColor, // shadowColor
+          textColor, // textColor
+          "OTMThemeOSB.html", // retryUrl (if applicable)
+          "1" // scale (optional)
+          // Add any other required parameters specific to OSBDisplay1Html
+        );
+      case "OSBDisplay3":
+        // Ensure getOSBDisplay2Html is implemented similarly to getOSBDisplay1Html
+        // return getOSBDisplay2Html(...);
+        // Placeholder for OSBDisplay2 HTML generation
+        return getOSBDisplay3Html(
           uploadedImage, // imgSrc
           aspectRatioClass, // aspectRatio: 'square', 'wide', 'portrait', 'classic', 'banner'
           backgroundColor, // backgroundColor
@@ -226,6 +257,42 @@ export default function DialogDisplay({
               orders={orders}
               prepIconSrc="/PrepLogo.png"
               readyIconSrc="/OrderReady.png"
+            />
+          )}
+        </>
+      )}
+      {activeDialog === "OSBDisplay3" && (
+        <>
+          {showHtml ? (
+            <div className="html-container custom-dialog-backdrop">
+              <span>
+                <h2>Display 3</h2>
+                <button
+                  className="copy"
+                  onClick={() => {
+                    navigator.clipboard.writeText(componentHtml);
+                  }}
+                >
+                  Copy
+                </button>
+                <pre>{componentHtml}</pre>
+                {/* Render OSBDisplay3 HTML if getOSBDisplay3Html is implemented */}
+                {/* <div dangerouslySetInnerHTML={{ __html: componentHtml }} /> */}
+              </span>
+            </div>
+          ) : (
+            <OSBDisplay3
+              imgSrc={uploadedImage}
+              aspectRatio={aspectRatioClass}
+              pos={pos}
+              prepIconSrc="/PrepLogo.png"
+              readyIconSrc="/OrderReady.png"
+              threeImageAspectRatio={threeImageAspectRatio}
+              groupLogos={{
+                Grill: imageLeft,
+                Bakery: imageCenter,
+                Drinks: imageRight,
+              }}
             />
           )}
         </>

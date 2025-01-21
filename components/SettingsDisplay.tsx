@@ -14,6 +14,7 @@ type Props = {
   handleSliderChange: (event: { target: { value: any } }) => void;
   setUploadedImage: (uploadedImage: string) => void;
   setAspectRatio: (aspectRatio: string) => void;
+  aspectRatio: string;
   handleThemeSubmit: (theme: string) => void;
   handleTutorial: () => void;
   showTutorial: boolean;
@@ -26,13 +27,22 @@ type Props = {
   setPlayerImgScale: (playerImgScale: number) => void;
   showHtml: boolean;
   setShowHtml: (showHtml: boolean) => void;
-  importTheme: boolean;
+  importTheme: boolean; // If you want to track whether a theme has been imported
   setImportTheme: (importTheme: boolean) => void;
   importedTheme: string;
+  disconnectedImgAspectRatio?: string;
   setDisconnectedImgAspectRatio: (disconnectedImgAspectRatio: string) => void;
   disconnectedImg: string;
   setDisconnectedImg: (disconnectedImg: string) => void;
   componentHtml?: string;
+  imageRight?: string;
+  imageLeft?: string;
+  imageCenter?: string;
+  setImageRight: (imageRight: string) => void;
+  setImageLeft: (imageLeft: string) => void;
+  setImageCenter: (imageCenter: string) => void;
+  threeImageAspectRatio?: string;
+  setThreeImageAspectRatio: (threeImageAspectRatio: string) => void;
 };
 
 type ButtonType =
@@ -56,6 +66,7 @@ export default function SettingsDisplay({
   handleSliderChange,
   setUploadedImage,
   setAspectRatio,
+  aspectRatio,
   handleThemeSubmit,
   handleTutorial,
   showTutorial,
@@ -68,12 +79,25 @@ export default function SettingsDisplay({
   setPlayerImgScale,
   showHtml,
   setShowHtml,
+  importTheme,
+  setImportTheme,
+  importedTheme,
+  disconnectedImgAspectRatio,
   setDisconnectedImgAspectRatio,
   disconnectedImg,
   setDisconnectedImg,
   componentHtml,
+  imageRight,
+  imageLeft,
+  imageCenter,
+  setImageRight,
+  setImageLeft,
+  setImageCenter,
+  threeImageAspectRatio,
+  setThreeImageAspectRatio,
 }: Props) {
   useEffect(() => {
+    // Keep cycling when cycleSpeed changes (assuming you want continuous refresh)
     setCycle(true);
   }, [cycleSpeed, setCycle]);
 
@@ -95,13 +119,11 @@ export default function SettingsDisplay({
         break;
       case "importCustomTheme":
         try {
-          // Check if the Clipboard API is available
           if (!navigator.clipboard) {
             alert("Clipboard API not supported in this browser.");
             return;
           }
 
-          // Read text from the clipboard
           const clipboardText = await navigator.clipboard.readText();
 
           if (!clipboardText) {
@@ -109,8 +131,9 @@ export default function SettingsDisplay({
             return;
           }
 
-          // Apply the theme using handleThemeSubmit without validating JSON
           handleThemeSubmit(clipboardText);
+          // If you want to track that an import has happened:
+          setImportTheme(true);
         } catch (error) {
           console.error("Failed to read clipboard contents: ", error);
           alert("Failed to import theme from clipboard.");
@@ -129,8 +152,8 @@ export default function SettingsDisplay({
       case "exportHtml":
         if (componentHtml) {
           navigator.clipboard.writeText(componentHtml);
+          alert("HTML copied to clipboard!");
         }
-
         break;
       default:
         console.warn(`Unhandled button type: ${buttonType}`);
@@ -163,13 +186,24 @@ export default function SettingsDisplay({
         </button>
       )}
 
-      {/* Settings Interfaces */}
+      {/* 
+        Example: if you wanted to toggle 'Interactive Tutorial'
+        you’d do something like:
+
+        {tutorialIsActive ? (
+          <button onClick={() => ...}>Stop Interactive Tutorial</button>
+        ) : (
+          <button onClick={() => ...}>Start Interactive Tutorial</button>
+        )} 
+        (But right now it’s just a one-time click to start.)
+      */}
+
+      {/**
+       * Now each "Settings Interface" is conditionally shown only if
+       * showSettings is true AND we’re in that interface mode
+       */}
       {settingInterface === "Konami" && showSettings && (
-        <div
-          className={`settings-container ${
-            showSettings ? "animate-down" : "animate-up"
-          }`}
-        >
+        <div className={`settings-container animate-down`}>
           {/* Import-Export Button Group */}
           <div className="import-export-container">
             <button
@@ -177,15 +211,21 @@ export default function SettingsDisplay({
               className="import-export-button gradient-button tutorial-button shake-lr animate"
               aria-label="Start Interactive Tutorial"
             >
-              Interactive Tutorial
+              Start Interactive Tutorial
             </button>
+
+            {/**
+             * If you want to reflect the "imported" state in the label, do:
+             */}
             <button
               onClick={() => handleClick("importCustomTheme")}
               className="import-export-button gradient-button animate"
               aria-label="Import Custom Theme from Clipboard"
             >
+              {/* {importTheme ? "Theme Imported!" : "Import Custom Theme"} */}
               Import Custom Theme
             </button>
+
             <button
               onClick={() => handleClick("exportCustomTheme")}
               className="import-export-button gradient-button animate"
@@ -267,6 +307,7 @@ export default function SettingsDisplay({
             <select
               id="aspect-ratio"
               className="aspect-ratio-dropdown"
+              value={aspectRatio}
               onChange={(e) => {
                 setAspectRatio(e.target.value);
               }}
@@ -283,9 +324,7 @@ export default function SettingsDisplay({
 
       {settingInterface === "OrderStatusBoard" && showSettings && (
         <div
-          className={`settings-container osb-settings-container ${
-            showSettings ? "animate-down" : "animate-up"
-          }`}
+          className={`settings-container osb-settings-container animate-down`}
         >
           {/* Import-Export Button Group */}
           <div className="import-export-container">
@@ -294,14 +333,15 @@ export default function SettingsDisplay({
               className="import-export-button gradient-button tutorial-button shake-lr animate"
               aria-label="Start Interactive Tutorial"
             >
-              Interactive Tutorial
+              Start Interactive Tutorial
             </button>
+
             <button
               onClick={() => handleClick("importCustomTheme")}
               className="import-export-button gradient-button animate"
               aria-label="Import Custom Theme from Clipboard"
             >
-              Import Custom Theme
+              {importTheme ? "Theme Imported!" : "Import Custom Theme"}
             </button>
             <button
               onClick={() => handleClick("exportCustomTheme")}
@@ -310,6 +350,9 @@ export default function SettingsDisplay({
             >
               Export Custom Theme
             </button>
+            {/**
+             * Toggles between HTML & Display
+             */}
             <button
               onClick={() => handleClick("toggleShowHtml")}
               className="import-export-button gradient-button animate"
@@ -398,6 +441,7 @@ export default function SettingsDisplay({
             <select
               id="aspect-ratio"
               className="aspect-ratio-dropdown"
+              value={aspectRatio}
               onChange={(e) => {
                 setAspectRatio(e.target.value);
               }}
@@ -432,14 +476,97 @@ export default function SettingsDisplay({
               }}
             />
           </div>
-          {/* Aspect Ratio Selector */}
           <div className="setting-option">
-            <label htmlFor="aspect-ratio">Disconnected Aspect Ratio: </label>
+            <label htmlFor="disconnected-aspect-ratio">
+              Disconnected Aspect Ratio:
+            </label>
             <select
-              id="aspect-ratio"
+              id="disconnected-aspect-ratio"
               className="aspect-ratio-dropdown"
+              value={disconnectedImgAspectRatio}
               onChange={(e) => {
                 setDisconnectedImgAspectRatio(e.target.value);
+              }}
+            >
+              <option value="wide">Wide</option>
+              <option value="portrait">Portrait</option>
+              <option value="classic">Classic</option>
+              <option value="banner">Banner</option>
+              <option value="square">Square</option>
+            </select>
+          </div>
+
+          {/* Three Images Upload */}
+          <div className="setting-option">
+            <p>Left Image: </p>
+            <label htmlFor="left-img" className="custom-upload-label">
+              Upload Image
+            </label>
+            <input
+              id="left-img"
+              className="img-option"
+              type="file"
+              accept="image/*"
+              onChange={(e) => {
+                const file = e.target.files?.[0];
+                if (file) {
+                  const reader = new FileReader();
+                  reader.onload = () => setImageLeft(reader.result as string);
+                  reader.readAsDataURL(file);
+                }
+              }}
+            />
+          </div>
+          <div className="setting-option">
+            <p>Center Image: </p>
+            <label htmlFor="center-img" className="custom-upload-label">
+              Upload Image
+            </label>
+            <input
+              id="center-img"
+              className="img-option"
+              type="file"
+              accept="image/*"
+              onChange={(e) => {
+                const file = e.target.files?.[0];
+                if (file) {
+                  const reader = new FileReader();
+                  reader.onload = () => setImageCenter(reader.result as string);
+                  reader.readAsDataURL(file);
+                }
+              }}
+            />
+          </div>
+          <div className="setting-option">
+            <p>Right Image: </p>
+            <label htmlFor="right-img" className="custom-upload-label">
+              Upload Image
+            </label>
+            <input
+              id="right-img"
+              className="img-option"
+              type="file"
+              accept="image/*"
+              onChange={(e) => {
+                const file = e.target.files?.[0];
+                if (file) {
+                  const reader = new FileReader();
+                  reader.onload = () => setImageRight(reader.result as string);
+                  reader.readAsDataURL(file);
+                }
+              }}
+            />
+          </div>
+          <div className="setting-option">
+            <label htmlFor="three-image-aspect-ratio">
+              Three Images Aspect Ratio:
+            </label>
+            <select
+              id="three-image-aspect-ratio"
+              className="aspect-ratio-dropdown"
+              value={threeImageAspectRatio}
+              onChange={(e) => {
+                setThreeImageAspectRatio(e.target.value);
               }}
             >
               <option value="wide">Wide</option>
@@ -453,11 +580,7 @@ export default function SettingsDisplay({
       )}
 
       {settingInterface === "Aristocrat" && showSettings && (
-        <div
-          className={`settings-container ${
-            showSettings ? "animate-down" : "animate-up"
-          }`}
-        >
+        <div className={`settings-container animate-down`}>
           {/* Import-Export Button Group */}
           <div className="import-export-container">
             <button
@@ -465,14 +588,14 @@ export default function SettingsDisplay({
               className="import-export-button gradient-button tutorial-button shake-lr animate"
               aria-label="Start Interactive Tutorial"
             >
-              Interactive Tutorial
+              Start Interactive Tutorial
             </button>
             <button
               onClick={() => handleClick("importCustomTheme")}
               className="import-export-button gradient-button animate"
               aria-label="Import Custom Theme from Clipboard"
             >
-              Import Custom Theme
+              {importTheme ? "Theme Imported!" : "Import Custom Theme"}
             </button>
             <button
               onClick={() => handleClick("exportCustomTheme")}
@@ -573,6 +696,7 @@ export default function SettingsDisplay({
             <select
               id="aspect-ratio"
               className="aspect-ratio-dropdown"
+              value={aspectRatio}
               onChange={(e) => {
                 setAspectRatio(e.target.value);
               }}

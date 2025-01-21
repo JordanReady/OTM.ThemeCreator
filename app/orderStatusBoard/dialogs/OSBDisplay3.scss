@@ -1,3 +1,4 @@
+// General Styles
 .osb-logo {
   width: 400px;
   height: 100px;
@@ -12,11 +13,6 @@
 }
 
 .custom-dialog-backdrop {
-  position: fixed;
-  top: 0;
-  left: 0;
-  right: 0;
-  bottom: 0;
   background: var(--background-color);
   display: flex;
   align-items: center;
@@ -37,6 +33,7 @@
   scale: var(--scale);
   border-radius: 5px;
   padding: 2rem;
+
   strong {
     text-shadow: var(--accent-color) 1px 1px 1px;
     margin-top: 3rem;
@@ -58,11 +55,11 @@
   cursor: pointer;
   width: 100%;
   transition: background 0.3s ease, transform 0.3s ease;
-}
 
-.retry-button:hover {
-  background: var(--button-hover-background);
-  transform: translateY(-4px);
+  &:hover {
+    background: var(--button-hover-background);
+    transform: translateY(-4px);
+  }
 }
 
 .custom-dialog {
@@ -88,22 +85,20 @@
     -1px 1px 0 var(--accent-color), 1px 1px 0 var(--accent-color);
 }
 
-.vertical-line {
-  border-left: 1px solid var(--accent-color);
-  height: 100%;
-  position: absolute;
-  top: 0;
-  left: 50%;
-  margin-left: -1px;
-}
+// Updated Header for Three Groups
 .header {
   display: flex;
   flex-direction: row;
   align-items: center;
-  justify-content: space-between;
+  justify-content: space-around; // Changed from space-between to space-around
   margin-bottom: 1rem;
   position: relative;
-  min-width: 550px;
+  min-width: 900px; // Increased min-width to accommodate third group
+
+  @media (max-width: 1200px) {
+    flex-direction: column;
+    min-width: unset;
+  }
 }
 
 .header h2 {
@@ -121,33 +116,97 @@
   align-items: flex-start;
   position: relative;
   height: 100%;
+  width: 100%;
+
+  @media (max-width: 1200px) {
+    flex-direction: column;
+    align-items: center;
+  }
 }
 
 .orderlist {
   display: flex;
   width: 100%;
-  min-width: 700px;
+  min-width: 900px; // Increased min-width for three columns
   height: 100%;
   flex: 1;
-  overflow: auto;
+  overflow: hidden;
+
+  @media (max-width: 1200px) {
+    flex-direction: column;
+    min-width: unset;
+  }
 }
 
-#secondListView1,
-#secondListView2 {
+// Updated List Views for Three Groups
+.group-orderlist {
   display: flex;
-  flex-wrap: wrap;
-  width: 50%;
-  padding: 1rem;
-  border-top: 1px solid var(--accent-color);
-  height: min-content;
-  font-size: 3rem;
-}
+  flex-direction: column;
+  width: 33.33%; // Each group takes up one-third of the width
+  padding: 0.25rem;
+  box-sizing: border-box;
 
-#listView1,
-#listView2 {
-  width: 50%;
-  padding: 1rem;
-  border-top: 1px solid var(--accent-color);
+  @media (max-width: 1200px) {
+    width: 100%;
+    padding: 0.5rem;
+  }
+
+  .group-logo {
+    border-bottom: 1px solid;
+    margin-bottom: 10px;
+    /* Square logo (1:1 aspect ratio) */
+    .square {
+      width: 100px;
+      height: 100px;
+      margin: auto;
+    }
+
+    /* Wide logo (16:9 aspect ratio) */
+    .wide {
+      width: 160px;
+      height: 90px;
+      margin: auto;
+    }
+
+    /* Portrait logo (9:16 aspect ratio) */
+    .portrait {
+      width: 90px;
+      height: 160px;
+      margin: auto;
+    }
+
+    /* Classic logo (4:3 aspect ratio) */
+    .classic {
+      width: 120px;
+      height: 90px;
+      margin: auto;
+    }
+
+    /* Banner logo (3:1 aspect ratio) */
+    .banner {
+      width: 300px;
+      height: 150px;
+      margin: auto;
+    }
+  }
+
+  .group-title {
+    font-size: 1.2em;
+    margin-bottom: 10px;
+    text-align: center;
+    color: var(--text-color);
+    text-shadow: 1px 1px 2px var(--accent-color);
+  }
+
+  #listView-*-prepping,
+  #listView-*-ready {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    height: min-content;
+    font-size: 3rem;
+    margin-bottom: 1rem;
+  }
 }
 
 .k-listview {
@@ -157,19 +216,7 @@
   height: 100%;
 }
 
-.secondOrderItem {
-  background: var(--box-background-color);
-  border: 1px solid var(--border-color);
-  border-radius: 8px;
-  margin: 1rem;
-  padding: 0.25rem 0.5rem;
-  box-shadow: var(--shadow-color) 0 4px 8px;
-  position: relative;
-  flex: 0 0 calc(50% - 2rem);
-  box-sizing: border-box;
-  font-size: 4rem;
-}
-
+.secondOrderItem,
 .orderItem {
   background: var(--box-background-color);
   border: 1px solid var(--border-color);
@@ -180,10 +227,15 @@
   position: relative;
   flex: 0 0 calc(50% - 2rem);
   box-sizing: border-box;
+  font-size: 4rem;
+
+  @media (max-width: 1200px) {
+    flex: 0 0 calc(100% - 2rem);
+  }
 }
 
 .checkNumber {
-  font-family: "Montserrat";
+  font-family: "Montserrat", sans-serif;
   font-size: 1.2rem;
   font-weight: bold;
   color: #333;
@@ -195,7 +247,7 @@
   text-overflow: inherit;
   width: 100%;
   color: var(--text-color);
-  font-size: 13px;
+  font-size: 20px;
 }
 
 .checkText {
@@ -230,15 +282,47 @@
   justify-content: center;
   height: 100%;
   width: 100%;
-  min-width: 600px;
+  min-width: 900px; // Increased to accommodate three groups
   scale: var(--scale);
+
+  @media (max-width: 1200px) {
+    min-width: unset;
+  }
 }
 
-.prep-logo {
-  width: 450px;
-  height: 250px;
+// Updated Logos for Order Items
+.second-order-logo {
+  width: 35px;
+  position: absolute; // Changed from fixed to absolute for better positioning within items
+  top: -16px;
+  right: -18px;
+  animation: shake-lr 1s cubic-bezier(0.455, 0.03, 0.515, 0.955) 1s both;
+  z-index: 999;
 }
 
+.second-order-logo-status {
+  width: 35px;
+}
+
+.order-logo {
+  width: 50px;
+  position: absolute; // Changed from fixed to absolute
+  top: -20px;
+  right: -25px;
+  animation: shake-lr 1s cubic-bezier(0.455, 0.03, 0.515, 0.955) 1s both;
+  z-index: 999;
+}
+
+.checknumber-row {
+  display: flex;
+  align-items: center;
+}
+
+.name {
+  font-size: 22px;
+}
+
+// Animations
 @keyframes alarm-move {
   0% {
     transform: translateY(0);
@@ -268,61 +352,26 @@
 @keyframes shake-lr {
   0%,
   100% {
-    -webkit-transform: rotate(0deg);
     transform: rotate(0deg);
-    -webkit-transform-origin: 50% 50%;
     transform-origin: 50% 50%;
   }
   10% {
-    -webkit-transform: rotate(8deg);
     transform: rotate(8deg);
   }
   20%,
   40%,
   60% {
-    -webkit-transform: rotate(-10deg);
     transform: rotate(-10deg);
   }
   30%,
   50%,
   70% {
-    -webkit-transform: rotate(10deg);
     transform: rotate(10deg);
   }
   80% {
-    -webkit-transform: rotate(-8deg);
     transform: rotate(-8deg);
   }
   90% {
-    -webkit-transform: rotate(8deg);
     transform: rotate(8deg);
   }
-}
-
-.second-order-logo {
-  width: 35px;
-  position: fixed;
-  top: -16px;
-  right: -18px;
-  animation: shake-lr 1s cubic-bezier(0.455, 0.03, 0.515, 0.955) 1s both;
-  z-index: 999;
-}
-
-.order-logo {
-  width: 50px;
-  position: fixed;
-  top: -20px;
-  right: -25px;
-  animation: shake-lr 1s cubic-bezier(0.455, 0.03, 0.515, 0.955) 1s both;
-  z-index: 999;
-}
-
-.checknumber-row {
-  display: flex;
-  align-items: center;
-  font-size: 20px;
-}
-
-.name {
-  font-size: 14px;
 }
