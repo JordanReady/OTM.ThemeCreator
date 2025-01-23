@@ -327,6 +327,7 @@ export default function OrderStatusBoard({}: Props) {
           />
           <SettingsDisplay
             settingInterface={"Aristocrat"}
+            activeDialog={activeDialog}
             showSettings={showSettings}
             setShowSettings={setShowSettings}
             importTheme={importTheme}

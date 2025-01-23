@@ -17,7 +17,7 @@ export default function HomePage() {
     },
     {
       title: "Order Status Board",
-      imageSrc: "/OSBThumbnail.png",
+      imageSrc: "/OSBThumbnail1.png",
       link: "/orderStatusBoard",
       description:
         "The Order Status Board displays when orders are being prepared and ready to be picked up.",

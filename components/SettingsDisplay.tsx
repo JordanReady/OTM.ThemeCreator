@@ -43,6 +43,7 @@ type Props = {
   setImageCenter: (imageCenter: string) => void;
   threeImageAspectRatio?: string;
   setThreeImageAspectRatio: (threeImageAspectRatio: string) => void;
+  activeDialog: string | null;
 };
 
 type ButtonType =
@@ -95,6 +96,7 @@ export default function SettingsDisplay({
   setImageCenter,
   threeImageAspectRatio,
   setThreeImageAspectRatio,
+  activeDialog,
 }: Props) {
   useEffect(() => {
     // Keep cycling when cycleSpeed changes (assuming you want continuous refresh)
@@ -326,7 +328,8 @@ export default function SettingsDisplay({
         <div
           className={`settings-container osb-settings-container animate-down`}
         >
-          {/* Import-Export Button Group */}
+          {/* UNIVERSAL SETTINGS - displayed for all dialogs */}
+
           <div className="import-export-container">
             <button
               onClick={() => handleClick("interactiveTutorial")}
@@ -343,6 +346,7 @@ export default function SettingsDisplay({
             >
               {importTheme ? "Theme Imported!" : "Import Custom Theme"}
             </button>
+
             <button
               onClick={() => handleClick("exportCustomTheme")}
               className="import-export-button gradient-button animate"
@@ -350,9 +354,7 @@ export default function SettingsDisplay({
             >
               Export Custom Theme
             </button>
-            {/**
-             * Toggles between HTML & Display
-             */}
+
             <button
               onClick={() => handleClick("toggleShowHtml")}
               className="import-export-button gradient-button animate"
@@ -360,6 +362,7 @@ export default function SettingsDisplay({
             >
               {showHtml ? "Show Display" : "Show HTML"}
             </button>
+
             <button
               onClick={() => handleClick("exportHtml")}
               className="import-export-button gradient-button animate"
@@ -410,172 +413,195 @@ export default function SettingsDisplay({
               onChange={handleSliderChange}
             />
           </div>
-          <br />
 
-          {/* Image Upload */}
-          <div className="setting-option">
-            <p>Logo: </p>
-            <label htmlFor="image-upload" className="custom-upload-label">
-              Upload Image
-            </label>
-            <input
-              id="image-upload"
-              className="img-option"
-              type="file"
-              accept="image/*"
-              onChange={(e) => {
-                const file = e.target.files?.[0];
-                if (file) {
-                  const reader = new FileReader();
-                  reader.onload = () =>
-                    setUploadedImage(reader.result as string);
-                  reader.readAsDataURL(file);
-                }
-              }}
-            />
-          </div>
+          {/* CONDITIONAL SETTINGS */}
 
-          {/* Aspect Ratio Selector */}
-          <div className="setting-option">
-            <label htmlFor="aspect-ratio">Aspect Ratio: </label>
-            <select
-              id="aspect-ratio"
-              className="aspect-ratio-dropdown"
-              value={aspectRatio}
-              onChange={(e) => {
-                setAspectRatio(e.target.value);
-              }}
-            >
-              <option value="wide">Wide</option>
-              <option value="portrait">Portrait</option>
-              <option value="classic">Classic</option>
-              <option value="banner">Banner</option>
-              <option value="square">Square</option>
-            </select>
-          </div>
+          {/* OSBDisplay1 or OSBDisplay2: Show logo & aspect ratio */}
+          {(activeDialog === "OSBDisplay1" ||
+            activeDialog === "OSBDisplay2") && (
+            <>
+              <div className="setting-option">
+                <p>Logo: </p>
+                <label htmlFor="image-upload" className="custom-upload-label">
+                  Upload Image
+                </label>
+                <input
+                  id="image-upload"
+                  className="img-option"
+                  type="file"
+                  accept="image/*"
+                  onChange={(e) => {
+                    const file = e.target.files?.[0];
+                    if (file) {
+                      const reader = new FileReader();
+                      reader.onload = () =>
+                        setUploadedImage(reader.result as string);
+                      reader.readAsDataURL(file);
+                    }
+                  }}
+                />
+              </div>
 
-          {/* Disconnected Upload */}
-          <div className="setting-option">
-            <p>Disconnected Image: </p>
-            <label htmlFor="disconnected-img" className="custom-upload-label">
-              Upload Image
-            </label>
-            <input
-              id="disconnected-img"
-              className="img-option"
-              type="file"
-              accept="image/*"
-              onChange={(e) => {
-                const file = e.target.files?.[0];
-                if (file) {
-                  const reader = new FileReader();
-                  reader.onload = () =>
-                    setDisconnectedImg(reader.result as string);
-                  reader.readAsDataURL(file);
-                }
-              }}
-            />
-          </div>
-          <div className="setting-option">
-            <label htmlFor="disconnected-aspect-ratio">
-              Disconnected Aspect Ratio:
-            </label>
-            <select
-              id="disconnected-aspect-ratio"
-              className="aspect-ratio-dropdown"
-              value={disconnectedImgAspectRatio}
-              onChange={(e) => {
-                setDisconnectedImgAspectRatio(e.target.value);
-              }}
-            >
-              <option value="wide">Wide</option>
-              <option value="portrait">Portrait</option>
-              <option value="classic">Classic</option>
-              <option value="banner">Banner</option>
-              <option value="square">Square</option>
-            </select>
-          </div>
+              <div className="setting-option">
+                <label htmlFor="aspect-ratio">Aspect Ratio: </label>
+                <select
+                  id="aspect-ratio"
+                  className="aspect-ratio-dropdown"
+                  value={aspectRatio}
+                  onChange={(e) => {
+                    setAspectRatio(e.target.value);
+                  }}
+                >
+                  <option value="wide">Wide</option>
+                  <option value="portrait">Portrait</option>
+                  <option value="classic">Classic</option>
+                  <option value="banner">Banner</option>
+                  <option value="square">Square</option>
+                </select>
+              </div>
+            </>
+          )}
 
-          {/* Three Images Upload */}
-          <div className="setting-option">
-            <p>Left Image: </p>
-            <label htmlFor="left-img" className="custom-upload-label">
-              Upload Image
-            </label>
-            <input
-              id="left-img"
-              className="img-option"
-              type="file"
-              accept="image/*"
-              onChange={(e) => {
-                const file = e.target.files?.[0];
-                if (file) {
-                  const reader = new FileReader();
-                  reader.onload = () => setImageLeft(reader.result as string);
-                  reader.readAsDataURL(file);
-                }
-              }}
-            />
-          </div>
-          <div className="setting-option">
-            <p>Center Image: </p>
-            <label htmlFor="center-img" className="custom-upload-label">
-              Upload Image
-            </label>
-            <input
-              id="center-img"
-              className="img-option"
-              type="file"
-              accept="image/*"
-              onChange={(e) => {
-                const file = e.target.files?.[0];
-                if (file) {
-                  const reader = new FileReader();
-                  reader.onload = () => setImageCenter(reader.result as string);
-                  reader.readAsDataURL(file);
-                }
-              }}
-            />
-          </div>
-          <div className="setting-option">
-            <p>Right Image: </p>
-            <label htmlFor="right-img" className="custom-upload-label">
-              Upload Image
-            </label>
-            <input
-              id="right-img"
-              className="img-option"
-              type="file"
-              accept="image/*"
-              onChange={(e) => {
-                const file = e.target.files?.[0];
-                if (file) {
-                  const reader = new FileReader();
-                  reader.onload = () => setImageRight(reader.result as string);
-                  reader.readAsDataURL(file);
-                }
-              }}
-            />
-          </div>
-          <div className="setting-option">
-            <label htmlFor="three-image-aspect-ratio">
-              Three Images Aspect Ratio:
-            </label>
-            <select
-              id="three-image-aspect-ratio"
-              className="aspect-ratio-dropdown"
-              value={threeImageAspectRatio}
-              onChange={(e) => {
-                setThreeImageAspectRatio(e.target.value);
-              }}
-            >
-              <option value="wide">Wide</option>
-              <option value="portrait">Portrait</option>
-              <option value="classic">Classic</option>
-              <option value="banner">Banner</option>
-              <option value="square">Square</option>
-            </select>
-          </div>
+          {/* OSBDisconnected: Show disconnected image & aspect ratio */}
+          {activeDialog === "OSBDisconnected" && (
+            <>
+              <div className="setting-option">
+                <p>Disconnected Image: </p>
+                <label
+                  htmlFor="disconnected-img"
+                  className="custom-upload-label"
+                >
+                  Upload Image
+                </label>
+                <input
+                  id="disconnected-img"
+                  className="img-option"
+                  type="file"
+                  accept="image/*"
+                  onChange={(e) => {
+                    const file = e.target.files?.[0];
+                    if (file) {
+                      const reader = new FileReader();
+                      reader.onload = () =>
+                        setDisconnectedImg(reader.result as string);
+                      reader.readAsDataURL(file);
+                    }
+                  }}
+                />
+              </div>
+
+              <div className="setting-option">
+                <label htmlFor="disconnected-aspect-ratio">
+                  Disconnected Aspect Ratio:
+                </label>
+                <select
+                  id="disconnected-aspect-ratio"
+                  className="aspect-ratio-dropdown"
+                  value={disconnectedImgAspectRatio}
+                  onChange={(e) => {
+                    setDisconnectedImgAspectRatio(e.target.value);
+                  }}
+                >
+                  <option value="wide">Wide</option>
+                  <option value="portrait">Portrait</option>
+                  <option value="classic">Classic</option>
+                  <option value="banner">Banner</option>
+                  <option value="square">Square</option>
+                </select>
+              </div>
+            </>
+          )}
+
+          {/* OSBDisplay3: Show left/center/right images & aspect ratio */}
+          {activeDialog === "OSBDisplay3" && (
+            <>
+              <div className="setting-option">
+                <p>Left Image: </p>
+                <label htmlFor="left-img" className="custom-upload-label">
+                  Upload Image
+                </label>
+                <input
+                  id="left-img"
+                  className="img-option"
+                  type="file"
+                  accept="image/*"
+                  onChange={(e) => {
+                    const file = e.target.files?.[0];
+                    if (file) {
+                      const reader = new FileReader();
+                      reader.onload = () =>
+                        setImageLeft(reader.result as string);
+                      reader.readAsDataURL(file);
+                    }
+                  }}
+                />
+              </div>
+
+              <div className="setting-option">
+                <p>Center Image: </p>
+                <label htmlFor="center-img" className="custom-upload-label">
+                  Upload Image
+                </label>
+                <input
+                  id="center-img"
+                  className="img-option"
+                  type="file"
+                  accept="image/*"
+                  onChange={(e) => {
+                    const file = e.target.files?.[0];
+                    if (file) {
+                      const reader = new FileReader();
+                      reader.onload = () =>
+                        setImageCenter(reader.result as string);
+                      reader.readAsDataURL(file);
+                    }
+                  }}
+                />
+              </div>
+
+              <div className="setting-option">
+                <p>Right Image: </p>
+                <label htmlFor="right-img" className="custom-upload-label">
+                  Upload Image
+                </label>
+                <input
+                  id="right-img"
+                  className="img-option"
+                  type="file"
+                  accept="image/*"
+                  onChange={(e) => {
+                    const file = e.target.files?.[0];
+                    if (file) {
+                      const reader = new FileReader();
+                      reader.onload = () =>
+                        setImageRight(reader.result as string);
+                      reader.readAsDataURL(file);
+                    }
+                  }}
+                />
+              </div>
+
+              <div className="setting-option">
+                <label htmlFor="three-image-aspect-ratio">
+                  Three Images Aspect Ratio:
+                </label>
+                <select
+                  id="three-image-aspect-ratio"
+                  className="aspect-ratio-dropdown"
+                  value={threeImageAspectRatio}
+                  onChange={(e) => {
+                    setThreeImageAspectRatio(e.target.value);
+                  }}
+                >
+                  <option value="wide">Wide</option>
+                  <option value="portrait">Portrait</option>
+                  <option value="classic">Classic</option>
+                  <option value="banner">Banner</option>
+                  <option value="square">Square</option>
+                </select>
+              </div>
+            </>
+          )}
         </div>
       )}
 

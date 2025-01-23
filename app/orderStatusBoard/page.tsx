@@ -390,6 +390,7 @@ export default function OrderStatusBoard({}: Props) {
             threeImageAspectRatio={threeImageAspectRatio}
             setThreeImageAspectRatio={setThreeImageAspectRatio}
             aspectRatio={aspectRatio}
+            activeDialog={activeDialog}
           />
           <div className="display-box" onClick={() => setShowSettings(false)}>
             <DialogDisplay

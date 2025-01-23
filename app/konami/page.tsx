@@ -330,6 +330,7 @@ export default function Konami({}: Props) {
           />
           <SettingsDisplay
             settingInterface={"Konami"}
+            activeDialog={activeDialog}
             showSettings={showSettings}
             setShowSettings={setShowSettings}
             importTheme={importTheme}
